@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "title": "Architecting Agentic Systems Companion",
+  "book_repository": "https://github.com/bmozi/architecting-agentic-systems",
+  "source_commit": "9160061",
+  "required_files": [
+    "README.md",
+    "START-HERE.md",
+    "INDEX.md",
+    "BOOK-TO-COMPANION-MAP.md",
+    "LICENSE-STATUS.md",
+    "PROVENANCE.md",
+    "VALIDATION.md"
+  ],
+  "gateway_assets": [
+    {
+      "path": "agent-authority-map.md",
+      "first_pass": "Ten-minute first map",
+      "required_language": ["Plain-language vocabulary", "Outside-team comprehension test"],
+      "examples": [
+        "NORTHBRIDGE-WORKED-EXAMPLES.md",
+        "TRANSFER-SCENARIO-WORKED-EXAMPLES.md"
+      ]
+    }
+  ]
+}
