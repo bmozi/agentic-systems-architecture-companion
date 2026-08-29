@@ -23,4 +23,15 @@
 - **Product or business owner:** decide which work is useful to delegate and
   which consequence remains a human or institutional decision.
 
+Use [Role-Based Paths](ROLE-BASED-PATHS.md) for developer, architect, manager,
+and executive routes with a concrete handoff artifact.
+
+## Lead a decision
+
+- [Team Workshop](TEAM-WORKSHOP.md)
+- [Value and Evidence Ledger](VALUE-AND-EVIDENCE-LEDGER.md)
+- [Executive Decision Brief](EXECUTIVE-DECISION-BRIEF.md)
+- [Failure Lab](FAILURE-LAB.md)
+- [Pilot and Usability Route](PILOT-AND-USABILITY.md)
+
 See [BOOK-TO-COMPANION-MAP.md](BOOK-TO-COMPANION-MAP.md) for chapter routing.

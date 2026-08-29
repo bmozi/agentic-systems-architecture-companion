@@ -49,6 +49,16 @@ Use [INDEX.md](INDEX.md) for role- and outcome-based routes and
 [BOOK-TO-COMPANION-MAP.md](BOOK-TO-COMPANION-MAP.md) to reconnect each tool to
 the book's reasoning.
 
+## Use it across roles
+
+[Role-Based Paths](ROLE-BASED-PATHS.md), the [Team Workshop](TEAM-WORKSHOP.md),
+and the [Executive Decision Brief](EXECUTIVE-DECISION-BRIEF.md) turn one agent
+design into a delegation decision. Use the
+[Value and Evidence Ledger](VALUE-AND-EVIDENCE-LEDGER.md) to connect autonomy to
+useful work without claiming unmeasured benefits, then exercise the design with
+the [Failure Lab](FAILURE-LAB.md) and
+[Pilot Route](PILOT-AND-USABILITY.md).
+
 ## Development boundary
 
 This is a private development companion. All included outcomes remain
