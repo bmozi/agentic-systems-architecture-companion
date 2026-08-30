@@ -4,7 +4,7 @@
 fixture. The people, dialogue, values, records, and outcomes are constructed.
 They are not John Briggs history, practitioner results, production observations,
 or evidence that the assets work.
-**Artifact state:** IN_PROGRESS
+**Artifact state:** REVIEWED
 **Test execution state:** PLANNED/UNRUN
 
 ## 1. Agent Authority Map example
@@ -14,10 +14,10 @@ or evidence that the assets work.
 | Artifact ID/version | AAM-NBX-CREDIT-001 / 0.2 |
 | Owner | Samir Patel, partner operations |
 | Case/capability | C-001 / investigate and draft partner credit |
-| Artifact state | IN_PROGRESS |
+| Artifact state | REVIEWED |
 | Test execution state | PLANNED/UNRUN |
 | Evidence references | Policy fixture `POL-NBX-12` v12; EXP-001 and EXP-005 `PLANNED/UNRUN` |
-| Decision date | NOT_YET_DECIDED |
+| Decision date | 2026-08-29 source review |
 | Supersession | None |
 | Reconsideration trigger | Credit policy, buyer delegation, amount, tenant, tool, or outcome semantics change |
 
@@ -52,10 +52,10 @@ policy, technical, or practitioner acceptance.
 | Artifact ID/version | GTC-NBX-CREDIT-001 / 0.2 |
 | Owner | Credit platform capability owner |
 | Case/capability | C-001 / submit credit draft |
-| Artifact state | IN_PROGRESS |
+| Artifact state | REVIEWED |
 | Test execution state | PLANNED/UNRUN |
 | Evidence references | AAM-NBX-CREDIT-001; `AUTHZ-NBX-D1042-DEC-001`; `USE-NBX-D1042-MEM778-001`; EXP-001/EXP-002/EXP-005 `PLANNED/UNRUN` |
-| Decision date | NOT_YET_DECIDED |
+| Decision date | 2026-08-29 source review |
 | Reconsideration trigger | Caller, principal, output contract, allowed release, or provider changes |
 
 - **Promise:** Accept one governed draft for review; `202 Accepted` means
@@ -88,10 +88,10 @@ policy, technical, or practitioner acceptance.
 | Artifact ID/version | MPR-NBX-POLICY-001 / 0.2 |
 | Owner | Lena Brooks, data and AI architecture |
 | Case/capability | C-003 scenario / partner-credit policy influence |
-| Artifact state | IN_PROGRESS |
+| Artifact state | REVIEWED |
 | Test execution state | PLANNED/UNRUN |
 | Evidence references | Source fixture `PX-44-credit-policy` v7; EXP-002 `PLANNED/UNRUN` |
-| Decision date | NOT_YET_DECIDED |
+| Decision date | 2026-08-29 source review |
 | Reconsideration trigger | Source, derivation, effective time, retention, or correction path changes |
 
 - **Meaning/use:** A derived summary of partner-specific evidence requirements;
@@ -126,10 +126,10 @@ planned EXP-002 questions, not observed controls.
 | Artifact ID/version | ABB-NBX-CREDIT-001 / 0.1 |
 | Owner | Eli Chen, platform reliability |
 | Case/capability | C-005 / investigation and draft submission loop |
-| Artifact state | IN_PROGRESS |
+| Artifact state | REVIEWED |
 | Test execution state | PLANNED/UNRUN |
 | Evidence references | Scenario graph `NBX-ACTION-GRAPH-01`; EXP-004 `PLANNED/UNRUN` |
-| Decision date | NOT_YET_DECIDED |
+| Decision date | 2026-08-29 source review |
 | Reconsideration trigger | Fan-out, retry, delay, tool, workflow, or value assumptions change |
 
 | Dimension | Constructed envelope | Stop behavior |
@@ -155,10 +155,10 @@ has not tested multiplication or containment.
 | Artifact ID/version | AEG-NBX-CREDIT-001 / 0.1 |
 | Owner | Maya Torres, architecture decision owner |
 | Case/capability | C-001 / move from investigation to draft submission |
-| Artifact state | IN_PROGRESS |
+| Artifact state | REVIEWED |
 | Test execution state | PLANNED/UNRUN |
 | Evidence references | AAM-NBX-CREDIT-001 v0.2; GTC-NBX-CREDIT-001 v0.2; MPR-NBX-POLICY-001 v0.2; ABB-NBX-CREDIT-001 v0.1; EXP-001, EXP-002, EXP-003, EXP-004, and EXP-005 all `PLANNED/UNRUN` |
-| Decision date | NOT_YET_DECIDED |
+| Decision date | 2026-08-29 source review |
 | Reconsideration trigger | Any material failure, control/version change, or proposed capability expansion |
 
 | Evidence class | Constructed required result | Current result | Status |
@@ -182,10 +182,10 @@ fixture.
 | Artifact ID/version | AIR-NBX-CREDIT-001 / 0.1 |
 | Owner | Eli Chen, technical incident commander; Samir, business owner |
 | Case/capability | C-007 scenario / repeated credit-draft loop |
-| Artifact state | IN_PROGRESS |
+| Artifact state | REVIEWED |
 | Test execution state | PLANNED/UNRUN |
 | Evidence references | AAM-NBX-CREDIT-001 v0.2; GTC-NBX-CREDIT-001 v0.2; MPR-NBX-POLICY-001 v0.2; ABB-NBX-CREDIT-001 v0.1; AEG-NBX-CREDIT-001 v0.1; EXP-005 `PLANNED/UNRUN` |
-| Decision date | NOT_YET_DECIDED |
+| Decision date | 2026-08-29 source review |
 | Reconsideration trigger | Owner, path, revocation, correction, communication, or evidence changes |
 
 - **Detect:** causal repetition, budget breach, duplicate operation identity,

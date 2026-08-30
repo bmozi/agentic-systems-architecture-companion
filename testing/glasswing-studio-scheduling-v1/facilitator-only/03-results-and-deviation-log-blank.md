@@ -3,14 +3,14 @@
 <!-- markdownlint-disable MD013 -->
 
 **File ID:** AGENTIC-TEST-GAC-RESULTS-001
-**File version:** 1.0.1-candidate
-**Packet:** AGENTIC-TEST-GAC-001 version 1.0.1-candidate
-**Artifact state:** IN_PROGRESS; blank controlled candidate
+**File version:** 1.0.2
+**Packet:** AGENTIC-TEST-GAC-001 version 1.0.2
+**Artifact state:** PREPARED; blank controlled record
 **Test execution state:** `PLANNED/UNRUN`; no result exists
 **Experiment authority:** None; no EXP-001 through EXP-005 execution or transition authority
 
 This file is intentionally blank. Do not populate it in the stable source
-fixture. After independent packet acceptance and completed preconditions, copy
+fixture. After source-manifest verification and completed preconditions, copy
 it into a separately authorized evidence package. A completed log would not by
 itself establish general usability, companion completeness, participant
 competence, runtime enforcement, system correctness, incident readiness,
@@ -19,7 +19,7 @@ safety, legal sufficiency, production fitness, or benefit.
 ## Attempt identity and authority
 
 - Practitioner-attempt ID:
-- Candidate packet ID/version:
+- Packet ID/version:
 - Accountable execution owner and authorization:
 - Independent packet-acceptance record:
 - Participant code and experience band:
@@ -145,7 +145,7 @@ the separate receipt, record the authoritative state as unchanged.
 - EXP-005 state after authorized integration: must remain `PLANNED/UNRUN`
 - Research, case, release, and publication states remain unchanged: yes / no
 
-Until independent packet acceptance, completed consent and ownership,
-controlled execution, retained evidence, independent evaluation, and an
-authorized source-owner disposition exist, this packet remains a candidate and
-`PLANNED/UNRUN`. No usability result or state transition exists.
+Until source-manifest verification, completed consent and ownership, controlled
+execution, retained evidence, independent evaluation, and an authorized source-
+owner disposition exist, this packet remains `PLANNED/UNRUN`. No usability
+result or state transition exists.

@@ -3,9 +3,9 @@
 <!-- markdownlint-disable MD013 -->
 
 **File ID:** AGENTIC-TEST-GAC-SCENARIO-001
-**File version:** 1.0.1-candidate
-**Packet:** AGENTIC-TEST-GAC-001 version 1.0.1-candidate
-**Artifact state:** IN_PROGRESS; fictional participant fixture
+**File version:** 1.0.2
+**Packet:** AGENTIC-TEST-GAC-001 version 1.0.2
+**Artifact state:** PREPARED; fictional participant fixture
 **Test execution state:** `PLANNED/UNRUN`
 **Recommended participant role:** Enterprise, solution, security, platform, or
 AI architect; AI product or governance practitioner; or equivalent
@@ -46,12 +46,12 @@ approve a release, clear an incident, or transition an experiment.
 
 ## Canonical working assets supplied
 
-Use exact unchanged copies of these files. The hashes pin the candidate packet
+Use exact unchanged copies of these files. The hashes pin the prepared packet
 to the current source bytes; they do not prove that a template works.
 
 | Canonical asset | Template version | SHA-256 |
 | --- | --- | --- |
-| [Agent Authority Map](../../../agent-authority-map.md) | 0.2-template | `9948d63664ff56f598cd0842b636e581cb83cc3d301a5dd017d77c2629a2f15a` |
+| [Agent Authority Map](../../../agent-authority-map.md) | 0.2-template | `c00f3a3ad00938d30efea9792523a6c6f51a7c16d5061a9d9fdc7d8c53755f0f` |
 | [Governed Tool Contract](../../../governed-tool-contract.md) | 0.2-template | `52d574fdc56434e6bc32e83c8b5403d80536e7b1b3a077dbfaf848414ed02eb4` |
 | [Memory and Provenance Record](../../../memory-and-provenance-record.md) | 0.2-template | `27cbfe0c596f1d482cc9d4e74d18d55bc4bf91063db1b73498a5fed859c7a55a` |
 | [Action Budget and Blast-Radius Worksheet](../../../action-budget-and-blast-radius.md) | 0.1-template | `dfb70615c37c1917ff7e32c836ee45860268147aa7af2bd7bb580553eb531bf0` |

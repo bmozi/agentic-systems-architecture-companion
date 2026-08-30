@@ -3,8 +3,8 @@
 <!-- markdownlint-disable MD013 -->
 
 **Packet ID:** AGENTIC-TEST-GAC-001
-**Packet version:** 1.0.1-candidate
-**Artifact state:** IN_PROGRESS; candidate pending independent review
+**Packet version:** 1.0.2
+**Artifact state:** PREPARED; source integrity and routing reviewed
 **Test execution state:** `PLANNED/UNRUN`
 **Domain:** Fictional community-arts studio scheduling and tentative-hold decision
 **Experiment authority:** None; EXP-001 through EXP-005 remain `PLANNED/UNRUN`
@@ -19,12 +19,11 @@ a real organization, a participant result, an observed incident, or evidence
 that any companion asset is usable, complete, effective, correct, safe,
 legally sufficient, production-ready, or beneficial.
 
-This packet has not been independently accepted or used. No participant has
-been recruited or consented. No facilitator, observer, evaluator, execution
-owner, retention authority, score, time, output, omission, assistance request,
-or deviation has been recorded. The candidate cannot enter execution until an
-independent review accepts the exact source bytes and a separately accountable
-owner completes every precondition.
+This packet has not been used. No participant has been recruited or consented.
+No facilitator, observer, evaluator, execution owner, retention authority,
+score, time, output, omission, assistance request, or deviation has been
+recorded. The packet cannot enter execution until a separately accountable
+owner verifies the source manifest and completes every precondition.
 
 At most, a completed and independently evaluated future attempt could inform a
 narrow source-revision decision for the exact packet, template bytes,
@@ -59,14 +58,14 @@ traceability, justified overlap, and safe exclusion.
 
 ## Stable-fixture and freeze procedure
 
-The source packet uses UTF-8, LF line endings, stable IDs, semantic candidate
+The source packet uses UTF-8, LF line endings, stable IDs, semantic
 versions, and no generated timestamps. Before an authorized attempt:
 
 1. assign an accountable execution owner, independent evaluator, observer, and
    privacy/retention owner;
 2. obtain consent under completed retention, access, withdrawal, deletion, and
    disclosure terms;
-3. copy the exact candidate files and canonical template bytes into a new
+3. copy the exact prepared files and canonical template bytes into a new
    controlled evidence directory outside this source fixture;
 4. calculate SHA-256 for every supplied and withheld file and record the tool,
    version, command, operator, date, and canonical relative path;
@@ -85,12 +84,13 @@ ambiguous, and dissenting evidence in the controlled run package.
 ## Canonical template dependencies
 
 The participant scenario pins all six unchanged canonical templates. Their
-current source hashes are recorded in the scenario and the source-owned
-inventory. A later byte change requires a new packet version or a recorded,
-independently reviewed dependency update before use.
+current source hashes are recorded in the scenario and the checked-in
+`SHA256SUMS`. A later byte change requires a new packet version and manifest
+update before use.
 
-## Candidate disposition
+## Prepared disposition
 
-**Pending independent review.** This source authoring step does not approve the
-packet, authorize recruitment or execution, record practitioner evidence, or
-change any artifact, release, research, case, or experiment state.
+Source structure, routing, and pinned dependencies have been reviewed and the
+packet is prepared for a separately authorized attempt. That review does not
+authorize recruitment or execution, record practitioner evidence, or change
+any artifact, release, research, case, or experiment state.

@@ -1,8 +1,8 @@
 # Supplementary Cross-Asset Views
 
-**Status:** Working supplementary views; not canonical assets
+**Status:** Reviewed supplementary views; not canonical assets
 
-**Artifact state:** IN_PROGRESS
+**Artifact state:** REVIEWED
 
 **Test execution state:** PLANNED/UNRUN
 

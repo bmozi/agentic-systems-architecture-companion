@@ -3,6 +3,7 @@
 
 from __future__ import annotations
 
+import hashlib
 import json
 from pathlib import Path
 import re
@@ -14,6 +15,7 @@ ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "companion.json"
 LINK_PATTERN = re.compile(r"!?\[[^\]]*\]\(([^)]+)\)")
 COMMIT_PATTERN = re.compile(r"^[0-9a-f]{7,40}$")
+CHECKSUM_PATTERN = re.compile(r"^([0-9a-f]{64})  (.+)$")
 
 
 def markdown_links(path: Path):
@@ -51,6 +53,14 @@ def local_target(source: Path, raw: str) -> Path | None:
     return resolved
 
 
+def sha256(path: Path) -> str:
+    digest = hashlib.sha256()
+    with path.open("rb") as stream:
+        for chunk in iter(lambda: stream.read(65536), b""):
+            digest.update(chunk)
+    return digest.hexdigest()
+
+
 def main() -> int:
     errors: list[str] = []
     if not MANIFEST.is_file():
@@ -75,6 +85,51 @@ def main() -> int:
     for relative in required:
         if not (ROOT / relative).is_file():
             errors.append(f"missing required file: {relative}")
+
+    checksum_manifests = manifest.get("checksum_manifests", [])
+    if not isinstance(checksum_manifests, list):
+        errors.append("companion.json: checksum_manifests must be a list")
+        checksum_manifests = []
+    checked_checksums = 0
+    for relative in checksum_manifests:
+        checksum_path = ROOT / relative
+        if not checksum_path.is_file():
+            errors.append(f"missing checksum manifest: {relative}")
+            continue
+        listed_targets: set[Path] = set()
+        for number, line in enumerate(
+            checksum_path.read_text(encoding="utf-8").splitlines(), start=1
+        ):
+            match = CHECKSUM_PATTERN.fullmatch(line)
+            if not match:
+                errors.append(f"{relative}:{number}: invalid SHA256SUMS line")
+                continue
+            expected, raw_target = match.groups()
+            target = (checksum_path.parent / raw_target).resolve()
+            try:
+                target.relative_to(ROOT)
+            except ValueError:
+                errors.append(f"{relative}:{number}: checksum target escapes repository")
+                continue
+            if not target.is_file():
+                errors.append(f"{relative}:{number}: missing checksum target: {raw_target}")
+                continue
+            listed_targets.add(target)
+            checked_checksums += 1
+            if sha256(target) != expected:
+                errors.append(f"{relative}:{number}: checksum mismatch: {raw_target}")
+        packet_files = {
+            path.resolve()
+            for path in checksum_path.parent.rglob("*")
+            if path.is_file()
+            and path != checksum_path
+            and "__pycache__" not in path.parts
+        }
+        for unlisted in sorted(packet_files - listed_targets):
+            errors.append(
+                f"{relative}: packet file missing from checksum manifest: "
+                f"{unlisted.relative_to(checksum_path.parent)}"
+            )
 
     gateways = manifest.get("gateway_assets")
     if not isinstance(gateways, list) or not gateways:
@@ -122,7 +177,8 @@ def main() -> int:
 
     print(
         f"companion validation passed: {len(markdown_files)} Markdown files, "
-        f"{checked_links} local links, {len(gateways)} gateway asset(s)"
+        f"{checked_links} local links, {len(gateways)} gateway asset(s), "
+        f"{checked_checksums} checksum(s)"
     )
     return 0
 

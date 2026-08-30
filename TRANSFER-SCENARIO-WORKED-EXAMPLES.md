@@ -5,7 +5,7 @@ unrelated to Northbridge. Its agent reviews building-sensor anomalies, drafts
 maintenance work, and may request dispatch. Names, limits, data, and outcomes
 are hypothetical. This packet tests conceptual transfer only after practitioner
 sessions occur; none have occurred.
-**Artifact state:** IN_PROGRESS
+**Artifact state:** REVIEWED
 **Test execution state:** PLANNED/UNRUN
 
 ## 1. Agent Authority Map example
@@ -15,10 +15,10 @@ sessions occur; none have occurred.
 | Artifact ID/version | AAM-CWF-HVAC-001 / 0.2 |
 | Owner | Facilities operations manager |
 | Case/capability | Investigate HVAC anomaly and draft work order |
-| Artifact state | IN_PROGRESS |
+| Artifact state | REVIEWED |
 | Test execution state | PLANNED/UNRUN |
 | Evidence references | Constructed policy `CWF-MAINT-4`; no test evidence |
-| Decision date | NOT_YET_DECIDED |
+| Decision date | 2026-08-29 source review |
 | Reconsideration trigger | Building, vendor, safety class, cost, occupancy, or dispatch scope changes |
 
 The agent may read approved sensor and maintenance history for the assigned
@@ -55,10 +55,10 @@ approval.
 | Artifact ID/version | GTC-CWF-WO-001 / 0.2 |
 | Owner | Maintenance platform owner |
 | Case/capability | Create draft work order |
-| Artifact state | IN_PROGRESS |
+| Artifact state | REVIEWED |
 | Test execution state | PLANNED/UNRUN |
 | Evidence references | AAM-CWF-HVAC-001 v0.2; `AUTHZ-CWF-HVAC-DEC-001`; `USE-CWF-HVAC-MANUAL001-001`; `USE-CWF-HVAC-REG001-001`; no test evidence |
-| Decision date | NOT_YET_DECIDED |
+| Decision date | 2026-08-29 source review |
 | Reconsideration trigger | Work-order API, vendor, identity, allowed fields, or result semantics change |
 
 `Accepted` means a draft has durable custody, not vendor dispatch. The request
@@ -89,10 +89,10 @@ receipt resolution or enforcement behavior has been executed.
 | Artifact ID/version | MPR-CWF-HVAC-001 / 0.2 |
 | Owner | Facilities data owner |
 | Case/capability | Maintenance interval and known-sensor condition |
-| Artifact state | IN_PROGRESS |
+| Artifact state | REVIEWED |
 | Test execution state | PLANNED/UNRUN |
 | Evidence references | Manual fixture `SRC-CWF-MANUAL-HVAC-004` v4; equipment-registry snapshot fixture `SRC-CWF-EQUIPREG-20260829T000000Z` v1; no test evidence |
-| Decision date | NOT_YET_DECIDED |
+| Decision date | 2026-08-29 source review |
 | Reconsideration trigger | Manual, sensor calibration, building use, retention, or source ownership changes |
 
 Retained item `MEM-CWF-MANUAL-INT-001` v1 summarizes a manufacturer interval
@@ -124,10 +124,10 @@ unrun assumptions.
 | Artifact ID/version | ABB-CWF-HVAC-001 / 0.1 |
 | Owner | Facilities reliability lead |
 | Case/capability | HVAC draft work orders |
-| Artifact state | IN_PROGRESS |
+| Artifact state | REVIEWED |
 | Test execution state | PLANNED/UNRUN |
 | Evidence references | Building-topology fixture `TOPO-CWF-BLDG-001` v0.1; no test evidence |
-| Decision date | NOT_YET_DECIDED |
+| Decision date | 2026-08-29 source review |
 | Reconsideration trigger | Sensor count, building scope, vendor path, or dispatch authority changes |
 
 The scenario permits one open draft per equipment/anomaly identity, ten sensor
@@ -146,10 +146,10 @@ real queue or workload.
 | Artifact ID/version | AEG-CWF-HVAC-001 / 0.1 |
 | Owner | Facilities architecture review |
 | Case/capability | Add autonomous vendor dispatch for low-cost HVAC work |
-| Artifact state | IN_PROGRESS |
+| Artifact state | REVIEWED |
 | Test execution state | PLANNED/UNRUN |
 | Evidence references | AAM-CWF-HVAC-001 v0.2; GTC-CWF-WO-001 v0.2; MPR-CWF-HVAC-001 v0.2; ABB-CWF-HVAC-001 v0.1; EXP-001, EXP-002, EXP-003, EXP-004, and EXP-005 all `PLANNED/UNRUN` |
-| Decision date | NOT_YET_DECIDED |
+| Decision date | 2026-08-29 source review |
 | Reconsideration trigger | Safety classification, cost, occupancy, provider, or incident changes |
 
 The proposed change introduces spending, physical access, scheduling, and
@@ -167,10 +167,10 @@ any real facility.
 | Artifact ID/version | AIR-CWF-HVAC-001 / 0.1 |
 | Owner | Facilities incident commander |
 | Case/capability | Duplicate maintenance drafts after sensor replay |
-| Artifact state | IN_PROGRESS |
+| Artifact state | REVIEWED |
 | Test execution state | PLANNED/UNRUN |
 | Evidence references | AAM-CWF-HVAC-001 v0.2; GTC-CWF-WO-001 v0.2; MPR-CWF-HVAC-001 v0.2; ABB-CWF-HVAC-001 v0.1; AEG-CWF-HVAC-001 v0.1; no tabletop evidence |
-| Decision date | NOT_YET_DECIDED |
+| Decision date | 2026-08-29 source review |
 | Reconsideration trigger | Path, owner, vendor, sensor, revocation, or correction changes |
 
 The plan detects repeated causal identities and backlog growth; stops new agent

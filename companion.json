@@ -10,13 +10,20 @@
     "BOOK-TO-COMPANION-MAP.md",
     "LICENSE-STATUS.md",
     "PROVENANCE.md",
+    "SOURCE-ALIGNMENT.md",
     "VALIDATION.md",
     "ROLE-BASED-PATHS.md",
     "TEAM-WORKSHOP.md",
     "VALUE-AND-EVIDENCE-LEDGER.md",
     "EXECUTIVE-DECISION-BRIEF.md",
     "FAILURE-LAB.md",
-    "PILOT-AND-USABILITY.md"
+    "PILOT-AND-USABILITY.md",
+    "testing/agentic-reader-value-v1/README.md",
+    "testing/agentic-reader-value-v1/SHA256SUMS"
+  ],
+  "checksum_manifests": [
+    "testing/agentic-reader-value-v1/SHA256SUMS",
+    "testing/glasswing-studio-scheduling-v1/SHA256SUMS"
   ],
   "gateway_assets": [
     {

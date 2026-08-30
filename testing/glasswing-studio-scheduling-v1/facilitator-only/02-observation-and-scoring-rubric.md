@@ -3,9 +3,9 @@
 <!-- markdownlint-disable MD013 -->
 
 **File ID:** AGENTIC-TEST-GAC-RUBRIC-001
-**File version:** 1.0.1-candidate
-**Packet:** AGENTIC-TEST-GAC-001 version 1.0.1-candidate
-**Artifact state:** IN_PROGRESS; predetermined facilitator-only candidate
+**File version:** 1.0.2
+**Packet:** AGENTIC-TEST-GAC-001 version 1.0.2
+**Artifact state:** PREPARED; predetermined facilitator-only rubric
 **Test execution state:** `PLANNED/UNRUN`
 **Evaluator:**
 **Evaluator independence disclosure:**
@@ -21,7 +21,7 @@ sufficiency, production fitness, or benefit.
 
 | Check | Yes / no | Evidence | Disposition |
 | --- | --- | --- | --- |
-| Exact candidate packet was independently accepted before recruitment | | | |
+| Exact prepared packet and manifest were verified before recruitment | | | |
 | Consent, privacy, retention, and withdrawal conditions completed before start | | | |
 | Supplied and withheld files match frozen SHA-256 values | | | |
 | Six canonical templates match the pinned versions and hashes | | | |

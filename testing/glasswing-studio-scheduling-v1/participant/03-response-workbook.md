@@ -3,9 +3,9 @@
 <!-- markdownlint-disable MD013 -->
 
 **File ID:** AGENTIC-TEST-GAC-RESPONSE-001
-**File version:** 1.0.1-candidate
-**Packet:** AGENTIC-TEST-GAC-001 version 1.0.1-candidate
-**Artifact state:** IN_PROGRESS; blank participant fixture
+**File version:** 1.0.2
+**Packet:** AGENTIC-TEST-GAC-001 version 1.0.2
+**Artifact state:** PREPARED; blank participant fixture
 **Test execution state:** `PLANNED/UNRUN`
 **Participant code:**
 **Attempt ID:**

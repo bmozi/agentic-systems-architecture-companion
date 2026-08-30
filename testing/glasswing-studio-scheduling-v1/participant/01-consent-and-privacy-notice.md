@@ -3,15 +3,15 @@
 <!-- markdownlint-disable MD013 -->
 
 **File ID:** AGENTIC-TEST-GAC-CONSENT-001
-**File version:** 1.0.1-candidate
-**Packet:** AGENTIC-TEST-GAC-001 version 1.0.1-candidate
-**Artifact state:** IN_PROGRESS; blank candidate notice
+**File version:** 1.0.2
+**Packet:** AGENTIC-TEST-GAC-001 version 1.0.2
+**Artifact state:** PREPARED; blank notice
 **Test execution state:** `PLANNED/UNRUN`
 **Current consent count:** 0
 
 ## Purpose of a possible attempt
 
-If separately authorized after independent packet review, a participant would
+If separately authorized after source-manifest verification, a participant would
 review a fictional studio-scheduling agent scenario, choose the smallest useful
 set of six working companion templates, and record bounded architectural
 decisions. The narrow purpose would be to observe routing ambiguity, field
@@ -79,7 +79,7 @@ The accountable execution owner must complete and approve every field below
 before seeking consent. Current blanks are stop conditions.
 
 - Approved execution owner and contact:
-- Independent-review acceptance record for this packet version:
+- Source-manifest verification record for this packet version:
 - Privacy contact or escalation path:
 - Evidence repository and jurisdiction:
 - Access roles:
@@ -113,5 +113,5 @@ fields above are approved.
 - Consent recorded by:
 - Date and method:
 
-**Current gate:** `STOP — candidate packet not independently accepted;
-accountable owner and retention terms are blank; no consent exists.`
+**Current gate:** `STOP — accountable execution owner and retention terms are
+blank; no consent exists.`

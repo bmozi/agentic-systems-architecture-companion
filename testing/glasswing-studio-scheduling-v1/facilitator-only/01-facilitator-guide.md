@@ -3,9 +3,9 @@
 <!-- markdownlint-disable MD013 -->
 
 **File ID:** AGENTIC-TEST-GAC-FACILITATOR-001
-**File version:** 1.0.1-candidate
-**Packet:** AGENTIC-TEST-GAC-001 version 1.0.1-candidate
-**Artifact state:** IN_PROGRESS; facilitator-only candidate
+**File version:** 1.0.2
+**Packet:** AGENTIC-TEST-GAC-001 version 1.0.2
+**Artifact state:** PREPARED; facilitator-only
 **Test execution state:** `PLANNED/UNRUN`
 **Blinding:** Do not supply this file or its contents to participants before or during an attempt
 
@@ -13,9 +13,8 @@
 
 This guide predetermines a reference route, acceptable alternative-route rule,
 and scoring boundaries for a possible companion-transfer attempt. It does not
-authorize independent acceptance of the packet, recruitment, consent,
-execution, observation, scoring, publication, release, or any evidence-state
-change.
+authorize recruitment, consent, execution, observation, scoring, publication,
+release, or any evidence-state change.
 
 This packet is not an EXP-001, EXP-002, EXP-003, EXP-004, or EXP-005 run. It
 cannot execute, satisfy, reinterpret, or transition those specifications. A
@@ -28,7 +27,7 @@ authorized source-owner disposition.
 Stop before starting unless a controlled run package records all of the
 following:
 
-- independent-review acceptance of the exact candidate packet and manifest;
+- verification of the exact prepared packet and manifest;
 - accountable practitioner-attempt execution owner;
 - observer and evaluator independent from packet and template authorship;
 - approved consent, privacy, retention, withdrawal, deletion, access, and

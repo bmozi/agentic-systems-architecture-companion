@@ -10,10 +10,18 @@ Use only the highest supported label: **Prepared**, **Piloted**, **Revised**,
 **Prepared**. Existing Glasswing materials and blank logs do not establish a
 completed result.
 
-## First pilot
+## Prepared reader-value packet
 
-1. Review [testing/README.md](testing/README.md) and select a protocol-approved
-   scenario version.
+Use the separately versioned [Agentic Systems Reader-Value Pilot
+Packet](testing/agentic-reader-value-v1/README.md) for a controlled two-stage
+practitioner and decision-owner attempt. During the scored packet, follow its
+participant inventory exactly; do not add the standalone Failure Lab or
+completed examples as participant hints.
+
+## Advanced technical-transfer packet
+
+1. Review [testing/README.md](testing/README.md) and use the prepared Glasswing
+   scenario only when the advanced six-template task fits the intended reader.
 2. Give participants the [Failure Lab](FAILURE-LAB.md) and only the linked
    companion assets.
 3. Include an implementation role, an authority or business owner, and an
@@ -24,6 +32,9 @@ completed result.
    unresolved decisions.
 6. Record only sessions that occurred in
    [Practitioner Test Logs](PRACTITIONER-TEST-LOGS.md).
+
+Do not merge the reader-value and Glasswing evidence as though their tasks,
+materials, and participants were interchangeable.
 
 ## No-result rule
 
