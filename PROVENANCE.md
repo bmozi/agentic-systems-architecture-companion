@@ -97,8 +97,20 @@
 - **Version 1.2.3 enforcement:** the positive control and 22 checksum-refreshed
   negative mutations cover temporal, execution-log, orchestration, identity,
   authority, transfer, and Phase 1 invariants
-- **Execution status:** version 1.2.3 is PREPARED and UNRUN; no human
+- **Version 1.2.4 repair:** adds mutually exclusive run-specific human-consent
+  and synthetic-context entry branches without fictional consent; explicit
+  Stage A start/feedback/end and Stage B start/scoring-end/debrief/end
+  boundaries; immutable results before log close; later external closeout
+  binding; and a proof-gated one-page US Letter handoff contract. Six scored
+  freeze chains remain distinct from full-route closure
+- **Version 1.2.4 enforcement:** permanent checksum-refreshed mutations reject
+  omitted or mixed entry branches, synthetic human-result claims, missing
+  boundaries/debrief/results, premature close, predicted future log hashes,
+  missing external closeout, and favorable one-page claims without proof
+- **Execution status:** version 1.2.4 is PREPARED and UNRUN; no human
   recruitment, consent, session, observation, score, retest, or result exists
+- **Real-world status:** UNRUN; no runtime, production, customer, safety, or
+  business result exists
 - **Synthetic boundary:** earlier AI runs found defects but establish no
   usability, safety, effectiveness, reader value, runtime enforcement, or
   business result

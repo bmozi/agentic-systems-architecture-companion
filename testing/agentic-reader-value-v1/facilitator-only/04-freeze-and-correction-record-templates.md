@@ -1,6 +1,6 @@
 # Detached Freeze-Verification and Correction Record Templates
 
-**Packet:** AG-RV-PILOT-001 version 1.2.3
+**Packet:** AG-RV-PILOT-001 version 1.2.4
 **Status:** Facilitator-only blank records; prepared and unrun
 
 These schemas create run evidence. Never supply this source template during a
@@ -79,6 +79,10 @@ manifest, this record, and the blank handoff input.
 
 ## Exact output chains
 
+These are the six scored freeze chains. Completing all six does not complete
+the entry branch, stage boundaries, debrief, run results, log close, or later
+external closeout.
+
 | Phase | Governed output manifest | Detached freeze-verification record |
 | --- | --- | --- |
 | Stage A initial | `STAGE-A-INITIAL-SHA256SUMS` | `STAGE-A-INITIAL-FREEZE-VERIFICATION-RECORD.md` |
@@ -103,12 +107,24 @@ timestamp/timezone.
 | Handoff to Stage B Section 1 | `STAGE-B-PHASE-1-INPUT-SHA256SUMS` |
 | Section 1 to detailed read-back | `STAGE-B-PHASE-2-INPUT-SHA256SUMS` |
 | Section 2 to executive decision | `STAGE-B-PHASE-3-INPUT-SHA256SUMS` |
+| Sections 3-5 to post-scoring Section 6 | `STAGE-B-DEBRIEF-INPUT-SHA256SUMS` |
 
 Each next phase-input manifest hashes the prior completed output, governing
 manifest, detached record, and new inputs. Verify it before new material opens.
 No other participant file, prompt, message, tool output, or instruction is
 permitted. Synthetic orchestration uses a separate predeclared, verified
 `ORCHESTRATION-INPUT-SHA256SUMS` and remains unscored facilitator evidence.
+
+The debrief input manifest is a post-scoring release, not a seventh scored
+freeze chain. It hashes `STAGE-B-SECTIONS-3-5-v1.md`, its governing manifest,
+its detached record, and exact `06-section-6-debrief.md`. Verify it only after
+`SCORING_ENDED` and before the debrief opens.
+
+Run-specific results use `AG-RUN-RESULTS-<ATTEMPT-ID>-v1.md` and state
+`RUN RESULTS COMPLETE` before `LOG_CLOSED`. The later external closeout uses
+`AG-RUN-CLOSEOUT-SHA256SUMS` and
+`AG-RUN-CLOSEOUT-<ATTEMPT-ID>-v1.md`; neither may be predicted inside a scored
+artifact or pre-close result.
 
 ## Correction of already frozen bytes
 

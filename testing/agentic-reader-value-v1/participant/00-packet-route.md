@@ -1,14 +1,35 @@
 # Exact Packet Route
 
-**Packet:** AG-RV-PILOT-001 version 1.2.3
+**Packet:** AG-RV-PILOT-001 version 1.2.4
 **Status:** Prepared and unrun; this route records no human result
 
 ## Before either stage
 
-The facilitator must complete the execution-owner, storage, access, retention,
-deletion, withdrawal, and recording fields in the consent notice. The human
-participant must review and affirm that notice before scored work begins. A
-blank prerequisite or missing consent means **do not start**.
+The facilitator first creates the run-specific execution/access log and records
+`RUN_STARTED`. Choose exactly one entry branch for the entire attempt and
+record `ENTRY_BRANCH_SELECTED`. The branches are
+mutually exclusive and may not change or mix between stages:
+
+- **Human branch:** complete every execution-owner, storage, access,
+  retention, deletion, withdrawal, recording, participant, and affirmation
+  field in `01-consent-and-privacy.md`. Use separate completed run records for
+  Stage A and Stage B. A blank prerequisite or missing human consent means
+  **do not start**. Do not create or deliver a synthetic-context record.
+- **Synthetic branch:** do not complete or deliver the human consent notice.
+  Complete the exact run-specific
+  `AG-SYNTHETIC-CONTEXT-<ATTEMPT-ID>-v1.md` from
+  `01-synthetic-context-record.md`, with artifact identity
+  `AG-SYNTHETIC-CONTEXT` / `v1` and the literal
+  `SYNTHETIC — NO HUMAN PARTICIPANT OR HUMAN DATA`. It must state that the
+  scenario is fictional, the run is orchestration-aided, and no human consent,
+  comprehension, usability, or practitioner result exists.
+
+Before any Stage A scored file opens, create and verify
+`STAGE-A-CONTEXT-SHA256SUMS` over only the selected branch record and record
+`STAGE_A_CONTEXT_MANIFEST_VERIFIED`. Before Stage B starts, create and verify
+`STAGE-B-CONTEXT-SHA256SUMS` over only the applicable same-branch record and
+record `STAGE_B_CONTEXT_MANIFEST_VERIFIED`. Branch omission, branch mixing, or
+a synthetic human-result claim is a deviation and stop.
 
 This route is written for a sealed, flat delivery directory. Use only the exact
 local filenames named below. Every named file must be an immutable copy covered
@@ -28,9 +49,10 @@ stop, and new attempt.
 
 ## Stage A — exact read and work order
 
-1. Complete `01-consent-and-privacy.md` before scored work.
-2. Immediately before first reading this route, record the exact Stage A start
-   timestamp and timezone in the practitioner workbook and facilitator log.
+1. Complete and verify the selected Stage A context gate before scored work.
+2. Immediately before first reading this route, record `STAGE_A_STARTED` and
+   the exact Stage A start timestamp/timezone in the practitioner workbook and
+   facilitator log.
 3. Read this route, then `02-scenario-and-task.md`.
 4. Open `03-practitioner-workbook.md` and complete
    Section 1, **Recognition before terminology**, without companion assets.
@@ -96,7 +118,10 @@ stop, and new attempt.
     The handoff must contain a nonblank largest unacceptable outcome. It must
     also separate the candidate scope being evaluated from capability that is
     presently authorized by current authority evidence.
-12. Complete material feedback and record the exact Stage A end timestamp.
+12. Complete material feedback, record `STAGE_A_FEEDBACK_COMPLETED`, and then
+    record `STAGE_A_ENDED` with the exact Stage A end timestamp/timezone. A
+    completed handoff freeze without these events is not a completed Stage A
+    route.
 
 The live update in Step 8 intentionally creates the first revised artifact
 set. That planned revision is not a post-freeze correction. If any byte changes
@@ -109,9 +134,13 @@ Never overwrite or relabel frozen bytes.
 
 ## Stage B — exact read and work order
 
-1. Complete `01-consent-and-privacy.md` before scored work.
-2. Immediately before first reading this route, record the exact Stage B start
-   timestamp and timezone in the decision-owner workbook and facilitator log.
+1. Complete and verify the selected same-branch Stage B context gate before
+   scored work. The synthetic branch reuses the exact immutable synthetic
+   context record; the human branch uses the Stage B participant's separately
+   completed consent record.
+2. Immediately before first reading this route, record `STAGE_B_STARTED` and
+   the exact Stage B start timestamp/timezone in the decision-owner workbook
+   and facilitator log.
 3. Read this route. Before the handoff is opened, verify
    `STAGE-B-PHASE-1-INPUT-SHA256SUMS`, which hashes the handoff, its governing
    manifest and detached record, this route, and the blank workbook. Then
@@ -152,8 +181,16 @@ Never overwrite or relabel frozen bytes.
    timestamp/timezone, and `SECTIONS 3-5 COMPLETE`. Create and verify
    `STAGE-B-SECTIONS-3-5-SHA256SUMS`; only then create
    `STAGE-B-SECTIONS-3-5-FREEZE-VERIFICATION-RECORD.md`.
-8. Complete Section 6 only after scoring ends. Only then may the Stage A
-   practitioner explain anything. Record the exact Stage B end time.
+8. After the Sections 3–5 detached record is complete, record `SCORING_ENDED`.
+   Only then create and verify `STAGE-B-DEBRIEF-INPUT-SHA256SUMS` over the
+   frozen Sections 3–5 artifact, its governing manifest, its detached record,
+   and the exact blank `06-section-6-debrief.md`. Release and open that debrief
+   input only after the manifest verifies. Complete Section 6 as
+   `STAGE-B-SECTION-6-DEBRIEF-v1.md` with artifact ID/version,
+   completion timestamp/timezone, and `DEBRIEF COMPLETE`. Only during this
+   post-scoring debrief may Stage A explain anything. The explanation must not
+   rewrite or upgrade frozen scored bytes or scores. Record `DEBRIEF_COMPLETED`
+   and then `STAGE_B_ENDED` with the exact Stage B end time.
 
 Every governed output records completion before hashing. Its manifest hashes
 only completed governed files, never itself or the later detached record.
@@ -170,3 +207,26 @@ log; that log remains outside participant input.
 Synthetic route preflight may identify wording or routing defects, but it is
 not human consent, practitioner validation, or evidence that the packet is
 usable, safe, effective, or valuable.
+
+## Results, log close, and later external closeout
+
+The six scored freeze chains and the full route are separate results. Six
+valid detached records establish only **six freeze chains complete**.
+
+After Stage B ends, complete a new immutable run-specific result from the
+facilitator template as `AG-RUN-RESULTS-<ATTEMPT-ID>-v1.md`, artifact identity
+`AG-RUN-RESULTS` / `v1`, state `RUN RESULTS COMPLETE`. It must include both
+stage boundaries, scoring end, debrief, all counts, scores, critical gates,
+deviations, layout evidence, and separate protocol/synthetic/layout/human/
+real-world states. Record `RUN_RESULTS_COMPLETED` before `LOG_CLOSED`. The
+results record must not predict the final closed-log hash or a future closeout
+timestamp.
+
+Only after results completion may the facilitator append `LOG_CLOSED`,
+validate the closed log, and copy it without byte change to `closeout/input`.
+Create `AG-RUN-CLOSEOUT-SHA256SUMS` over the closed-log copy and run-results
+file. Then create the later external
+`AG-RUN-CLOSEOUT-<ATTEMPT-ID>-v1.md` record binding the closed-log hash,
+closeout-manifest hash, and run-results hash. Only after this later binding may
+the result say **full synthetic route complete**. The external closeout is not
+an event retroactively inserted into the already closed log.

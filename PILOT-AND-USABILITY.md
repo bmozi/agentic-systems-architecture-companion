@@ -10,16 +10,17 @@ Use only the highest supported label: **Prepared**, **Piloted**, **Revised**,
 **Prepared**. Existing Glasswing materials and blank logs do not establish a
 completed result.
 
-Versions 1.0.0 through 1.2.2 received synthetic AI preflight, regression, or
+Versions 1.0.0 through 1.2.3 received synthetic AI preflight, regression, or
 independent audit runs used only to find defects in routing, transfer, timing,
 incident authority,
 order correction, numeric prompts, freeze evidence, and artifact provenance.
-They were not human or practitioner sessions. Version 1.2.3 contains the latest
-non-self-referential temporal sealing, exact execution-log, orchestration-
-input, transfer-language, and Phase 1 withholding repairs and remains
+They were not human or practitioner sessions. Version 1.2.4 contains the latest
+mutually exclusive entry-branch, full-route boundary, results/closeout, and
+one-page proof-contract repairs in addition to the non-self-referential
+temporal sealing and exact execution log. It remains
 **PREPARED/UNRUN**.
-No version establishes usability,
-safety, effectiveness, or reader/customer value.
+Real-world execution remains **UNRUN**. No version establishes usability,
+safety, effectiveness, human comprehension, or reader/customer value.
 
 ## Prepared reader-value packet
 

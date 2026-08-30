@@ -1,13 +1,21 @@
 # Stage B Decision-Owner Workbook
 
-**Packet:** AG-RV-PILOT-001 version 1.2.3
+**Packet:** AG-RV-PILOT-001 version 1.2.4
 **Status:** Blank independent read-back record
 
 - Reviewer code:
+- Entry branch: human / synthetic; must match Stage A
+- Exact selected context-record filename and artifact ID/version:
+- `STAGE-B-CONTEXT-SHA256SUMS` verification timestamp/timezone and log checkpoint:
 - Broad role and experience band, optional:
 - Stage A artifact ID/version:
 - Exact Stage B start before first scored read of the packet route, with timezone:
+- `STAGE_B_STARTED` log checkpoint sequence/hash:
+- Exact scoring-end timestamp/timezone and `SCORING_ENDED` checkpoint:
+- Exact debrief-input manifest verification timestamp/timezone and checkpoint:
+- Exact Section 6/debrief completion timestamp/timezone and `DEBRIEF_COMPLETED` checkpoint:
 - Exact Stage B end, with timezone:
+- `STAGE_B_ENDED` log checkpoint sequence/hash:
 - Exact supplied-file route and manifest:
 - Exact `STAGE-A-REVISED-FREEZE-RECORD.md` received and verified: write
   `NOT RELEASED — PHASE 2 CHECK` until Phase 2:
@@ -148,12 +156,17 @@ Choose one: `EXPLORE` / `PROCEED BOUNDED` / `INVEST` / `HOLD` / `STOP`
 
 ## 6. Debrief after scoring
 
-Do not begin this section until Sections 1–5 have completed their governing-
-manifest verification and detached-record sequences and scoring has ended.
+This heading is a route reminder, not the debrief input. Do not begin Section
+6 until Sections 1–5 have completed their governing-manifest verification and
+detached-record sequences, `SCORING_ENDED` is recorded, and
+`STAGE-B-DEBRIEF-INPUT-SHA256SUMS` verifies the exact separate
+`06-section-6-debrief.md` input. Export the completed debrief as
+`STAGE-B-SECTION-6-DEBRIEF-v1.md` with state `DEBRIEF COMPLETE`.
 
 - Stage A explanation that changed your interpretation:
 - Decision changed after discussion:
 - Why:
+- Frozen scored artifact or score changed: `NO` / deviation and stop
 
 ## Frozen-artifact correction register
 

@@ -1,15 +1,27 @@
 # One-Screen Decision Handoff
 
-**Packet:** AG-RV-PILOT-001 version 1.2.3
+**Packet:** AG-RV-PILOT-001 version 1.2.4
 **Status:** Blank Stage A transfer; complete only after the live update
 
-Keep this to one screen or one printed page. Do not open or complete it until
+Keep this to one screen and one printed page. The declared local proof target
+is US Letter portrait, exactly one page, margins of at least 0.5 inch, body and
+table text of at least 9 points, no clipping, overlap, hidden overflow, or
+unreadable shrinking, and no more than 450 reader-facing words excluding only
+immutable provenance metadata. Excluded provenance must still fit on the same
+page. Do not open or complete this handoff until
 `STAGE-A-HANDOFF-INPUT-SHA256SUMS` verifies the revised artifacts, their
 governing manifest, their detached verification record, and this blank input.
 Export the completed handoff as `AG-A-ONE-SCREEN-HANDOFF-v1.md`. Link detailed artifacts instead of copying
 them. Use each exact literal immutable local filename; Stage B must receive
 that same filename and byte sequence. `UNASSIGNED` and `UNKNOWN` are valid and
 preferable to invention.
+
+Do not claim `LAYOUT PASSED` inside this governed handoff. After its freeze,
+the facilitator must preserve the Markdown and generated PDF and complete
+`AG-A-HANDOFF-LAYOUT-PROOF-<ATTEMPT-ID>-v1.md` with the rendering command,
+tool versions, PDF SHA-256, page count, margins, point size, word count, and
+clipping/overlap results. A favorable one-page claim requires every proof row
+to pass. Layout evidence is not comprehension evidence.
 
 | Decision field | Stage A entry |
 | --- | --- |

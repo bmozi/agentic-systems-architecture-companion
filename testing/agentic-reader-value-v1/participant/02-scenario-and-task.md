@@ -1,6 +1,6 @@
 # Cedar Lane Scenario: Replenish Safety Supplies Without Surrendering Control
 
-**Packet:** AG-RV-PILOT-001 version 1.2.3
+**Packet:** AG-RV-PILOT-001 version 1.2.4
 **Status:** Fictional, prepared, and unrun
 
 Cedar Lane Supply keeps protective gloves and eye protection in stock for

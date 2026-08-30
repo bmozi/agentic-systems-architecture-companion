@@ -1,7 +1,19 @@
 # Participant Consent and Privacy Notice
 
-**Packet:** AG-RV-PILOT-001 version 1.2.3
+**Packet:** AG-RV-PILOT-001 version 1.2.4
 **Status:** Blank; no consent has been obtained
+**Branch:** Human only; mutually exclusive with the synthetic-context record
+**Run artifact identity:** `AG-HUMAN-CONSENT` / `v1`
+
+For Stage A, export the completed record as
+`AG-HUMAN-CONSENT-STAGE-A-<ATTEMPT-ID>-v1.md`. For Stage B, use the separate
+participant's completed record and exact filename
+`AG-HUMAN-CONSENT-STAGE-B-<ATTEMPT-ID>-v1.md`. The applicable completed record
+must be the sole branch record in that stage's context manifest.
+
+Do not use this notice for a synthetic rehearsal. A synthetic run uses
+`AG-SYNTHETIC-CONTEXT-<ATTEMPT-ID>-v1.md` and must not fabricate human
+affirmations.
 
 ## Purpose
 

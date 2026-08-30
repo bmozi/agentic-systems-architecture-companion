@@ -1,13 +1,32 @@
 # Agentic Systems Reader-Value Pilot Packet
 
 **Packet ID:** AG-RV-PILOT-001
-**Version:** 1.2.3
+**Version:** 1.2.4
 **Status:** Prepared and unrun; no participant recruited or consented
 **Scenario:** Cedar Lane Supply, entirely fictional
 
 ## Version and evidence note
 
-Version 1.2.3 repairs execution-chain and content defects found by the
+Version 1.2.4 repairs full-route closure defects found by the independent
+synthetic replay of version 1.2.3. Each attempt now enters through exactly one
+run-specific branch: a human consent record or the exact synthetic context
+record `AG-SYNTHETIC-CONTEXT-<ATTEMPT-ID>-v1.md`. The branches may not be
+omitted, mixed, or used to fictionalize consent. Stage A and Stage B have
+explicit context gates and start/end events; Stage A feedback, scoring end,
+post-scoring Section 6 debrief, immutable run-specific results, log close, and
+later external closeout are separately ordered and recorded. The six scored
+freeze chains remain intact, but they no longer substitute for full-route
+closure.
+
+Version 1.2.4 also declares a local handoff-layout proof: one US Letter page,
+at least 0.5-inch margins, at least 9-point reader-facing type, no more than
+450 reader-facing words excluding provenance, and no clipping or overlap. A
+favorable `LAYOUT PASSED` claim requires a completed run-specific proof. That
+local layout fact is not comprehension, usability, safety, value, or human
+evidence. Human testing remains **PREPARED/UNRUN** and real-world execution
+remains **UNRUN**.
+
+Version 1.2.3 repaired execution-chain and content defects found by the
 independent replay of version 1.2.2. Every detached record now carries the
 attempt, phase, facilitator/actor codes, exact observed verification
 command/output/exit/time/timezone, a later record-completion time/timezone,
@@ -76,7 +95,9 @@ Build a sealed, flat Stage A delivery directory and supply only exact immutable
 copies of these files. Keep the filenames shown here; do not substitute links
 back to a working repository:
 
-1. [Consent and privacy notice](participant/01-consent-and-privacy.md)
+1. the selected run-specific [human consent](participant/01-consent-and-privacy.md)
+   or [synthetic context](participant/01-synthetic-context-record.md) record,
+   never both
 2. [Exact packet route](participant/00-packet-route.md)
 3. [Scenario and task](participant/02-scenario-and-task.md)
 4. [Practitioner workbook](participant/03-practitioner-workbook.md)
@@ -88,6 +109,13 @@ back to a working repository:
 8. [Action Budget and Blast-Radius Worksheet](../../action-budget-and-blast-radius.md),
    delivered as `action-budget-and-blast-radius.md`
 9. [One-Screen Decision Handoff](participant/05-one-screen-handoff.md)
+
+Before these scored files are released, select exactly one entry record: the
+[human consent notice](participant/01-consent-and-privacy.md) for a real human
+participant or the [synthetic context record](participant/01-synthetic-context-record.md)
+for a synthetic actor. Give the selected record its exact run-specific
+identity, verify it in the Stage A context manifest, and log
+`STAGE_A_STARTED`. Do not deliver or claim the other branch.
 
 Follow the route exactly: recognition comes before companion assets; the
 initial detailed artifact is frozen before the live update; the revised
@@ -110,7 +138,8 @@ during Stage A.
 Build a sealed, flat Stage B delivery directory and supply exact immutable
 copies with the filenames shown below. Supply them in the route's phases:
 
-1. [Consent and privacy notice](participant/01-consent-and-privacy.md);
+1. the already selected run-specific human consent or synthetic context
+   record, never both;
 2. [Exact packet route](participant/00-packet-route.md);
 3. the completed [One-Screen Decision Handoff](participant/05-one-screen-handoff.md),
    delivered as `AG-A-ONE-SCREEN-HANDOFF-v1.md`, as the first scored content;
@@ -122,9 +151,11 @@ copies with the filenames shown below. Supply them in the route's phases:
    `STAGE-A-REVISED-FREEZE-RECORD.md`; and its governing
    `STAGE-A-REVISED-FREEZE-SHA256SUMS` manifest;
 6. [Executive Decision Brief](../../EXECUTIVE-DECISION-BRIEF.md), delivered as
-   `EXECUTIVE-DECISION-BRIEF.md`; and
+   `EXECUTIVE-DECISION-BRIEF.md`;
 7. [Value and Evidence Ledger](../../VALUE-AND-EVIDENCE-LEDGER.md), delivered as
-   `VALUE-AND-EVIDENCE-LEDGER.md`.
+   `VALUE-AND-EVIDENCE-LEDGER.md`; and
+8. after `SCORING_ENDED` and a verified debrief-input manifest, the
+   [Section 6 debrief](participant/06-section-6-debrief.md).
 
 Use a different person for Stage B during the first calibration round. Do not
 let the Stage A participant explain or repair the artifact during the initial
@@ -135,13 +166,22 @@ Sections 3-5 before debrief. Every next phase-input manifest hashes the prior
 completed output, its manifest, its detached record, and newly released
 inputs. Supply no other files or omitted links.
 
+After the three Stage B scored freezes, log `SCORING_ENDED`. Only then create
+and verify the debrief-input manifest and release Section 6. Log
+`DEBRIEF_COMPLETED` and `STAGE_B_ENDED` after the debrief. Complete and hash
+the immutable run-specific results before `RUN_RESULTS_COMPLETED`; append
+`LOG_CLOSED` only afterward. Do not predict the future final log hash. Hash
+the closed log externally and bind that observed hash to the immutable results
+hash and observation timestamps in the later run-specific external closeout
+record.
+
 Do not rename, summarize, regenerate, substitute, or omit a handoff-linked
 detail. A route or manifest mismatch is a recorded deviation and stop, not a
 file-access problem to repair silently.
 
 For each stage, create a run-specific SHA-256 manifest that covers every exact
-file supplied, including each of the six companion assets assigned to that
-stage above. Verify the manifest before the participant starts and retain it
+file supplied, including each of the six companion assets assigned across the
+two stages above. Verify the manifest before the participant starts and retain it
 with the run. Treat the delivered bytes as immutable. If any supplied byte
 changes, stop, preserve the earlier evidence, record the exact change, and
 issue a new timestamp and hash; a meaning change also requires a new packet
@@ -166,6 +206,8 @@ change to frozen evidence bytes.
 - [Freeze and correction record templates](facilitator-only/04-freeze-and-correction-record-templates.md)
 - [Execution and access log](facilitator-only/05-execution-and-access-log.md)
 - [Execution-log entry schema](facilitator-only/05-execution-access-log-schema.json)
+- [Handoff layout proof record](facilitator-only/06-handoff-layout-proof-record.md)
+- [External closeout record](facilitator-only/07-external-closeout-record.md)
 
 Never supply these files before either scored stage ends.
 
@@ -183,7 +225,10 @@ Before recruitment:
 6. keep scheduling identity separate from participant codes; and
 7. assign a facilitator and evaluator with disclosed relationships.
 
-Before any run, also create the facilitator-side execution/access log. It is
+Before any run, create the facilitator-side execution/access log and record
+`RUN_STARTED`. Select exactly one human or synthetic entry branch, record
+`ENTRY_BRANCH_SELECTED`, create its exact run-specific record, and bind that
+record into both stage context manifests. The execution/access log is
 not supplied to participants and is not a member of a scored phase-input
 manifest. It records the exact order of every admitted input, release, open,
 completion, manifest, verification, and detached-record event. Each detached
@@ -195,6 +240,10 @@ tool, or orchestration instruction as immutable bytes, list it in
 `ORCHESTRATION-INPUT-SHA256SUMS`, verify that manifest before delivery, and
 record the event in the facilitator log. An undeclared input is a stop and new
 attempt, not an omission to repair after the fact.
+
+The full route has explicit Stage A start/feedback/end, Stage B start/scoring-
+end/debrief/end, results-before-close, and later closeout gates. A six-freeze
+success without these gates is incomplete.
 
 The checked-in `SHA256SUMS` records the prepared source packet. It does not
 cover companion assets stored outside this packet. Each run-specific manifest
@@ -212,9 +261,10 @@ files.
 ## Temporal sealing rule
 
 [`TEMPORAL-FREEZE-PROTOCOL.json`](TEMPORAL-FREEZE-PROTOCOL.json) is the
-machine-readable canonical inventory for the six output freezes, five
-next-release triples, completion states, correction rules, artifact bindings,
-and results rows. Reader-facing instructions must agree with that inventory;
+machine-readable canonical inventory for the two entry branches, full-route
+boundaries, six output freezes, five next-release triples, completion states,
+correction rules, artifact bindings, result/closeout records, and handoff
+layout proof. Reader-facing instructions must agree with that inventory;
 the repository validator also checks reviewed protocol-document hashes so a
 prose change cannot silently bypass structural review.
 

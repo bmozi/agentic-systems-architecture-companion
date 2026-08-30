@@ -133,6 +133,44 @@ def mutations():
     def log_actor_without_code(schema: dict) -> None:
         schema["properties"]["actor"]["required"].remove("code")
 
+    def omit_entry_branch(protocol: dict) -> None:
+        protocol["entry_branches"]["selection_required"] = False
+
+    def mix_entry_branches(protocol: dict) -> None:
+        protocol["entry_branches"]["mutually_exclusive"] = False
+
+    def remove_full_route_event(event: str):
+        def mutation(protocol: dict) -> None:
+            protocol["full_route_closure"]["required_boundary_events"].remove(event)
+
+        return mutation
+
+    def remove_results_identity(protocol: dict) -> None:
+        protocol["full_route_closure"]["results"].pop("artifact_id")
+
+    def close_before_results(protocol: dict) -> None:
+        events = protocol["full_route_closure"]["required_boundary_events"]
+        results_index = events.index("RUN_RESULTS_COMPLETED")
+        close_index = events.index("LOG_CLOSED")
+        events[results_index], events[close_index] = events[close_index], events[results_index]
+
+    def debrief_before_scoring(protocol: dict) -> None:
+        events = protocol["full_route_closure"]["required_boundary_events"]
+        scoring_index = events.index("SCORING_ENDED")
+        debrief_index = events.index("DEBRIEF_INPUT_MANIFEST_VERIFIED")
+        events[scoring_index], events[debrief_index] = (
+            events[debrief_index],
+            events[scoring_index],
+        )
+
+    def remove_external_closeout(protocol: dict) -> None:
+        protocol["full_route_closure"].pop("external_closeout")
+
+    def allow_layout_claim_without_proof(protocol: dict) -> None:
+        protocol["handoff_layout_proof"][
+            "favorable_claim_requires_passing_proof"
+        ] = False
+
     return [
         (
             "self-or-later-record hashing",
@@ -278,6 +316,78 @@ def mutations():
                 "AG-A-ONE-SCREEN-HANDOFF-v2.md",
             ),
             "omits AG-A-ONE-SCREEN-HANDOFF-v1.md",
+        ),
+        (
+            "entry branch selection is omitted",
+            lambda root: mutate_protocol(root, omit_entry_branch),
+            "entry branches are incomplete, mixed, or stale",
+        ),
+        (
+            "human and synthetic entry branches may be mixed",
+            lambda root: mutate_protocol(root, mix_entry_branches),
+            "entry branches are incomplete, mixed, or stale",
+        ),
+        (
+            "synthetic context claims a human result",
+            lambda root: append_text(
+                root,
+                "participant/01-synthetic-context-record.md",
+                "\nHuman consent obtained.\n",
+            ),
+            "synthetic context claims human consent or human results",
+        ),
+        *[
+            (
+                f"full route omits {event}",
+                lambda root, event=event: mutate_protocol(
+                    root, remove_full_route_event(event)
+                ),
+                "full-route closure is incomplete or stale",
+            )
+            for event in (
+                "STAGE_A_STARTED",
+                "STAGE_A_ENDED",
+                "STAGE_B_STARTED",
+                "SCORING_ENDED",
+                "DEBRIEF_INPUT_MANIFEST_VERIFIED",
+                "DEBRIEF_COMPLETED",
+                "STAGE_B_ENDED",
+                "RUN_RESULTS_COMPLETED",
+            )
+        ],
+        (
+            "run-specific results identity is missing",
+            lambda root: mutate_protocol(root, remove_results_identity),
+            "full-route closure is incomplete or stale",
+        ),
+        (
+            "log closes before immutable run results",
+            lambda root: mutate_protocol(root, close_before_results),
+            "full-route closure is incomplete or stale",
+        ),
+        (
+            "debrief input is admitted before scoring ends",
+            lambda root: mutate_protocol(root, debrief_before_scoring),
+            "full-route closure is incomplete or stale",
+        ),
+        (
+            "run results predict the future final log hash",
+            lambda root: append_text(
+                root,
+                "facilitator-only/03-results-and-deviation-log.md",
+                "\nFinal closed-log SHA-256: `PREDICTED`\n",
+            ),
+            "run results predict the future closed-log hash",
+        ),
+        (
+            "external closeout is omitted",
+            lambda root: mutate_protocol(root, remove_external_closeout),
+            "full-route closure is incomplete or stale",
+        ),
+        (
+            "favorable one-page claim is allowed without proof",
+            lambda root: mutate_protocol(root, allow_layout_claim_without_proof),
+            "one-page handoff proof contract is incomplete or stale",
         ),
     ]
 

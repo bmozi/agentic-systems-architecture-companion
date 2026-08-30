@@ -1,12 +1,17 @@
 # Stage A Practitioner Workbook
 
-**Packet:** AG-RV-PILOT-001 version 1.2.3
+**Packet:** AG-RV-PILOT-001 version 1.2.4
 **Status:** Blank participant record
 
 - Participant code:
+- Entry branch: human / synthetic; exactly one
+- Exact selected context-record filename and artifact ID/version:
+- `STAGE-A-CONTEXT-SHA256SUMS` verification timestamp/timezone and log checkpoint:
 - Broad role and experience band, optional:
 - Exact Stage A start before first scored read of the packet route, with timezone:
+- `STAGE_A_STARTED` log checkpoint sequence/hash:
 - Exact Stage A end, with timezone:
+- `STAGE_A_ENDED` log checkpoint sequence/hash:
 - Frozen supplied-file manifest and route record:
 
 ## 1. Recognition before terminology
@@ -181,3 +186,8 @@ set and provenance chain; do not mutate the earlier one.
 - Any prompt that pushed you toward an unsupported answer:
 - Question, pause, or access problem and exact time:
 - What this exercise cannot establish:
+- Material-feedback completion timestamp/timezone:
+- `STAGE_A_FEEDBACK_COMPLETED` log checkpoint sequence/hash:
+
+The facilitator records `STAGE_A_ENDED` only after these fields are complete.
+Completing the handoff freeze does not by itself complete the Stage A route.

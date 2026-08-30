@@ -18,7 +18,7 @@ COMMIT_PATTERN = re.compile(r"^[0-9a-f]{7,40}$")
 CHECKSUM_PATTERN = re.compile(r"^([0-9a-f]{64})  (.+)$")
 FREEZE_ORDER = ["complete", "manifest", "verify", "record"]
 PRIOR_TRIPLE = ["governed_outputs", "governing_manifest", "detached_record"]
-PACKET_VERSION = "1.2.3"
+PACKET_VERSION = "1.2.4"
 REQUIRED_RECORD_FIELDS = [
     "attempt_id",
     "phase_id",
@@ -51,21 +51,42 @@ ORDERED_LOG_EVENTS = [
     "PHASE_COMPLETED",
 ]
 ALL_LOG_EVENTS = [
-    "ATTEMPT_STARTED",
+    "RUN_STARTED",
+    "ENTRY_BRANCH_SELECTED",
     "ORCHESTRATION_MANIFEST_VERIFIED",
+    "STAGE_A_CONTEXT_MANIFEST_CREATED",
+    "STAGE_A_CONTEXT_MANIFEST_VERIFIED",
+    "STAGE_A_STARTED",
     *ORDERED_LOG_EVENTS,
+    "STAGE_A_FEEDBACK_COMPLETED",
+    "STAGE_A_ENDED",
+    "STAGE_B_CONTEXT_MANIFEST_CREATED",
+    "STAGE_B_CONTEXT_MANIFEST_VERIFIED",
+    "STAGE_B_STARTED",
+    "SCORING_ENDED",
+    "DEBRIEF_INPUT_MANIFEST_CREATED",
+    "DEBRIEF_INPUT_MANIFEST_VERIFIED",
+    "DEBRIEF_COMPLETED",
+    "STAGE_B_ENDED",
+    "RUN_RESULTS_COMPLETED",
     "DEVIATION",
     "STOP",
     "LOG_CLOSED",
 ]
 LOG_PHASES = [
-    "attempt",
+    "run",
+    "stage_a_entry",
     "stage_a_initial",
     "stage_a_revised",
     "stage_a_handoff",
+    "stage_a_close",
+    "stage_b_entry",
     "stage_b_section_1",
     "stage_b_section_2",
     "stage_b_sections_3_5",
+    "stage_b_scoring_close",
+    "stage_b_debrief",
+    "results",
     "closeout",
 ]
 PHASE_PROTOCOL = {
@@ -215,6 +236,25 @@ EXECUTION_LOG_PROTOCOL = {
     ],
     "detached_record_checkpoint_event": "GOVERNING_MANIFEST_VERIFIED",
     "final_log_bound_by_closeout_manifest": True,
+    "required_route_boundaries": [
+        "RUN_STARTED",
+        "ENTRY_BRANCH_SELECTED",
+        "STAGE_A_CONTEXT_MANIFEST_VERIFIED",
+        "STAGE_A_STARTED",
+        "STAGE_A_FEEDBACK_COMPLETED",
+        "STAGE_A_ENDED",
+        "STAGE_B_CONTEXT_MANIFEST_VERIFIED",
+        "STAGE_B_STARTED",
+        "SCORING_ENDED",
+        "DEBRIEF_INPUT_MANIFEST_VERIFIED",
+        "DEBRIEF_COMPLETED",
+        "STAGE_B_ENDED",
+        "RUN_RESULTS_COMPLETED",
+        "LOG_CLOSED",
+    ],
+    "results_completion_precedes_log_close": True,
+    "closed_log_must_not_predict_external_hash": True,
+    "external_closeout_is_later": True,
 }
 ORCHESTRATION_POLICY = {
     "human_participant_inputs_are_exact_phase_manifest_only": True,
@@ -246,6 +286,152 @@ CONTENT_GUARDS = {
         "every_handoff_linked_filename_received_unchanged",
         "detailed_execution_evidence_verified",
     ],
+}
+ENTRY_BRANCH_PROTOCOL = {
+    "selection_required": True,
+    "mutually_exclusive": True,
+    "selection_event": "ENTRY_BRANCH_SELECTED",
+    "stage_a_context_manifest": "STAGE-A-CONTEXT-SHA256SUMS",
+    "stage_b_context_manifest": "STAGE-B-CONTEXT-SHA256SUMS",
+    "human": {
+        "template": "participant/01-consent-and-privacy.md",
+        "stage_a_run_filename_pattern": "AG-HUMAN-CONSENT-STAGE-A-<ATTEMPT-ID>-v1.md",
+        "stage_b_run_filename_pattern": "AG-HUMAN-CONSENT-STAGE-B-<ATTEMPT-ID>-v1.md",
+        "requires_completed_human_consent": True,
+        "forbids_synthetic_context": True,
+    },
+    "synthetic": {
+        "template": "participant/01-synthetic-context-record.md",
+        "artifact_id": "AG-SYNTHETIC-CONTEXT",
+        "version": "1",
+        "run_filename_pattern": "AG-SYNTHETIC-CONTEXT-<ATTEMPT-ID>-v1.md",
+        "required_literal": "SYNTHETIC — NO HUMAN PARTICIPANT OR HUMAN DATA",
+        "replaces_human_consent": True,
+        "forbids_human_consent_form": True,
+        "forbids_human_result_claim": True,
+        "required_fields": [
+            "packet_id_version",
+            "attempt_id",
+            "synthetic_no_human_literal",
+            "fictional_scenario_only",
+            "human_evidence_limits",
+            "stage_a_actor_code",
+            "stage_b_actor_code",
+            "facilitator_code",
+            "orchestration_aided_status",
+            "orchestration_manifest_identity",
+            "evidence_root",
+            "retention_boundary",
+            "access_boundary",
+            "synthetic_start_timestamp_timezone",
+            "pre_scored_log_checkpoint",
+        ],
+    },
+}
+FULL_ROUTE_BOUNDARY_EVENTS = [
+    "RUN_STARTED",
+    "ENTRY_BRANCH_SELECTED",
+    "STAGE_A_CONTEXT_MANIFEST_VERIFIED",
+    "STAGE_A_STARTED",
+    "STAGE_A_FEEDBACK_COMPLETED",
+    "STAGE_A_ENDED",
+    "STAGE_B_CONTEXT_MANIFEST_VERIFIED",
+    "STAGE_B_STARTED",
+    "SCORING_ENDED",
+    "DEBRIEF_INPUT_MANIFEST_VERIFIED",
+    "DEBRIEF_COMPLETED",
+    "STAGE_B_ENDED",
+    "RUN_RESULTS_COMPLETED",
+    "LOG_CLOSED",
+]
+DEBRIEF_PROTOCOL = {
+    "phase": "stage_b_debrief",
+    "input_manifest": "STAGE-B-DEBRIEF-INPUT-SHA256SUMS",
+    "required_prior_bundle": PRIOR_TRIPLE,
+    "new_inputs": ["section_6_debrief_input"],
+    "exact_membership": PRIOR_TRIPLE + ["section_6_debrief_input"],
+    "source_template": "participant/06-section-6-debrief.md",
+    "output_artifact_id": "STAGE-B-SECTION-6-DEBRIEF",
+    "output_version": "1",
+    "output_filename": "STAGE-B-SECTION-6-DEBRIEF-v1.md",
+    "completion_state": "DEBRIEF COMPLETE",
+    "must_follow_event": "SCORING_ENDED",
+    "may_not_modify_scored_bytes": True,
+}
+RESULTS_CONTRACT = {
+    "source_template": "facilitator-only/03-results-and-deviation-log.md",
+    "run_filename_pattern": "AG-RUN-RESULTS-<ATTEMPT-ID>-v1.md",
+    "artifact_id": "AG-RUN-RESULTS",
+    "version": "1",
+    "completion_state": "RUN RESULTS COMPLETE",
+    "completion_event": "RUN_RESULTS_COMPLETED",
+    "must_precede_event": "LOG_CLOSED",
+    "forbid_predicted_final_log_sha256": True,
+    "forbid_future_closeout_timestamp": True,
+    "required_fields": [
+        "packet_attempt_actors_facilitator_dates",
+        "source_and_orchestration_manifest_identities",
+        "six_freeze_chain_results",
+        "final_pre_close_log_checkpoint",
+        "declared_counts",
+        "stage_boundaries_and_debrief",
+        "interventions_deviations_stops_rejected_attempts",
+        "semantic_inventions_layout_failures_variances",
+        "reader_value_scores_and_critical_gates",
+        "protocol_synthetic_layout_human_real_world_states",
+        "decision_and_evidence_limits",
+    ],
+}
+EXTERNAL_CLOSEOUT_CONTRACT = {
+    "must_follow_event": "LOG_CLOSED",
+    "closed_log_must_validate": True,
+    "closed_log_copy_must_be_byte_identical": True,
+    "closeout_input_directory": "closeout/input",
+    "manifest": "AG-RUN-CLOSEOUT-SHA256SUMS",
+    "manifest_exact_membership": ["closed_execution_log", "run_results"],
+    "record_template": "facilitator-only/07-external-closeout-record.md",
+    "record_filename_pattern": "AG-RUN-CLOSEOUT-<ATTEMPT-ID>-v1.md",
+    "record_artifact_id": "AG-RUN-CLOSEOUT",
+    "record_version": "1",
+    "record_completion_state": "CLOSEOUT COMPLETE",
+    "record_binds": [
+        "closed_log_sha256",
+        "closeout_manifest_sha256",
+        "run_results_sha256",
+    ],
+    "outside_closed_log": True,
+}
+LAYOUT_PROOF_CONTRACT = {
+    "target": "US Letter portrait",
+    "page_count": 1,
+    "minimum_margin_inches": 0.5,
+    "minimum_body_table_point_size": 9,
+    "maximum_reader_facing_words_excluding_provenance": 450,
+    "no_clipping": True,
+    "no_overlap": True,
+    "no_hidden_overflow": True,
+    "no_unreadable_shrinking": True,
+    "source_markdown_required": True,
+    "pdf_required": True,
+    "rendering_command_required": True,
+    "tool_versions_required": True,
+    "pdf_sha256_required": True,
+    "proof_template": "facilitator-only/06-handoff-layout-proof-record.md",
+    "proof_filename_pattern": "AG-A-HANDOFF-LAYOUT-PROOF-<ATTEMPT-ID>-v1.md",
+    "favorable_claim_requires_passing_proof": True,
+    "layout_evidence_is_not_comprehension": True,
+}
+FULL_ROUTE_CLOSURE = {
+    "six_scored_freeze_chains_are_not_full_route": True,
+    "required_boundary_events": FULL_ROUTE_BOUNDARY_EVENTS,
+    "stage_a_context_gate_precedes_start": True,
+    "stage_a_feedback_precedes_end": True,
+    "stage_b_context_gate_precedes_start": True,
+    "scoring_end_follows_sections_3_5_freeze": True,
+    "debrief": DEBRIEF_PROTOCOL,
+    "results": RESULTS_CONTRACT,
+    "log_close_requires_results_complete": True,
+    "external_closeout": EXTERNAL_CLOSEOUT_CONTRACT,
 }
 
 
@@ -293,7 +479,7 @@ def sha256(path: Path) -> str:
 
 
 def validate_temporal_freeze_protocol(errors: list[str]) -> None:
-    """Validate the canonical v1.2.3 freeze, release, and execution graph."""
+    """Validate the canonical v1.2.4 scored-freeze and full-route graph."""
     packet = ROOT / "testing" / "agentic-reader-value-v1"
     protocol_path = packet / "TEMPORAL-FREEZE-PROTOCOL.json"
     try:
@@ -302,8 +488,8 @@ def validate_temporal_freeze_protocol(errors: list[str]) -> None:
         errors.append(f"temporal protocol inventory is unreadable: {exc}")
         return
 
-    if protocol.get("schema_version") != 2:
-        errors.append("temporal protocol: schema_version must be 2")
+    if protocol.get("schema_version") != 3:
+        errors.append("temporal protocol: schema_version must be 3")
     if protocol.get("packet_id") != "AG-RV-PILOT-001":
         errors.append("temporal protocol: packet_id mismatch")
     if protocol.get("packet_version") != PACKET_VERSION:
@@ -385,6 +571,12 @@ def validate_temporal_freeze_protocol(errors: list[str]) -> None:
         errors.append("temporal protocol: orchestration-input policy is incomplete or stale")
     if protocol.get("content_guards") != CONTENT_GUARDS:
         errors.append("temporal protocol: content guards are incomplete or stale")
+    if protocol.get("entry_branches") != ENTRY_BRANCH_PROTOCOL:
+        errors.append("temporal protocol: entry branches are incomplete, mixed, or stale")
+    if protocol.get("full_route_closure") != FULL_ROUTE_CLOSURE:
+        errors.append("temporal protocol: full-route closure is incomplete or stale")
+    if protocol.get("handoff_layout_proof") != LAYOUT_PROOF_CONTRACT:
+        errors.append("temporal protocol: one-page handoff proof contract is incomplete or stale")
 
     if protocol.get("correction_requirements") != CORRECTION_REQUIREMENTS:
         errors.append("temporal protocol: immutable correction requirements are incomplete")
@@ -510,8 +702,11 @@ def validate_temporal_freeze_protocol(errors: list[str]) -> None:
             errors.append("temporal protocol: execution-log continuity fields are incomplete")
         verification_events = {
             "ORCHESTRATION_MANIFEST_VERIFIED",
+            "STAGE_A_CONTEXT_MANIFEST_VERIFIED",
+            "STAGE_B_CONTEXT_MANIFEST_VERIFIED",
             "PHASE_INPUT_MANIFEST_VERIFIED",
             "GOVERNING_MANIFEST_VERIFIED",
+            "DEBRIEF_INPUT_MANIFEST_VERIFIED",
         }
         all_of = log_schema.get("allOf", [])
         guarded = set()
@@ -527,9 +722,26 @@ def validate_temporal_freeze_protocol(errors: list[str]) -> None:
 
     required_snippets = {
         "participant/00-packet-route.md": [
+            "Choose exactly one entry branch",
+            "RUN_STARTED",
+            "ENTRY_BRANCH_SELECTED",
+            "STAGE_A_STARTED",
+            "STAGE_A_ENDED",
+            "STAGE_B_STARTED",
+            "SCORING_ENDED",
+            "DEBRIEF_COMPLETED",
+            "STAGE_B_ENDED",
+            "STAGE-B-DEBRIEF-INPUT-SHA256SUMS",
+            "RUN RESULTS COMPLETE",
             "Any undeclared input is a deviation,",
             "current ID/version pair must differ",
             "NOT RELEASED — PHASE 2 CHECK",
+        ],
+        "participant/01-synthetic-context-record.md": [
+            "AG-SYNTHETIC-CONTEXT-<ATTEMPT-ID>-v1.md",
+            "SYNTHETIC — NO HUMAN PARTICIPANT OR HUMAN DATA",
+            "No human consent, comprehension, usability, or practitioner result",
+            "Pre-scored execution-log checkpoint",
         ],
         "participant/02-scenario-and-task.md": [
             "candidate scope for evaluation",
@@ -547,14 +759,33 @@ def validate_temporal_freeze_protocol(errors: list[str]) -> None:
             "Presently authorized scope and current authority evidence, or `NOT AUTHORIZED`",
         ],
         "participant/05-one-screen-handoff.md": [
+            "US Letter portrait",
+            "at least 9 points",
+            "450 reader-facing words",
             "Candidate proposal scope under evaluation",
             "Presently authorized scope and current authority evidence",
             "FICTIONAL REPORTED EFFECTS EXIST; REAL-WORLD EXECUTION EVIDENCE DOES",
         ],
+        "participant/06-section-6-debrief.md": [
+            "STAGE-B-SECTION-6-DEBRIEF-v1.md",
+            "SCORING_ENDED",
+            "DEBRIEF COMPLETE",
+            "must not rewrite or upgrade frozen scored bytes",
+        ],
         "facilitator-only/01-facilitator-guide.md": [
+            "STAGE-A-CONTEXT-SHA256SUMS",
+            "STAGE-B-CONTEXT-SHA256SUMS",
+            "AG-RUN-RESULTS-<ATTEMPT-ID>-v1.md",
             "ORCHESTRATION-INPUT-SHA256SUMS",
             "exact verification command/stdout/stderr/exit",
             "NOT RELEASED — PHASE 2 CHECK",
+        ],
+        "facilitator-only/03-results-and-deviation-log.md": [
+            "AG-RUN-RESULTS-<ATTEMPT-ID>-v1.md",
+            "RUN RESULTS COMPLETE",
+            "Final closed-log SHA-256 is not available before `LOG_CLOSED`",
+            "Protocol integrity state",
+            "Real-world evidence state",
         ],
         "facilitator-only/04-freeze-and-correction-record-templates.md": [
             "Exact observed verification command",
@@ -563,9 +794,24 @@ def validate_temporal_freeze_protocol(errors: list[str]) -> None:
             "Execution-log checkpoint entry SHA-256",
         ],
         "facilitator-only/05-execution-and-access-log.md": [
+            "RUN_RESULTS_COMPLETED",
+            "before `LOG_CLOSED`",
+            "external closeout",
             "one JSON object conforming",
             "previous entry's sequence/hash",
             "undeclared prompt, message, file, tool result, or",
+        ],
+        "facilitator-only/06-handoff-layout-proof-record.md": [
+            "AG-A-HANDOFF-LAYOUT-PROOF-<ATTEMPT-ID>-v1.md",
+            "US Letter portrait",
+            "Minimum body and table text size",
+            "Layout evidence is not human comprehension evidence",
+        ],
+        "facilitator-only/07-external-closeout-record.md": [
+            "AG-RUN-CLOSEOUT-<ATTEMPT-ID>-v1.md",
+            "AG-RUN-CLOSEOUT-SHA256SUMS",
+            "Closed execution-log SHA-256",
+            "Run-results SHA-256",
         ],
     }
     for relative, snippets in required_snippets.items():
@@ -589,6 +835,32 @@ def validate_temporal_freeze_protocol(errors: list[str]) -> None:
     scenario = packet / "participant" / "02-scenario-and-task.md"
     if scenario.is_file() and "No implementation, enforcement test" in scenario.read_text(encoding="utf-8"):
         errors.append("temporal protocol: stale no-execution wording contradicts reported effects")
+
+    synthetic_context = packet / "participant" / "01-synthetic-context-record.md"
+    if synthetic_context.is_file():
+        synthetic_text = synthetic_context.read_text(encoding="utf-8")
+        forbidden_synthetic_claims = (
+            "human consent obtained",
+            "human comprehension passed",
+            "human usability passed",
+            "practitioner result passed",
+        )
+        for claim in forbidden_synthetic_claims:
+            if claim.casefold() in synthetic_text.casefold():
+                errors.append(
+                    "temporal protocol: synthetic context claims human consent or human results"
+                )
+                break
+
+    results_text = results_path.read_text(encoding="utf-8") if results_path.is_file() else ""
+    if "Final closed-log SHA-256: `PREDICTED`" in results_text:
+        errors.append("temporal protocol: run results predict the future closed-log hash")
+
+    layout_template = packet / "facilitator-only" / "06-handoff-layout-proof-record.md"
+    if layout_template.is_file():
+        layout_text = layout_template.read_text(encoding="utf-8")
+        if "A favorable `LAYOUT PASSED` claim requires this completed proof" not in layout_text:
+            errors.append("temporal protocol: favorable one-page claim lacks required proof")
 
     protected = protocol.get("protected_documents")
     expected_protected = {

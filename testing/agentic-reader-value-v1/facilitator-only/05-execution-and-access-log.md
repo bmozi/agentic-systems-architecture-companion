@@ -1,6 +1,6 @@
 # Execution and Access Log
 
-**Packet:** AG-RV-PILOT-001 version 1.2.3
+**Packet:** AG-RV-PILOT-001 version 1.2.4
 **Status:** Facilitator-only schema and blank run template; prepared and unrun
 
 This log proves the order in which inputs were admitted, files were released
@@ -8,6 +8,11 @@ and opened, artifacts were completed, manifests were created and verified,
 and detached records were completed. It is facilitator-side evidence. Never
 place this file, its JSON Lines run instance, or its schema in a participant
 delivery directory or a scored phase-input manifest.
+
+The log also proves the full-route boundaries outside the six scored freezes:
+entry-branch selection, both context gates, both stage starts/ends, Stage A
+feedback, scoring end, post-scoring debrief, immutable run results, and log
+close. Six freeze chains complete is not full-route completion.
 
 ## Exact run file and entry schema
 
@@ -57,9 +62,37 @@ The detached record cites the log sequence and hash through the governing-
 manifest verification it describes. The later `DETACHED_RECORD_COMPLETED`
 entry cannot be cited by that earlier record; it is instead continuity-bound
 by the next phase-input manifest, which hashes the completed detached record,
-and by the next log entries. At run closeout, append `LOG_CLOSED`, then hash
-the complete JSON Lines file in the run closeout manifest. Do not rewrite a
-prior log line. A correction appends events and preserves the earlier chain.
+and by the next log entries. Do not rewrite a prior log line. A correction
+appends events and preserves the earlier chain.
+
+## Full-route boundary order
+
+The log must preserve these non-substitutable route boundaries around the six
+scored freeze chains:
+
+1. `RUN_STARTED`
+2. `ENTRY_BRANCH_SELECTED`
+3. `STAGE_A_CONTEXT_MANIFEST_CREATED` and
+   `STAGE_A_CONTEXT_MANIFEST_VERIFIED`
+4. `STAGE_A_STARTED`
+5. the three Stage A scored freeze chains
+6. `STAGE_A_FEEDBACK_COMPLETED`
+7. `STAGE_A_ENDED`
+8. `STAGE_B_CONTEXT_MANIFEST_CREATED` and
+   `STAGE_B_CONTEXT_MANIFEST_VERIFIED`
+9. `STAGE_B_STARTED`
+10. the three Stage B scored freeze chains
+11. `SCORING_ENDED`
+12. `DEBRIEF_INPUT_MANIFEST_CREATED` and
+    `DEBRIEF_INPUT_MANIFEST_VERIFIED`
+13. `DEBRIEF_COMPLETED`
+14. `STAGE_B_ENDED`
+15. `RUN_RESULTS_COMPLETED`
+16. `LOG_CLOSED`
+
+Debrief access before `SCORING_ENDED`, log close before immutable run results,
+or a missing boundary is a protocol stop. The six scored freeze chains do not
+substitute for this full route.
 
 ## Orchestration boundary
 
@@ -79,13 +112,24 @@ and a new attempt; it may not be silently admitted or retroactively declared.
 
 ## Closeout checks
 
+- Exactly one entry branch was selected and its run-specific record was
+  context-manifest verified before `STAGE_A_STARTED`.
 - Attempt ID remains identical on every line.
 - Sequence numbers are contiguous and each continuity hash verifies.
 - Every release/open/completion event names exactly one literal filename.
-- Every route gate has the required manifest-created, manifest-verified,
-  detached-record-completed, and phase-completed events in order.
+- Every scored route gate has the required manifest-created,
+  manifest-verified, detached-record-completed, and phase-completed events in
+  order.
 - Every detached record contains the same phase, actor codes, observed
   verification evidence, and log checkpoint as the corresponding log entry.
-- The final closeout manifest hashes the completed JSON Lines log.
+- `SCORING_ENDED` precedes debrief input access and Section 6 completion.
+- Immutable run-specific results are completed and hashed before
+  `RUN_RESULTS_COMPLETED`, and `RUN_RESULTS_COMPLETED` occurs before
+  `LOG_CLOSED`.
+- `LOG_CLOSED` occurs only after `RUN_RESULTS_COMPLETED`.
+- The results and log do not predict or embed the future final log hash.
+- After closure, the run-specific external closeout record binds the observed
+  closed-log hash, the immutable results hash, and their observation
+  timestamps. This later closeout evidence remains outside the closed log.
 
 No blank template or static schema is evidence that a run occurred.

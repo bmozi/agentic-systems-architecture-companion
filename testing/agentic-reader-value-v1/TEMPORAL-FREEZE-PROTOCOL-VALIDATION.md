@@ -1,8 +1,8 @@
 # Temporal Freeze Protocol Static Validation
 
-**Packet:** AG-RV-PILOT-001 version 1.2.3
+**Packet:** AG-RV-PILOT-001 version 1.2.4
 **Validation type:** Static source review; not a human run
-**Validation date:** 2026-08-29
+**Validation date:** 2026-08-30
 **Result:** PASS for the reviewed prepared source protocol; executable
 mutation regression is required after any protocol change
 
@@ -26,6 +26,9 @@ completed detached record, and new inputs.
 
 ## Execution-chain checks
 
+- Exactly one run-specific entry branch is required: the human consent record
+  or the synthetic context record, never both and never neither. The synthetic
+  branch cannot claim human consent or human results.
 - Every detached record names one attempt and phase, the facilitator and
   actor codes, the exact observed verification evidence, and the execution-
   log checkpoint through `GOVERNING_MANIFEST_VERIFIED`.
@@ -35,7 +38,22 @@ completed detached record, and new inputs.
 - Every synthetic orchestration instruction must be immutable, declared,
   manifest-verified, and logged before use. An undeclared input stops the
   attempt.
-- The completed log is bound by the run closeout manifest.
+- Stage A context/start/feedback/end and Stage B context/start/scoring-end/
+  debrief/end are explicit boundaries outside the six scored freeze chains.
+- Immutable run-specific results must be completed and hashed before
+  `RUN_RESULTS_COMPLETED`, which must precede `LOG_CLOSED`.
+- Results and log cannot predict or embed the future final log hash. A later
+  external closeout record binds the observed closed-log hash to the immutable
+  results hash and observation timestamps.
+
+## One-page proof contract
+
+- A favorable local `LAYOUT PASSED` claim requires a completed run-specific
+  proof of one US Letter page, margins of at least 0.5 inch, reader-facing type
+  of at least 9 point, no more than 450 reader-facing words excluding
+  provenance, and no clipping or overlap.
+- Layout evidence is not comprehension, usefulness, scanability behavior,
+  safety, business value, or a human result.
 
 ## Self-reference checks
 
@@ -64,8 +82,11 @@ The canonical inventory is
 `python3 scripts/validate_repository.py` and
 `python3 scripts/test_temporal_freeze_protocol.py` from the repository root.
 The latter uses disposable copies, refreshes ordinary packet checksums, and
-requires one positive control plus rejection of structural and semantic
-mutations.
+requires one positive control plus permanent rejection of structural and
+semantic mutations. These include branch omission/mixing, synthetic human-
+result claims, missing stage boundaries, missing scoring end or debrief,
+missing immutable results, premature log close, a predicted future log hash,
+missing external closeout, and a favorable one-page claim without proof.
 
 This PASS means only that the reviewed prepared source and executable mutation
 checks agree on the stated temporal invariants. It does not establish that a

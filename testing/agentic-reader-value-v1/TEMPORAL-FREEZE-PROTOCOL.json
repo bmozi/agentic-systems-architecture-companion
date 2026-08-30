@@ -1,7 +1,7 @@
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "packet_id": "AG-RV-PILOT-001",
-  "packet_version": "1.2.3",
+  "packet_version": "1.2.4",
   "allowed_completion_states": [
     "INITIAL COMPLETE",
     "REVISED COMPLETE",
@@ -206,7 +206,26 @@
       "timezone"
     ],
     "detached_record_checkpoint_event": "GOVERNING_MANIFEST_VERIFIED",
-    "final_log_bound_by_closeout_manifest": true
+    "final_log_bound_by_closeout_manifest": true,
+    "required_route_boundaries": [
+      "RUN_STARTED",
+      "ENTRY_BRANCH_SELECTED",
+      "STAGE_A_CONTEXT_MANIFEST_VERIFIED",
+      "STAGE_A_STARTED",
+      "STAGE_A_FEEDBACK_COMPLETED",
+      "STAGE_A_ENDED",
+      "STAGE_B_CONTEXT_MANIFEST_VERIFIED",
+      "STAGE_B_STARTED",
+      "SCORING_ENDED",
+      "DEBRIEF_INPUT_MANIFEST_VERIFIED",
+      "DEBRIEF_COMPLETED",
+      "STAGE_B_ENDED",
+      "RUN_RESULTS_COMPLETED",
+      "LOG_CLOSED"
+    ],
+    "results_completion_precedes_log_close": true,
+    "closed_log_must_not_predict_external_hash": true,
+    "external_closeout_is_later": true
   },
   "orchestration_input_policy": {
     "human_participant_inputs_are_exact_phase_manifest_only": true,
@@ -222,6 +241,47 @@
       "preserve_partial_chain",
       "start_new_attempt"
     ]
+  },
+  "entry_branches": {
+    "selection_required": true,
+    "mutually_exclusive": true,
+    "selection_event": "ENTRY_BRANCH_SELECTED",
+    "stage_a_context_manifest": "STAGE-A-CONTEXT-SHA256SUMS",
+    "stage_b_context_manifest": "STAGE-B-CONTEXT-SHA256SUMS",
+    "human": {
+      "template": "participant/01-consent-and-privacy.md",
+      "stage_a_run_filename_pattern": "AG-HUMAN-CONSENT-STAGE-A-<ATTEMPT-ID>-v1.md",
+      "stage_b_run_filename_pattern": "AG-HUMAN-CONSENT-STAGE-B-<ATTEMPT-ID>-v1.md",
+      "requires_completed_human_consent": true,
+      "forbids_synthetic_context": true
+    },
+    "synthetic": {
+      "template": "participant/01-synthetic-context-record.md",
+      "artifact_id": "AG-SYNTHETIC-CONTEXT",
+      "version": "1",
+      "run_filename_pattern": "AG-SYNTHETIC-CONTEXT-<ATTEMPT-ID>-v1.md",
+      "required_literal": "SYNTHETIC — NO HUMAN PARTICIPANT OR HUMAN DATA",
+      "replaces_human_consent": true,
+      "forbids_human_consent_form": true,
+      "forbids_human_result_claim": true,
+      "required_fields": [
+        "packet_id_version",
+        "attempt_id",
+        "synthetic_no_human_literal",
+        "fictional_scenario_only",
+        "human_evidence_limits",
+        "stage_a_actor_code",
+        "stage_b_actor_code",
+        "facilitator_code",
+        "orchestration_aided_status",
+        "orchestration_manifest_identity",
+        "evidence_root",
+        "retention_boundary",
+        "access_boundary",
+        "synthetic_start_timestamp_timezone",
+        "pre_scored_log_checkpoint"
+      ]
+    }
   },
   "content_guards": {
     "revised_current_identity_must_differ_from_initial_identity_version_pair": true,
@@ -250,6 +310,107 @@
     "new_detached_record": true,
     "new_next_release_manifest_when_applicable": true,
     "stop_current_attempt": true
+  },
+  "full_route_closure": {
+    "six_scored_freeze_chains_are_not_full_route": true,
+    "required_boundary_events": [
+      "RUN_STARTED",
+      "ENTRY_BRANCH_SELECTED",
+      "STAGE_A_CONTEXT_MANIFEST_VERIFIED",
+      "STAGE_A_STARTED",
+      "STAGE_A_FEEDBACK_COMPLETED",
+      "STAGE_A_ENDED",
+      "STAGE_B_CONTEXT_MANIFEST_VERIFIED",
+      "STAGE_B_STARTED",
+      "SCORING_ENDED",
+      "DEBRIEF_INPUT_MANIFEST_VERIFIED",
+      "DEBRIEF_COMPLETED",
+      "STAGE_B_ENDED",
+      "RUN_RESULTS_COMPLETED",
+      "LOG_CLOSED"
+    ],
+    "stage_a_context_gate_precedes_start": true,
+    "stage_a_feedback_precedes_end": true,
+    "stage_b_context_gate_precedes_start": true,
+    "scoring_end_follows_sections_3_5_freeze": true,
+    "debrief": {
+      "phase": "stage_b_debrief",
+      "input_manifest": "STAGE-B-DEBRIEF-INPUT-SHA256SUMS",
+      "required_prior_bundle": ["governed_outputs", "governing_manifest", "detached_record"],
+      "new_inputs": ["section_6_debrief_input"],
+      "exact_membership": ["governed_outputs", "governing_manifest", "detached_record", "section_6_debrief_input"],
+      "source_template": "participant/06-section-6-debrief.md",
+      "output_artifact_id": "STAGE-B-SECTION-6-DEBRIEF",
+      "output_version": "1",
+      "output_filename": "STAGE-B-SECTION-6-DEBRIEF-v1.md",
+      "completion_state": "DEBRIEF COMPLETE",
+      "must_follow_event": "SCORING_ENDED",
+      "may_not_modify_scored_bytes": true
+    },
+    "results": {
+      "source_template": "facilitator-only/03-results-and-deviation-log.md",
+      "run_filename_pattern": "AG-RUN-RESULTS-<ATTEMPT-ID>-v1.md",
+      "artifact_id": "AG-RUN-RESULTS",
+      "version": "1",
+      "completion_state": "RUN RESULTS COMPLETE",
+      "completion_event": "RUN_RESULTS_COMPLETED",
+      "must_precede_event": "LOG_CLOSED",
+      "forbid_predicted_final_log_sha256": true,
+      "forbid_future_closeout_timestamp": true,
+      "required_fields": [
+        "packet_attempt_actors_facilitator_dates",
+        "source_and_orchestration_manifest_identities",
+        "six_freeze_chain_results",
+        "final_pre_close_log_checkpoint",
+        "declared_counts",
+        "stage_boundaries_and_debrief",
+        "interventions_deviations_stops_rejected_attempts",
+        "semantic_inventions_layout_failures_variances",
+        "reader_value_scores_and_critical_gates",
+        "protocol_synthetic_layout_human_real_world_states",
+        "decision_and_evidence_limits"
+      ]
+    },
+    "log_close_requires_results_complete": true,
+    "external_closeout": {
+      "must_follow_event": "LOG_CLOSED",
+      "closed_log_must_validate": true,
+      "closed_log_copy_must_be_byte_identical": true,
+      "closeout_input_directory": "closeout/input",
+      "manifest": "AG-RUN-CLOSEOUT-SHA256SUMS",
+      "manifest_exact_membership": ["closed_execution_log", "run_results"],
+      "record_template": "facilitator-only/07-external-closeout-record.md",
+      "record_filename_pattern": "AG-RUN-CLOSEOUT-<ATTEMPT-ID>-v1.md",
+      "record_artifact_id": "AG-RUN-CLOSEOUT",
+      "record_version": "1",
+      "record_completion_state": "CLOSEOUT COMPLETE",
+      "record_binds": [
+        "closed_log_sha256",
+        "closeout_manifest_sha256",
+        "run_results_sha256"
+      ],
+      "outside_closed_log": true
+    }
+  },
+  "handoff_layout_proof": {
+    "target": "US Letter portrait",
+    "page_count": 1,
+    "minimum_margin_inches": 0.5,
+    "minimum_body_table_point_size": 9,
+    "maximum_reader_facing_words_excluding_provenance": 450,
+    "no_clipping": true,
+    "no_overlap": true,
+    "no_hidden_overflow": true,
+    "no_unreadable_shrinking": true,
+    "source_markdown_required": true,
+    "pdf_required": true,
+    "rendering_command_required": true,
+    "tool_versions_required": true,
+    "pdf_sha256_required": true,
+    "proof_template": "facilitator-only/06-handoff-layout-proof-record.md",
+    "proof_filename_pattern": "AG-A-HANDOFF-LAYOUT-PROOF-<ATTEMPT-ID>-v1.md",
+    "favorable_claim_requires_passing_proof": true,
+    "layout_evidence_is_not_comprehension": true
   },
   "artifact_bindings": [
     {
@@ -286,18 +447,22 @@
     "stage_b_sections_3_5"
   ],
   "protected_documents": {
-    "README.md": "2eb853787db1ed8b6ec1048f1a76089182540dafd6388af400d7fd6b37c14731",
-    "TEMPORAL-FREEZE-PROTOCOL-VALIDATION.md": "92ab35b578044fb1dc0ef42efc38c8e64e445e24e3b8e5ba41feec71a7d23cc4",
-    "facilitator-only/01-facilitator-guide.md": "d17cbf5235908d82d67d7a2ce753f026a698d0943079d5574d54161321d1ad54",
-    "facilitator-only/02-observation-and-scoring-rubric.md": "75bca02cca9f8d2d851e7f24210a06214362c6045c40918a88bb1a9c7a5fc4c6",
-    "facilitator-only/03-results-and-deviation-log.md": "580765a654d4912be91c141d59cab4a48e1d56367834fd07afa443967a485fd0",
-    "facilitator-only/04-freeze-and-correction-record-templates.md": "52cdb868958791f8312e91a159f65928762b9a2e8f69318bd803440fdb3255c2",
-    "facilitator-only/05-execution-and-access-log.md": "7b8d86bc463f79aec0f68e7c149c4f59cd05662c1f9f9bc8324a5e4c65741029",
-    "participant/00-packet-route.md": "089472fbc7e13d2c9edb860de19197c9b1c3448310baca97d37fb118eff32f20",
-    "participant/01-consent-and-privacy.md": "b1ba8d0e4c2bfc5384ef0758ed0a8f9b3a8e66f1c12d661f785cb0448518ba27",
-    "participant/02-scenario-and-task.md": "3e6cd5715854c9ca82277fc07f7d42d0cb8384f56f4f5b4f77b59b32016b4d26",
-    "participant/03-practitioner-workbook.md": "cfaaee3abece9bffc5654c3ab1f1ff3fbe6aca8a77ea1ecf0c96690682081093",
-    "participant/04-decision-owner-workbook.md": "a05988c1537538c65981edb2bca3c36a1a9484597d17395281c289ebde5ee26d",
-    "participant/05-one-screen-handoff.md": "561023687401772e830386fb5c813d3d2cc5533d8e585de368b45ebc0a024e86"
+    "README.md": "1cf3b9b700f46001a1b7852b1357e415315e3af7d4755d8a096d331a94214e29",
+    "TEMPORAL-FREEZE-PROTOCOL-VALIDATION.md": "2cf1c6ac95b710a96473629169d042492b73521132c05ecc238bd26a9c8c20d9",
+    "facilitator-only/01-facilitator-guide.md": "e22a1420fde9e21554a568862aa1d854a153491478dbc4c5b0cbee7e2627327f",
+    "facilitator-only/02-observation-and-scoring-rubric.md": "b91956f851a99bb01a9b60449f688ac56c0e78e50431dd41cc3d403e8857c971",
+    "facilitator-only/03-results-and-deviation-log.md": "513f4524df1638abc5cab9a735de6354ceb7bc36e11a9c8faead99e7aa03e1c8",
+    "facilitator-only/04-freeze-and-correction-record-templates.md": "2bd54dbce90f7a3be25db9e13c54a55b170eff8b9a0f63c10581570a967bb939",
+    "facilitator-only/05-execution-and-access-log.md": "9d59d8858a56bb54c0cd3914e3490619da301d763af2a4b0cb3c181bd2bfba25",
+    "facilitator-only/06-handoff-layout-proof-record.md": "f3d167d3225c462c6dd1d00953af8b5efda43d10cf4e0755d6e3e055265b8f3e",
+    "facilitator-only/07-external-closeout-record.md": "c592d233eec2a09020b53057ca74b77188045959f2e440bd8b4c06756eb7b0ef",
+    "participant/00-packet-route.md": "81957159dc99e8b5d96ad7733962e09f87ec5964758b06bb0b2cca0addd3128e",
+    "participant/01-consent-and-privacy.md": "0aaca6e34b36ea1e9b4b01da74c196a3b2ade7f5898b46f0043145e7361e6b9b",
+    "participant/01-synthetic-context-record.md": "bb06ee72489bd5c4a41b53f70e2517d07bfd4be196d7af2af2d3068650607db6",
+    "participant/02-scenario-and-task.md": "a265b9fcf7bb13bbd59ebff49f6fbb16fb74c398b4cd8a1a05e0d5e5f909e124",
+    "participant/03-practitioner-workbook.md": "4cb82124adce87b73458c8e27cabf3907e0641f7a7ca8586c99672854eb46fa1",
+    "participant/04-decision-owner-workbook.md": "53b2b6079ad56cdcb3d91f51f15e35752487980d7f6dd1c37504cc79cae7cf5c",
+    "participant/05-one-screen-handoff.md": "bfb4fb4ddd7a385238294453a1d389e0424366e008d2ffe97539306fb673f550",
+    "participant/06-section-6-debrief.md": "3c373aeb4adcea9a619197d01555251d0adce288d2de64f284b9331fba92cc83"
   }
 }

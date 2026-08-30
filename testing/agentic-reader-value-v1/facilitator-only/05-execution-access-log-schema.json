@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://example.invalid/agentic-reader-value/execution-access-log-entry-v1.schema.json",
+  "$id": "https://example.invalid/agentic-reader-value/execution-access-log-entry-v2.schema.json",
   "title": "Agentic reader-value execution and access log entry",
   "description": "One append-only JSON Lines event. The log is facilitator-side run evidence and is never participant input.",
   "type": "object",
@@ -22,25 +22,35 @@
   ],
   "properties": {
     "packet_id": { "const": "AG-RV-PILOT-001" },
-    "packet_version": { "const": "1.2.3" },
+    "packet_version": { "const": "1.2.4" },
     "attempt_id": { "type": "string", "minLength": 1 },
     "sequence": { "type": "integer", "minimum": 1 },
     "phase": {
       "enum": [
-        "attempt",
+        "run",
+        "stage_a_entry",
         "stage_a_initial",
         "stage_a_revised",
         "stage_a_handoff",
+        "stage_a_close",
+        "stage_b_entry",
         "stage_b_section_1",
         "stage_b_section_2",
         "stage_b_sections_3_5",
+        "stage_b_scoring_close",
+        "stage_b_debrief",
+        "results",
         "closeout"
       ]
     },
     "event_type": {
       "enum": [
-        "ATTEMPT_STARTED",
+        "RUN_STARTED",
+        "ENTRY_BRANCH_SELECTED",
         "ORCHESTRATION_MANIFEST_VERIFIED",
+        "STAGE_A_CONTEXT_MANIFEST_CREATED",
+        "STAGE_A_CONTEXT_MANIFEST_VERIFIED",
+        "STAGE_A_STARTED",
         "PHASE_INPUT_MANIFEST_CREATED",
         "PHASE_INPUT_MANIFEST_VERIFIED",
         "FILE_RELEASED",
@@ -50,6 +60,17 @@
         "GOVERNING_MANIFEST_VERIFIED",
         "DETACHED_RECORD_COMPLETED",
         "PHASE_COMPLETED",
+        "STAGE_A_FEEDBACK_COMPLETED",
+        "STAGE_A_ENDED",
+        "STAGE_B_CONTEXT_MANIFEST_CREATED",
+        "STAGE_B_CONTEXT_MANIFEST_VERIFIED",
+        "STAGE_B_STARTED",
+        "SCORING_ENDED",
+        "DEBRIEF_INPUT_MANIFEST_CREATED",
+        "DEBRIEF_INPUT_MANIFEST_VERIFIED",
+        "DEBRIEF_COMPLETED",
+        "STAGE_B_ENDED",
+        "RUN_RESULTS_COMPLETED",
         "DEVIATION",
         "STOP",
         "LOG_CLOSED"
@@ -143,8 +164,11 @@
           "event_type": {
             "enum": [
               "ORCHESTRATION_MANIFEST_VERIFIED",
+              "STAGE_A_CONTEXT_MANIFEST_VERIFIED",
+              "STAGE_B_CONTEXT_MANIFEST_VERIFIED",
               "PHASE_INPUT_MANIFEST_VERIFIED",
-              "GOVERNING_MANIFEST_VERIFIED"
+              "GOVERNING_MANIFEST_VERIFIED",
+              "DEBRIEF_INPUT_MANIFEST_VERIFIED"
             ]
           }
         }
