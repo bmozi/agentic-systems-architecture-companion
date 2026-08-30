@@ -1,6 +1,6 @@
 # Facilitator Guide
 
-**Packet:** AG-RV-PILOT-001 version 1.0.0
+**Packet:** AG-RV-PILOT-001 version 1.1.0
 **Status:** Facilitator-only; prepared and unrun
 
 ## Purpose
@@ -34,38 +34,57 @@ Time is evidence, not a speed target.
 During scored work, the facilitator may repeat written text or resolve file
 access. Do not grant authority, select the action, interpret `accepted`, define
 the budget, identify the memory defect, supply a stop path, or confirm an
-answer. Record every intervention.
+answer. Do not supply an owner, authority, date, numeric baseline, limit,
+budget, order state, or evidence source. Record every question, pause, access
+problem, and intervention with exact time and level.
 
 ## Stage A sequence
 
-1. Confirm consent and freeze identity.
-2. Supply the scenario and workbook only. Let the participant complete Section
-   1 before opening companion assets.
-3. Supply the four listed assets in the packet README.
-4. Freeze a copy of the initial artifact before the update.
+1. Complete the consent prerequisites and obtain human consent. A blank field
+   means do not start.
+2. Record exact Stage A start, timezone, and supplied-file route immediately
+   before the participant's first packet read.
+3. Follow `participant/00-packet-route.md` exactly. Let the participant
+   complete recognition before opening companion assets. The miniature example
+   embedded in the Agent Authority Map is authorized teaching content; do not
+   follow its links to full worked examples or supply omitted files.
+4. Freeze the initial workbook and detailed artifacts before the update;
+   record IDs, versions, timestamp, and manifest.
 5. Read the live update:
 
 > One duplicated low-stock record reached three depot workers. The old memory
 > was treated as current purchase authority. The first order call timed out
 > after the supplier committed it, so one worker retried with a new tool-call
 > and business ID. Other workers selected a second supplier to improve
-> availability. Four orders totaling $18,400 are now accepted or committed,
-> two budget reservations exist, and the agent published a restock-planned
-> event. No shared budget stopped the workers, no one knows which orders can be
-> cancelled without residue, and the dashboard shows only a high-confidence
+> availability. A provider report says four orders totaling $18,400 are now
+> accepted or committed; treat that amount as reported exposure, not an
+> observed terminal consequence. Two budget reservations are reported, and
+> the agent published a restock-planned event. No shared budget stopped the
+> workers, no one knows which orders can be cancelled without residue, and the
+> dashboard shows only a high-confidence
 > plan.
 
 6. Ask only: “What can each party safely say or do now, and what changes in
    your artifacts?”
-7. Preserve original and revised artifacts separately.
+7. Freeze revised detailed artifacts, including the four-order/correction
+   register, separately. Then have Stage A complete and freeze the one-screen
+   handoff. Record initial, revised, and one-screen timestamps and manifests;
+   do not let the handoff erase earlier evidence.
+8. Record exact Stage A end.
 
 ## Stage B sequence
 
-1. Use a participant who did not create the Stage A artifact.
-2. Supply the scenario, unchanged Stage A artifact and handoff, decision-owner
-   workbook, Executive Decision Brief, and Value and Evidence Ledger.
-3. Keep the Stage A participant unavailable during Sections 1–4.
-4. End scoring before allowing explanation or repair.
+1. Use a participant who did not create the Stage A artifact. Complete consent
+   before beginning.
+2. Record exact Stage B start, timezone, and route immediately before first
+   packet read.
+3. Supply the frozen one-screen handoff first. Freeze the handoff-only read-back
+   before supplying the scenario or detailed artifacts.
+4. Supply only the remaining files, in the route's exact order. Record each
+   open time, pause, question, and access or facilitator intervention.
+5. Keep the Stage A participant unavailable through the bounded-decision
+   freeze. End scoring before allowing explanation or repair.
+6. Record exact Stage B end.
 
 ## Intervention levels
 

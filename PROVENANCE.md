@@ -32,6 +32,24 @@
 - **Prior packet boundary:** the advanced Glasswing packet retains its
   detailed six-template scope and does not inherit the new packet's results
 
+## 2026-08-29 synthetic route-preflight repair
+
+- **Authority:** Author-directed internal defect-finding review
+- **Prior candidate:** `AG-RV-PILOT-001` version 1.0.0
+- **Teaching-content boundary:** the miniature example embedded in the Agent
+  Authority Map was authorized participant content in version 1.0.0; linked
+  full examples were withheld. Version 1.0.0 is not reinterpreted as unaided
+  derivation
+- **Repair:** version 1.1.0 adds an exact route, one-screen handoff, exact timing
+  and freeze records, incident-authority matrix, four-order/correction
+  register, and separated numeric evidence classes
+- **Synthetic boundary:** the version 1.0.0 AI route preflight was synthetic
+  defect-finding only, not human or practitioner validation
+- **Current execution status:** version 1.1.0 is PREPARED and UNRUN; no human
+  recruitment, consent, session, observation, score, retest, or result exists
+- **Claim boundary:** no usability, safety, effectiveness, reader value,
+  customer value, runtime enforcement, or business-result claim is supported
+
 ## 2026-08-29 example and packet integrity repair
 
 - **Authority:** Author-directed collection drift and unfinished-state audit;

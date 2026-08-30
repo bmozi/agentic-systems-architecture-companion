@@ -19,6 +19,8 @@
     "FAILURE-LAB.md",
     "PILOT-AND-USABILITY.md",
     "testing/agentic-reader-value-v1/README.md",
+    "testing/agentic-reader-value-v1/participant/00-packet-route.md",
+    "testing/agentic-reader-value-v1/participant/05-one-screen-handoff.md",
     "testing/agentic-reader-value-v1/SHA256SUMS"
   ],
   "checksum_manifests": [

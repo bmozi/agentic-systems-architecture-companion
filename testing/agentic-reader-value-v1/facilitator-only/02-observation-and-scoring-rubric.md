@@ -1,6 +1,6 @@
 # Observation and Scoring Rubric
 
-**Packet:** AG-RV-PILOT-001 version 1.0.0
+**Packet:** AG-RV-PILOT-001 version 1.1.0
 **Status:** Predetermined, blank, and unrun
 
 Score retained behavior, not agreement with preferred vocabulary.
@@ -25,7 +25,7 @@ Do not use the total as a validated psychometric score.
 | RV-3 First useful artifact | Produces a bounded authority record with explicit unknowns | A | | |
 | RV-4 Outside read-back | Stage B reconstructs value, authority, limits, failure, and proof without repair | B | | |
 | RV-5 Failure discovery | Detects stale memory, absent delegation, unknown outcome, duplication, and budget escape | A | | |
-| RV-6 Team transfer | Handoff yields owner, decision, unknowns, evidence, and next date | B | | |
+| RV-6 Team transfer | One-screen handoff yields decision, allowed/withheld scope, assigned owner or `UNASSIGNED`, assigning authority/trigger or `UNKNOWN`, evidence, unknowns, next action, and date or evidence-based trigger without invention | B | | |
 | RV-7 Decision-owner legibility | Selects a bounded state without inventing ROI, approval, or safety | B | | |
 
 ## Critical Agentic Systems gates
@@ -37,11 +37,20 @@ Mark `clear`, `unclear`, `unsafe`, or `contaminated`:
 | Delegated authority | Separates service identity, model ability, memory, and current institutional permission | | |
 | Action boundary | Names one permitted action and explicitly withheld actions and substitutions | | |
 | Governed tool | External enforcement, business identity, outcome meanings, and receipts survive tool calls | | |
-| Cumulative consequence | Shared budgets cover workers, depots, retries, ambiguity, orders, and spend | | |
+| Cumulative consequence | Shared scope covers workers, depots, retries, ambiguity, orders, and spend while authorized limits, hypotheses, reported exposure, and observed terminal consequence stay separate; unsupported numbers remain `UNKNOWN` | | |
 | Stop and correction | Kill authority reaches queued and in-flight work; committed effects are reconciled and corrected | | |
 | Evidence | Source, memory, authority, decision, tool, order, event, cancellation, shipment, and inventory can be joined | | |
+| Incident authority | Names owner, authority source, expiry/trigger, and prohibited actions for containment, provider contact, per-order decisions, finance, event correction, receiving/inventory, manual continuity, and closure; honest `UNASSIGNED`/`UNKNOWN` remains acceptable | | |
+| Four-order correction | Keeps all four possible orders distinct through `CANCEL_REQUESTED`, `CANCEL_ACCEPTED`, `CANCELLED`, residue, shipment/return, event acknowledgement, receiving, budget, inventory, and closure; `UNKNOWN` is not closure | | |
+| Handoff scanability | Stage B can locate value, decision, allowed/withheld scope, ownership/authority gaps, evidence, unknowns, next action, and reconsideration on one screen | | |
 
 Any unsafe critical gate blocks a favorable interpretation regardless of total.
+
+For RV-6 and every critical gate, never reward invented data. An explicit
+`UNASSIGNED`, `UNKNOWN`, or evidence-based reconsideration trigger can be
+unaided and defensible. A plausible but unsupported owner, authority, date,
+budget, limit, order state, or evidence source scores 0 for the affected
+behavior.
 
 ## Findings to record
 

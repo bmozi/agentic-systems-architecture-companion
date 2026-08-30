@@ -1,9 +1,25 @@
 # Agentic Systems Reader-Value Pilot Packet
 
 **Packet ID:** AG-RV-PILOT-001
-**Version:** 1.0.0
+**Version:** 1.1.0
 **Status:** Prepared and unrun; no participant recruited or consented
 **Scenario:** Cedar Lane Supply, entirely fictional
+
+## Version and evidence note
+
+Version 1.1.0 repairs route clarity, transfer density, timing instrumentation,
+incident authority, order/correction tracking, and numeric-evidence prompts
+found in a synthetic AI route preflight of version 1.0.0. That preflight was
+defect-finding only. It was not a human or practitioner session and establishes
+no usability, safety, effectiveness, or value result. Version 1.1.0 remains
+**PREPARED/UNRUN** for human testing.
+
+The miniature example embedded in the supplied Agent Authority Map was and
+remains authorized teaching content. Version 1.0.0 supplied that file as-is;
+this repair does not reinterpret the earlier packet as an unaided-derivation
+test. Linked full worked examples remain withheld. A future test of unaided
+derivation would require a separately versioned packet that removes all
+teaching examples explicitly.
 
 ## What this packet tests
 
@@ -26,29 +42,40 @@ executive decision language.
 Supply only:
 
 1. [Consent and privacy notice](participant/01-consent-and-privacy.md)
-2. [Scenario and task](participant/02-scenario-and-task.md)
-3. [Practitioner workbook](participant/03-practitioner-workbook.md)
-4. [Start Here](../../START-HERE.md)
-5. [Agent Authority Map](../../agent-authority-map.md)
-6. [Governed Tool Contract](../../governed-tool-contract.md)
-7. [Action Budget and Blast-Radius Worksheet](../../action-budget-and-blast-radius.md)
+2. [Exact packet route](participant/00-packet-route.md)
+3. [Scenario and task](participant/02-scenario-and-task.md)
+4. [Practitioner workbook](participant/03-practitioner-workbook.md)
+5. [Start Here](../../START-HERE.md)
+6. [Agent Authority Map](../../agent-authority-map.md)
+7. [Governed Tool Contract](../../governed-tool-contract.md)
+8. [Action Budget and Blast-Radius Worksheet](../../action-budget-and-blast-radius.md)
+9. [One-Screen Decision Handoff](participant/05-one-screen-handoff.md)
 
-Do not supply completed examples, the repository Failure Lab, facilitator
-materials, the executive brief, or the value ledger during Stage A.
+Follow the route exactly: recognition comes before companion assets; the
+initial detailed artifact is frozen before the live update; the revised
+detailed artifact and one-screen handoff are completed and frozen after the
+update. The miniature example embedded in the Agent Authority Map is authorized
+and may be read. Do not follow its links to full worked examples, or supply the
+repository Failure Lab, facilitator materials, executive brief, value ledger,
+or any omitted file during Stage A.
 
 ### Stage B — independent decision owner
 
 Supply:
 
-1. the frozen scenario;
-2. the unchanged Stage A artifact and handoff;
-3. [Decision-owner workbook](participant/04-decision-owner-workbook.md);
-4. [Executive Decision Brief](../../EXECUTIVE-DECISION-BRIEF.md); and
-5. [Value and Evidence Ledger](../../VALUE-AND-EVIDENCE-LEDGER.md).
+1. [Consent and privacy notice](participant/01-consent-and-privacy.md);
+2. [Exact packet route](participant/00-packet-route.md);
+3. the frozen [One-Screen Decision Handoff](participant/05-one-screen-handoff.md)
+   as the first scored content;
+4. [Decision-owner workbook](participant/04-decision-owner-workbook.md);
+5. the frozen scenario and unchanged detailed Stage A artifacts;
+6. [Executive Decision Brief](../../EXECUTIVE-DECISION-BRIEF.md); and
+7. [Value and Evidence Ledger](../../VALUE-AND-EVIDENCE-LEDGER.md).
 
 Use a different person for Stage B during the first calibration round. Do not
 let the Stage A participant explain or repair the artifact during the initial
-read-back.
+read-back. Freeze the handoff-only read-back before supplying detailed
+artifacts. Supply no other files or omitted links.
 
 ## Facilitator only
 

@@ -10,13 +10,22 @@ Use only the highest supported label: **Prepared**, **Piloted**, **Revised**,
 **Prepared**. Existing Glasswing materials and blank logs do not establish a
 completed result.
 
+Version 1.0.0 received a synthetic AI route preflight used only to find defects
+in routing, transfer, timing, incident authority, order correction, and numeric
+prompts. It was not a human or practitioner session. Version 1.1.0 contains
+those repairs and remains **PREPARED/UNRUN**. Neither version establishes
+usability, safety, effectiveness, or reader/customer value.
+
 ## Prepared reader-value packet
 
 Use the separately versioned [Agentic Systems Reader-Value Pilot
 Packet](testing/agentic-reader-value-v1/README.md) for a controlled two-stage
 practitioner and decision-owner attempt. During the scored packet, follow its
 participant inventory exactly; do not add the standalone Failure Lab or
-completed examples as participant hints.
+completed full worked examples as participant hints. The miniature example
+embedded in the explicitly supplied Agent Authority Map is authorized teaching
+content; its linked full worked examples remain withheld. Testing unaided
+derivation would require a separately versioned packet.
 
 ## Advanced technical-transfer packet
 

@@ -1,6 +1,6 @@
 # Cedar Lane Scenario: Replenish Safety Supplies Without Surrendering Control
 
-**Packet:** AG-RV-PILOT-001 version 1.0.0
+**Packet:** AG-RV-PILOT-001 version 1.1.0
 **Status:** Fictional, prepared, and unrun
 
 Cedar Lane Supply keeps protective gloves and eye protection in stock for
@@ -48,6 +48,24 @@ receives purchasing authority.
 12. No implementation, enforcement test, incident exercise, practitioner
     session, cost measurement, or business-result evidence exists.
 
+## Numeric evidence classes
+
+Keep every number in one of these classes. Do not move a number between classes
+without its evidence:
+
+- **Authorized limit:** a current authority source explicitly permits the
+  number for this scope and time.
+- **Unproved hypothesis:** a proposed test boundary; it is not yet authorized
+  or shown safe.
+- **Reported exposure:** a source reports current or possible consequence; it
+  is not yet reconciled.
+- **Observed terminal consequence:** authoritative outcome evidence shows the
+  final consequence after correction and residue.
+
+If a budget baseline or its evidence is not supplied, write `UNKNOWN`, name the
+baseline/evidence required, and identify its owner or assignment trigger if
+known. A plausible invented number is not a better answer.
+
 ## Stage A task
 
 Without discussing the intended answer with a facilitator:
@@ -58,12 +76,15 @@ Without discussing the intended answer with a facilitator:
    Authority Map for the smallest useful action.
 3. Define the governed tool outcome, business identity, unknown-outcome rule,
    prohibited fields, enforcement point, and receipt.
-4. Set proposed per-action and cumulative boundaries without pretending the
-   scenario proves the numbers are safe.
+4. Separate authorized limits, unproved hypotheses, reported exposure, and
+   observed terminal consequence. Use `UNKNOWN` and request a baseline and
+   evidence before supplying an unsupported number.
 5. Name one stop path, one correction path, and the evidence required before
    any expansion.
-6. Leave missing authority or evidence unknown. Do not invent it.
-7. Complete the handoff in the practitioner workbook.
+6. Complete the incident-authority matrix and leave missing ownership or
+   authority `UNASSIGNED` or `UNKNOWN`; do not infer it from technical access.
+7. After the live update, complete the four-order/correction register.
+8. Complete and freeze the separate one-screen handoff.
 
 ## Live update
 

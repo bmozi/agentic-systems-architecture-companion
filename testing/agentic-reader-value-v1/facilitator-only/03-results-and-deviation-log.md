@@ -1,6 +1,6 @@
 # Results and Deviation Log
 
-**Packet:** AG-RV-PILOT-001 version 1.0.0
+**Packet:** AG-RV-PILOT-001 version 1.1.0
 **Status:** Blank controlled record; no result exists
 
 ## Run identity
@@ -11,31 +11,43 @@
 - Stage B reviewer code:
 - Facilitator:
 - Evaluator and independence disclosure:
-- Date, mode, and time:
+- Date, mode, and timezone:
 
 ## Consent, privacy, and freeze
 
-- Consent records:
+- Consent records completed before either scored stage:
 - Storage/access/retention authority:
 - Run-specific SHA-256 manifest:
 - Prepared-source manifest match:
 - Supplied and withheld materials correct: yes / no / deviation
 - Confidentiality or privacy concern:
 
-## Timing and interventions
+## Exact starts, file route, questions, pauses, and interventions
 
-| Stage/activity | Start | End | Elapsed | Notes |
+- Exact Stage A start before first scored read of the packet route, with timezone:
+- Exact Stage B start before first scored read of the packet route, with timezone:
+
+| Time | Stage | File opened or activity | Route position | Question/pause/access issue | Intervention and level | Interpretation effect |
+| --- | --- | --- | --- | --- | --- | --- |
+| | | | | | | |
+
+No coaching is allowed. Repeating text or resolving access is still logged.
+Supplying an owner, authority, date, number, baseline, limit, budget, order
+state, evidence source, or answer contaminates the affected gate.
+
+## Timing and freezes
+
+| Stage/activity | Exact start | Exact end | Elapsed | Artifact IDs/manifest or notes |
 | --- | --- | --- | ---: | --- |
-| A recognition | | | | |
-| A artifact | | | | |
+| A recognition before assets | | | | |
+| A detailed work | | | | |
+| A initial freeze | | | | |
 | A live update | | | | |
-| A handoff | | | | |
-| B read-back | | | | |
-| B decision | | | | |
-
-| Time | Exact intervention | Level | Gate affected | Interpretation effect |
-| --- | --- | --- | --- | --- |
-| | | | | |
+| A revised freeze and four-order register | | | | |
+| A one-screen handoff freeze | | | | |
+| B handoff-only read-back and freeze | | | | |
+| B detailed read-back | | | | |
+| B bounded decision freeze | | | | |
 
 ## Gate results
 
