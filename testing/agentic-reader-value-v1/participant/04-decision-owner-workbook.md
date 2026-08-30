@@ -1,6 +1,6 @@
 # Stage B Decision-Owner Workbook
 
-**Packet:** AG-RV-PILOT-001 version 1.2.1
+**Packet:** AG-RV-PILOT-001 version 1.2.2
 **Status:** Blank independent read-back record
 
 - Reviewer code:
@@ -11,20 +11,23 @@
 - Exact supplied-file route and manifest:
 - Exact `STAGE-A-REVISED-FREEZE-RECORD.md` received and verified:
 - Exact `STAGE-A-REVISED-FREEZE-SHA256SUMS` received and verified:
+- Exact `STAGE-A-HANDOFF-SHA256SUMS` received and verified:
+- Exact `STAGE-A-HANDOFF-FREEZE-VERIFICATION-RECORD.md` received and verified:
 - Every handoff-linked filename received unchanged: yes / no / deviation
 - Prior involvement with Stage A: none required for first calibration
 
 Do not ask the Stage A practitioner to explain or repair the artifact until
 Sections 1–5 are complete.
 
-Each freeze must record timestamp, timezone, literal local filename, artifact
-ID/version, and SHA-256 hash. Never overwrite a frozen section. Record any
-later correction in the correction register with exact old/new text,
-filenames, IDs/versions, hashes, reason, and correction timestamp/timezone.
+Each exported section records its literal local filename, ID/version,
+completion timestamp/timezone, and required `COMPLETE` state before hashing.
+Its governing manifest is then created and verified. Only afterward does the
+facilitator create the detached freeze-verification record. Never put the
+section's own hash or a future verification time inside the section artifact.
 
 ## 1. Handoff-only read-back and scanability freeze
 
-Complete this section from the frozen one-screen handoff before receiving the
+Complete this section from the verified one-screen handoff before receiving the
 scenario or detailed Stage A artifacts.
 
 - Who receives value and what outcome is proposed?
@@ -39,7 +42,12 @@ scenario or detailed Stage A artifacts.
 - Immediate next action:
 - Reconsideration date or evidence-based trigger:
 - Could you find those fields on one screen without verbal repair? yes / partly / no
-- Section 1 freeze timestamp, timezone, artifact version, and SHA-256 hash:
+- Phase-input manifest verified: `STAGE-B-PHASE-1-INPUT-SHA256SUMS` / deviation
+- Section 1 output: `STAGE-B-SECTION-1-v1.md`; artifact ID/version:
+- Section 1 completion timestamp/timezone and `SECTION 1 COMPLETE` state:
+- Governing manifest: `STAGE-B-SECTION-1-SHA256SUMS`
+- Detached freeze-verification record:
+  `STAGE-B-SECTION-1-FREEZE-VERIFICATION-RECORD.md`
 
 Do not ask the Stage A practitioner to explain or repair the handoff. Do not
 penalize an honest `UNASSIGNED`, `UNKNOWN`, or evidence-based trigger. Do flag
@@ -47,7 +55,8 @@ invented ownership, authority, dates, budgets, or evidence.
 
 ## 2. Detailed read-back
 
-Complete and checksum-freeze this section before opening
+Complete this section and finish its manifest-verification/detached-record
+sequence before opening
 `EXECUTIVE-DECISION-BRIEF.md` or `VALUE-AND-EVIDENCE-LEDGER.md`.
 
 Before reading detail, verify that every detailed artifact named in the
@@ -68,7 +77,12 @@ deviation and stop.
   shipment/return, event acknowledgement, receiving, budget, inventory, and
   closure without treating unknown as complete?
 - What evidence proves what the agent and surrounding system actually did?
-- Section 2 freeze timestamp, timezone, artifact version, and SHA-256 hash:
+- Phase-input manifest verified: `STAGE-B-PHASE-2-INPUT-SHA256SUMS` / deviation
+- Section 2 output: `STAGE-B-SECTION-2-v1.md`; artifact ID/version:
+- Section 2 completion timestamp/timezone and `SECTION 2 COMPLETE` state:
+- Governing manifest: `STAGE-B-SECTION-2-SHA256SUMS`
+- Detached freeze-verification record:
+  `STAGE-B-SECTION-2-FREEZE-VERIFICATION-RECORD.md`
 
 ## 3. Decision legibility
 
@@ -98,12 +112,17 @@ Choose one: `EXPLORE` / `PROCEED BOUNDED` / `INVEST` / `HOLD` / `STOP`
 - Unsupported benefit or certainty, if any:
 - Smallest change that would improve the handoff:
 - Detailed-artifact link that was missing or failed:
-- Sections 3–5 freeze timestamp, timezone, artifact version, and SHA-256 hash:
+- Phase-input manifest verified: `STAGE-B-PHASE-3-INPUT-SHA256SUMS` / deviation
+- Sections 3-5 output: `STAGE-B-SECTIONS-3-5-v1.md`; artifact ID/version:
+- Sections 3-5 completion timestamp/timezone and `SECTIONS 3-5 COMPLETE` state:
+- Governing manifest: `STAGE-B-SECTIONS-3-5-SHA256SUMS`
+- Detached freeze-verification record:
+  `STAGE-B-SECTIONS-3-5-FREEZE-VERIFICATION-RECORD.md`
 
 ## 6. Debrief after scoring
 
-Do not begin this section until Sections 1–5 have been checksum-frozen and
-scoring has ended.
+Do not begin this section until Sections 1–5 have completed their governing-
+manifest verification and detached-record sequences and scoring has ended.
 
 - Stage A explanation that changed your interpretation:
 - Decision changed after discussion:
@@ -113,6 +132,12 @@ scoring has ended.
 
 Leave blank when no frozen section changed. Preserve the prior frozen artifact.
 
-| Section | Exact old text | Exact new text | Reason | Correction timestamp/timezone | Exact old filename, ID/version, SHA-256 | Exact new filename, ID/version, SHA-256 | Replacement freeze record and manifest |
+| Section | Exact old text | Exact new text | Reason | Correction timestamp/timezone | Exact old filename, ID/version, SHA-256 | Exact new filename, ID/version, SHA-256 | Replacement manifest, verification event, detached record, and next-phase manifest |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | | | | | | | | |
+
+Each next phase-input manifest hashes the prior completed artifact, its
+governing manifest, its detached record, and new inputs. A later correction
+retains that entire chain and creates an immutable replacement artifact set,
+manifest, observed verification event, detached record, and next-phase
+manifest when applicable.

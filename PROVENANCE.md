@@ -76,7 +76,13 @@
 - **Record structure:** post-freeze correction evidence preserves exact old and
   new filenames, artifact IDs/versions, hashes, reason, timestamp/timezone,
   replacement freeze record, and replacement manifest
-- **Execution status:** version 1.2.1 is PREPARED and UNRUN; no human
+- **Version 1.2.2 repair:** removes temporal self-reference from revised Stage
+  A, handoff, and Stage B freezes. Governed outputs complete before hashing;
+  manifests hash only completed outputs; manifest verification precedes the
+  detached verification record; and the next phase-input manifest carries the
+  outputs, prior manifest, and detached record. Workbook fields now reference
+  that chain instead of embedding self-hashes or future times
+- **Execution status:** version 1.2.2 is PREPARED and UNRUN; no human
   recruitment, consent, session, observation, score, retest, or result exists
 - **Synthetic boundary:** earlier AI runs found defects but establish no
   usability, safety, effectiveness, reader value, runtime enforcement, or

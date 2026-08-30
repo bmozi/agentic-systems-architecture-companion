@@ -1,6 +1,6 @@
 # Results and Deviation Log
 
-**Packet:** AG-RV-PILOT-001 version 1.2.1
+**Packet:** AG-RV-PILOT-001 version 1.2.2
 **Status:** Blank controlled record; no result exists
 
 ## Run identity
@@ -20,8 +20,9 @@
 - Run-specific SHA-256 manifest:
 - Run-specific manifest verified before each stage:
 - Prepared-source manifest match:
-- Detached `STAGE-A-REVISED-FREEZE-RECORD.md` verification time/timezone:
 - Governing `STAGE-A-REVISED-FREEZE-SHA256SUMS` verification time/timezone:
+- Detached `STAGE-A-REVISED-FREEZE-RECORD.md` completion time/timezone:
+- `STAGE-A-HANDOFF-INPUT-SHA256SUMS` verification time/timezone:
 - Later correction record and replacement-manifest verification, if any:
 - Every handoff-linked literal filename received unchanged by Stage B:
 - Supplied and withheld materials correct: yes / no / deviation
@@ -46,14 +47,14 @@ state, evidence source, or answer contaminates the affected gate.
 | --- | --- | --- | ---: | --- |
 | A recognition before assets | | | | |
 | A detailed work | | | | |
-| A initial freeze | | | | |
+| A initial completion / manifest verification / detached record | | | | |
 | A live update | | | | |
 | A revised completion and four-order register | | | | |
-| A detached revised freeze record and manifest verification | | | | |
-| A one-screen handoff freeze | | | | |
-| B Section 1 handoff-only read-back and checksum freeze | | | | |
-| B Section 2 detailed read-back and checksum freeze | | | | |
-| B Sections 3–5 bounded-decision checksum freeze | | | | |
+| A revised manifest verification / detached record / handoff-input verification | | | | |
+| A one-screen handoff completion / manifest verification / detached record | | | | |
+| B Phase 1 input; Section 1 completion / manifest verification / detached record | | | | |
+| B Phase 2 input; Section 2 completion / manifest verification / detached record | | | | |
+| B Phase 3 input; Sections 3–5 completion / manifest verification / detached record | | | | |
 | B Section 6 debrief after scoring | | | | |
 
 ## Post-freeze corrections
@@ -61,9 +62,24 @@ state, evidence source, or answer contaminates the affected gate.
 The planned live-update revision is not a correction. Preserve each prior
 frozen artifact. Leave blank if no later correction occurred.
 
-| Section | Exact old text | Exact new text | Reason | Correction timestamp/timezone | Exact old filename, ID/version, SHA-256 | Exact new filename, ID/version, SHA-256 | Replacement freeze record and manifest |
+| Section | Exact old text | Exact new text | Reason | Correction timestamp/timezone | Exact old filename, ID/version, SHA-256 | Exact new filename, ID/version, SHA-256 | Replacement manifest, verification event, detached record, and next-phase manifest |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | | | | | | | | |
+
+## Temporal freeze chain
+
+| Output phase | Completed artifact filename + ID/version + completion time/state | Governing manifest filename/hash | Manifest verification method + exact timestamp/timezone + result | Detached record filename/hash + completion timestamp/timezone | Next phase-input manifest filename/hash + verification time |
+| --- | --- | --- | --- | --- | --- |
+| Initial Stage A | | | | | |
+| Revised Stage A | | | | | |
+| Handoff | | | | | |
+| Stage B Section 1 | | | | | |
+| Stage B Section 2 | | | | | |
+| Stage B Sections 3-5 | | | | | N/A |
+
+A detached record is valid only when created after the manifest verification
+it describes. No governing manifest may list itself or that later record. No
+governed output may embed its own hash or a future verification timestamp.
 
 ## Gate results
 

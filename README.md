@@ -59,6 +59,11 @@ useful work without claiming unmeasured benefits, then exercise the design with
 the [Failure Lab](FAILURE-LAB.md) and
 [Pilot Route](PILOT-AND-USABILITY.md).
 
+The current checksum-locked reader-value packet is version 1.2.2. Its temporal
+sealing protocol completes artifacts before hashing, verifies the governing
+manifest, and only then writes a detached verification record. It remains
+**PREPARED/UNRUN** for humans.
+
 ## Development boundary
 
 This is a private development companion. All included outcomes remain

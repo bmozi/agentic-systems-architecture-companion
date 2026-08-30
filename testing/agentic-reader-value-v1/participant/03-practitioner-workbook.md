@@ -1,6 +1,6 @@
 # Stage A Practitioner Workbook
 
-**Packet:** AG-RV-PILOT-001 version 1.2.1
+**Packet:** AG-RV-PILOT-001 version 1.2.2
 **Status:** Blank participant record
 
 - Participant code:
@@ -86,7 +86,11 @@ frozen before revising them. This planned revision after the live update is
 not a post-freeze correction.
 
 - Initial artifact IDs/versions:
-- Initial freeze timestamp, timezone, and manifest reference:
+- Initial governing manifest exact filename: `STAGE-A-INITIAL-SHA256SUMS`
+- Initial detached freeze-verification record exact filename:
+  `STAGE-A-INITIAL-FREEZE-VERIFICATION-RECORD.md`
+- Live-update input manifest exact filename:
+  `STAGE-A-LIVE-UPDATE-INPUT-SHA256SUMS`
 - Exact live update:
 - Initial answer now challenged:
 - Actions to stop, reconcile, or correct:
@@ -121,33 +125,42 @@ are complete. Before the handoff opens, no revised artifact may contain
 `DRAFT`, `PENDING FREEZE`, or an equivalent pending-freeze marker. If an
 artifact contains a status/state field, it must say `REVISED COMPLETE`, not
 remain blank. The detached
-`STAGE-A-REVISED-FREEZE-RECORD.md` and
-`STAGE-A-REVISED-FREEZE-SHA256SUMS`—not a self-referential field inside this
-artifact—record and govern the freeze.
+`STAGE-A-REVISED-FREEZE-SHA256SUMS` and the later
+`STAGE-A-REVISED-FREEZE-RECORD.md`—not a self-referential field inside this
+artifact—govern and document the freeze. The manifest hashes only completed
+revised artifacts. After it verifies, the detached record describes that
+observed event. Do not put this workbook's own hash or a future verification
+timestamp inside the workbook.
 
 ## 8. One-screen transfer preparation
 
 Complete and freeze the separate
 [One-Screen Decision Handoff](05-one-screen-handoff.md) after the live update.
-Do not open it until the detached revised freeze record and manifest have been
-created and verified. Link each detailed artifact using its exact literal
+Do not open it until `STAGE-A-HANDOFF-INPUT-SHA256SUMS` has verified the revised
+artifacts, their governing manifest, their detached record, and the blank
+handoff. Link each detailed artifact using its exact literal
 frozen local filename and ID/version rather than copying every implementation
 detail. Name the detached record and governing manifest exactly. Use a date
 **or** an evidence-based reconsideration trigger. Never invent an owner,
 assigning authority, date, budget, or evidence to make the handoff look full.
 
 - Handoff artifact ID/version:
-- Handoff freeze timestamp, timezone, and manifest reference:
+- Handoff artifact completion timestamp/timezone and `HANDOFF COMPLETE` state:
+- Handoff governing manifest filename: `STAGE-A-HANDOFF-SHA256SUMS`
+- Handoff detached freeze-verification record filename:
+  `STAGE-A-HANDOFF-FREEZE-VERIFICATION-RECORD.md`
 - Revised freeze record filename: `STAGE-A-REVISED-FREEZE-RECORD.md`
 - Governing revised manifest filename: `STAGE-A-REVISED-FREEZE-SHA256SUMS`
+- Handoff-input manifest filename: `STAGE-A-HANDOFF-INPUT-SHA256SUMS`
 - Recommended stop/containment:
 - Actual containment execution status and evidence, or `UNKNOWN`:
 
 If a frozen revised byte later changes, do not call it the planned live-update
 revision and do not overwrite it. Stop and preserve both versions. Record the
 exact old/new filenames, IDs/versions, hashes, reason, correction timestamp and
-timezone, replacement freeze record, and replacement manifest before any new
-handoff or attempt.
+timezone, replacement freeze-verification record, and replacement manifest
+before any new handoff or attempt. A replacement is a new immutable artifact
+set and provenance chain; do not mutate the earlier one.
 
 ## 9. Material feedback
 

@@ -1,6 +1,6 @@
 # Facilitator Guide
 
-**Packet:** AG-RV-PILOT-001 version 1.2.1
+**Packet:** AG-RV-PILOT-001 version 1.2.2
 **Status:** Facilitator-only; prepared and unrun
 
 ## Purpose
@@ -49,16 +49,22 @@ assets must be exact immutable copies named `START-HERE.md`,
 manifest covering every supplied file. Do not substitute a repository path,
 live link, summary, renamed file, or newer byte sequence during a run.
 
-The manifest is detached and must not list or hash itself. A later-stage
-delivery manifest may hash the earlier manifest as one supplied file.
+Every governed output contains its ID/version, exact completion
+timestamp/timezone, and required `COMPLETE` state before hashing. Its governing
+manifest hashes only those completed outputs and never itself or a later
+record. Verify the manifest from sealed storage, capture the exact verification
+timestamp/timezone, and only then create the detached freeze-verification
+record. A later phase-input manifest hashes the prior outputs, manifest,
+detached record, and new inputs.
 
 The planned live update creates the first revised Stage A artifact set and is
 not a post-freeze correction. After any scored freeze, preserve every prior
 frozen artifact. A later correction must use a new immutable filename and
 version and record exact old/new text, filenames, IDs/versions, hashes, reason,
-correction timestamp/timezone, replacement freeze record, and replacement
-manifest. If supplied source bytes change, stop and record the deviation; do
-not silently continue the same run.
+completion and verification timestamps/timezones, replacement freeze-
+verification record, and replacement manifest. The replacement is a new
+immutable artifact set and provenance chain. If supplied source bytes change,
+stop and record the deviation; do not silently continue the same run.
 
 ## Required detached revised-freeze record
 
@@ -71,16 +77,18 @@ handoff is opened, use the run-record schema in
 2. reject any revised artifact that still says `DRAFT`, `PENDING FREEZE`, or
    otherwise claims its freeze is pending; if it contains a status/state
    field, reject a blank field and require `REVISED COMPLETE` before hashing;
-3. calculate the SHA-256 hash of each exact revised artifact;
-4. create `STAGE-A-REVISED-FREEZE-RECORD.md` containing one row per governed
-   artifact with its exact filename, ID, version, and hash, plus one exact
-   freeze timestamp/timezone and the literal governing manifest name
-   `STAGE-A-REVISED-FREEZE-SHA256SUMS`;
-5. hash the completed freeze record and create
-   `STAGE-A-REVISED-FREEZE-SHA256SUMS` listing the freeze record and every
-   governed revised artifact, but not the manifest itself; and
-6. verify every listed hash from the sealed directory and record verification
-   time/timezone in the facilitator log.
+3. calculate the SHA-256 hash of each exact revised artifact and create
+   `STAGE-A-REVISED-FREEZE-SHA256SUMS`, listing only those completed artifacts;
+4. verify that manifest from the sealed directory and capture the exact
+   verification timestamp/timezone;
+5. only after successful verification, create
+   `STAGE-A-REVISED-FREEZE-RECORD.md` containing one row per governed artifact
+   with its exact filename, ID/version, completion time/state, and hash, plus
+   the already-observed verification timestamp/timezone and the governing
+   manifest's literal filename and SHA-256; and
+6. create and verify `STAGE-A-HANDOFF-INPUT-SHA256SUMS`, listing the revised
+   artifacts, their governing manifest, the completed detached record, and the
+   blank handoff input.
 
 Only then may Stage A open and complete `05-one-screen-handoff.md`. Its detail
 links must enumerate every governed detail under the exact literal filename in
@@ -97,8 +105,14 @@ artifact ID without the literal filename is not sufficient.
    complete recognition before opening companion assets. The miniature example
    embedded in the Agent Authority Map is authorized teaching content; do not
    follow its links to full worked examples or supply omitted files.
-4. Freeze the initial workbook and detailed artifacts before the update;
-   record IDs, versions, timestamp, and manifest.
+4. Complete the initial workbook and detailed artifacts before the update with
+   IDs/versions, completion timestamps/timezones, and `INITIAL COMPLETE` state.
+   Create and verify `STAGE-A-INITIAL-SHA256SUMS`; only then create
+   `STAGE-A-INITIAL-FREEZE-VERIFICATION-RECORD.md`. Export the exact quote in
+   Step 5 as `STAGE-A-LIVE-UPDATE-v1.md`. Create and verify
+   `STAGE-A-LIVE-UPDATE-INPUT-SHA256SUMS`, covering the initial artifacts,
+   their manifest and detached record, and that update file. Do not read the
+   update until this phase-input manifest passes.
 5. Read the live update:
 
 > One duplicated low-stock record reached three depot workers. The old memory
@@ -117,9 +131,13 @@ artifact ID without the literal filename is not sufficient.
    your artifacts?”
 7. Finish revised detailed artifacts, including the four-order register, and
    apply the required detached revised-freeze procedure above. Do not open the
-   handoff until the record and manifest verify. Then have Stage A complete and
-   freeze the one-screen handoff. Record initial, revised, and one-screen
-   timestamps and manifests; do not let the handoff erase earlier evidence.
+   handoff until `STAGE-A-HANDOFF-INPUT-SHA256SUMS` verifies. Then have Stage A
+   complete the one-screen handoff with ID/version, completion
+   timestamp/timezone, and `HANDOFF COMPLETE` state. Create and verify
+   `STAGE-A-HANDOFF-SHA256SUMS`; only afterward create
+   `STAGE-A-HANDOFF-FREEZE-VERIFICATION-RECORD.md`. Record initial, revised,
+   and one-screen completion and verification timestamps, manifests, and
+   detached records; do not let the handoff erase earlier evidence.
    The handoff must distinguish
    a recommended stop or containment from evidence that containment was
    actually executed. When execution is not evidenced, the actual status must
@@ -132,22 +150,41 @@ artifact ID without the literal filename is not sufficient.
    before beginning.
 2. Record exact Stage B start, timezone, and route immediately before first
    packet read.
-3. Supply the frozen one-screen handoff first. Complete and checksum-freeze
-   Section 1 before supplying the scenario or detailed artifacts.
+3. Create and verify `STAGE-B-PHASE-1-INPUT-SHA256SUMS`, covering the completed
+   handoff, its governing manifest and detached record, the route, and the
+   blank workbook. Only then supply and open the handoff as the first scored
+   content; its provenance files are unscored inputs. Complete and export
+   `STAGE-B-SECTION-1-v1.md` with ID/version, completion timestamp/timezone,
+   and `SECTION 1 COMPLETE`. Create and verify
+   `STAGE-B-SECTION-1-SHA256SUMS`; only then create
+   `STAGE-B-SECTION-1-FREEZE-VERIFICATION-RECORD.md`, before supplying the
+   scenario or detailed artifacts.
 4. Supply the scenario; every handoff-linked detail under the exact literal
    local filename; `STAGE-A-REVISED-FREEZE-RECORD.md`; and
    `STAGE-A-REVISED-FREEZE-SHA256SUMS`. Supply the governing manifest as a file,
    not merely its name or a facilitator assertion. Verify exact filenames and
    hashes. Do not rename, substitute, regenerate, summarize, or omit a linked
-   detail. Any mismatch is a recorded deviation and stop. Complete and
-   checksum-freeze Section 2 before supplying either executive file.
+   detail. Any mismatch is a recorded deviation and stop. Create and verify
+   `STAGE-B-PHASE-2-INPUT-SHA256SUMS`, which includes Section 1 and its
+   manifest/record plus every new detailed input. Complete and export
+   `STAGE-B-SECTION-2-v1.md` with ID/version, completion timestamp/timezone,
+   and `SECTION 2 COMPLETE`. Create and verify
+   `STAGE-B-SECTION-2-SHA256SUMS`; only then create
+   `STAGE-B-SECTION-2-FREEZE-VERIFICATION-RECORD.md`, before supplying either
+   executive file.
 5. Supply `EXECUTIVE-DECISION-BRIEF.md` and
-   `VALUE-AND-EVIDENCE-LEDGER.md`, in that order. Complete and checksum-freeze
-   Sections 3–5.
+   `VALUE-AND-EVIDENCE-LEDGER.md`, in that order. Create and verify
+   `STAGE-B-PHASE-3-INPUT-SHA256SUMS`, including Section 2 and its
+   manifest/record plus both executive inputs. Complete and export
+   `STAGE-B-SECTIONS-3-5-v1.md` with ID/version, completion timestamp/timezone,
+   and `SECTIONS 3-5 COMPLETE`. Create and verify
+   `STAGE-B-SECTIONS-3-5-SHA256SUMS`; only then create
+   `STAGE-B-SECTIONS-3-5-FREEZE-VERIFICATION-RECORD.md`.
 6. Keep the Stage A participant unavailable through the Sections 3–5 freeze.
    End scoring before allowing explanation or repair, then complete Section 6.
 7. Record exact Stage B end. Record every open time, pause, question, access
-   problem, intervention, freeze timestamp, artifact version, and hash.
+   problem, intervention, completion timestamp, manifest verification event,
+   detached record, artifact version, and hash.
 
 ## Intervention levels
 

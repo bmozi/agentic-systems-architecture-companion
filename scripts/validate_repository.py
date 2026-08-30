@@ -61,6 +61,73 @@ def sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def validate_temporal_freeze_protocol(errors: list[str]) -> None:
+    """Protect the v1.2.2 complete-hash-verify-record ordering."""
+    packet = ROOT / "testing" / "agentic-reader-value-v1"
+    required: dict[str, list[str]] = {
+        "participant/00-packet-route.md": [
+            "STAGE-A-HANDOFF-INPUT-SHA256SUMS",
+            "STAGE-A-LIVE-UPDATE-INPUT-SHA256SUMS",
+            "STAGE-B-PHASE-1-INPUT-SHA256SUMS",
+            "STAGE-B-PHASE-2-INPUT-SHA256SUMS",
+            "STAGE-B-PHASE-3-INPUT-SHA256SUMS",
+            "never itself or the later detached record",
+        ],
+        "participant/03-practitioner-workbook.md": [
+            "Do not put this workbook's own hash",
+            "STAGE-A-REVISED-FREEZE-RECORD.md",
+        ],
+        "participant/04-decision-owner-workbook.md": [
+            "STAGE-B-SECTION-1-FREEZE-VERIFICATION-RECORD.md",
+            "STAGE-B-SECTION-2-FREEZE-VERIFICATION-RECORD.md",
+            "STAGE-B-SECTIONS-3-5-FREEZE-VERIFICATION-RECORD.md",
+        ],
+        "participant/05-one-screen-handoff.md": [
+            "Do not put this handoff's own hash",
+            "HANDOFF COMPLETE",
+        ],
+        "facilitator-only/04-freeze-and-correction-record-templates.md": [
+            "Create it only after the governing manifest",
+            "does not list or hash itself or this later record",
+        ],
+        "TEMPORAL-FREEZE-PROTOCOL-VALIDATION.md": [
+            "complete governed bytes",
+            "create a detached freeze-verification record",
+        ],
+    }
+    for relative, phrases in required.items():
+        path = packet / relative
+        if not path.is_file():
+            errors.append(f"temporal protocol missing file: {path.relative_to(ROOT)}")
+            continue
+        content = path.read_text(encoding="utf-8")
+        normalized = " ".join(content.split())
+        for phrase in phrases:
+            if " ".join(phrase.split()) not in normalized:
+                errors.append(
+                    f"{path.relative_to(ROOT)}: missing temporal protocol language: {phrase!r}"
+                )
+
+    forbidden = {
+        "manifest hashes the record and every governed artifact",
+        "manifest must hash every governed revised artifact and the freeze record",
+        "hash the completed freeze record and create",
+        "Section 1 freeze timestamp",
+        "Section 2 freeze timestamp",
+        "Handoff freeze timestamp",
+    }
+    for path in sorted(packet.rglob("*.md")):
+        content = path.read_text(encoding="utf-8")
+        header = "\n".join(content.splitlines()[:6])
+        if ("**Packet:**" in header or "**Version:**" in header) and "1.2.2" not in header:
+            errors.append(f"{path.relative_to(ROOT)}: packet header is not version 1.2.2")
+        for phrase in forbidden:
+            if phrase.casefold() in content.casefold():
+                errors.append(
+                    f"{path.relative_to(ROOT)}: forbidden temporal self-reference: {phrase!r}"
+                )
+
+
 def main() -> int:
     errors: list[str] = []
     if not MANIFEST.is_file():
@@ -130,6 +197,8 @@ def main() -> int:
                 f"{relative}: packet file missing from checksum manifest: "
                 f"{unlisted.relative_to(checksum_path.parent)}"
             )
+
+    validate_temporal_freeze_protocol(errors)
 
     gateways = manifest.get("gateway_assets")
     if not isinstance(gateways, list) or not gateways:

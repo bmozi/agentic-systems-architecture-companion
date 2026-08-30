@@ -1,6 +1,6 @@
 # Observation and Scoring Rubric
 
-**Packet:** AG-RV-PILOT-001 version 1.2.1
+**Packet:** AG-RV-PILOT-001 version 1.2.2
 **Status:** Predetermined, blank, and unrun
 
 Score retained behavior, not agreement with preferred vocabulary.
@@ -23,7 +23,7 @@ Do not use the total as a validated psychometric score.
 | RV-1 Recognition | Names useful delegation and human consequence before mechanisms | A | | |
 | RV-2 Plain understanding | Explains delegated and withheld action, authority, limits, and proof without agent jargon | A and B | | |
 | RV-3 First useful artifact | Produces a bounded authority record with explicit unknowns | A | | |
-| RV-4 Outside read-back | From checksum-frozen Sections 1 and 2, Stage B reconstructs value, authority, limits, failure, recommended containment, actual containment status, and proof without repair | B | | |
+| RV-4 Outside read-back | From separately completed, manifested, verified, and recorded Sections 1 and 2, Stage B reconstructs value, authority, limits, failure, recommended containment, actual containment status, and proof without repair | B | | |
 | RV-5 Failure discovery | Detects stale memory, absent delegation, unknown outcome, duplication, and budget escape | A | | |
 | RV-6 Team transfer | One-screen handoff yields decision, allowed/withheld scope, assigned owner or `UNASSIGNED`, assigning authority/trigger or `UNKNOWN`, evidence, unknowns, recommended stop/containment, actual containment execution status or `UNKNOWN`, next action, and date or evidence-based trigger without invention | B | | |
 | RV-7 Decision-owner legibility | Selects a bounded state without inventing ROI, approval, or safety | B | | |
@@ -50,15 +50,17 @@ Mark each condition `clear`, `deviated`, or `not interpretable`:
 
 | Condition | Result | Evidence |
 | --- | --- | --- |
-| Section 1 was checksum-frozen before scenario or detail access | | |
-| Revised Stage A details were sealed by a detached exact freeze record and governing manifest before the handoff opened | | |
-| Freeze record includes timestamp/timezone and every governed artifact's literal filename, ID/version, and SHA-256; manifest hashes the record and governed artifacts but not itself | | |
+| Section 1 was completed, manifested, verified, and documented by a later detached record before scenario or detail access | | |
+| Revised Stage A details were complete before hashing; their manifest was verified before the detached verification record was written; and the handoff-input manifest then carried artifacts, manifest, record, and blank handoff | | |
+| Detached record describes the observed manifest-verification timestamp/timezone and includes every governed artifact's literal filename, ID/version, completion time/state, and SHA-256 plus the manifest filename/hash | | |
+| No governing manifest hashes itself or its later detached record; no governed output embeds its own hash or a future verification time | | |
 | No revised artifact retained `DRAFT`, `PENDING FREEZE`, or an equivalent pending-freeze claim after the detached freeze; any existing status/state field was nonblank and `REVISED COMPLETE` before hashing | | |
 | Stage B received every handoff-linked detail under its exact literal filename plus `STAGE-A-REVISED-FREEZE-RECORD.md` and `STAGE-A-REVISED-FREEZE-SHA256SUMS`, with no rename, substitution, regeneration, summary, or omission | | |
-| Section 2 was checksum-frozen before executive brief or value ledger access | | |
-| Sections 3–5 were checksum-frozen before Section 6 or Stage A explanation | | |
+| Section 2 was completed, manifested, verified, and documented by a later detached record before executive brief or value ledger access | | |
+| Sections 3–5 were completed, manifested, verified, and documented by a later detached record before Section 6 or Stage A explanation | | |
+| Each next phase-input manifest hashes the prior completed output, its governing manifest, its detached record, and newly released inputs | | |
 | Planned live-update revision was distinguished from any later correction of already frozen bytes | | |
-| Every post-freeze correction preserved exact old/new text, immutable filenames, IDs/versions, and hashes and added reason, correction timestamp/timezone, replacement freeze record, and replacement manifest | | |
+| Every post-freeze correction preserved the prior chain and created an immutable replacement artifact set, manifest, observed verification event, detached record, and next-phase manifest when applicable | | |
 
 Any unsafe critical gate blocks a favorable interpretation regardless of total.
 
