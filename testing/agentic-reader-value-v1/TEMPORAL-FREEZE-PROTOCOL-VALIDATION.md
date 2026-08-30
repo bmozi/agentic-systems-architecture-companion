@@ -3,7 +3,8 @@
 **Packet:** AG-RV-PILOT-001 version 1.2.2
 **Validation type:** Static source review; not a human run
 **Validation date:** 2026-08-29
-**Result:** PASS for temporal ordering in the prepared source protocol
+**Result:** PASS for the reviewed prepared source protocol; executable
+mutation regression is required after any protocol change
 
 ## Required ordering checked
 
@@ -37,7 +38,15 @@ completed detached record, and new inputs.
 
 ## Evidence boundary
 
-This static PASS means the written protocol is temporally executable without
-the identified self-reference. It does not establish that a human followed
-the route, understood it, found it usable, or produced a correct, safe, or
-valuable agentic-system decision. Packet state remains **PREPARED/UNRUN**.
+The canonical inventory is
+[`TEMPORAL-FREEZE-PROTOCOL.json`](TEMPORAL-FREEZE-PROTOCOL.json). Run both
+`python3 scripts/validate_repository.py` and
+`python3 scripts/test_temporal_freeze_protocol.py` from the repository root.
+The latter uses disposable copies, refreshes ordinary packet checksums, and
+requires one positive control plus rejection of eleven structural mutations.
+
+This PASS means only that the reviewed prepared source and executable mutation
+checks agree on the stated temporal invariants. It does not establish that a
+human followed the route, understood it, found it usable, or produced a
+correct, safe, or valuable agentic-system decision. Packet state remains
+**PREPARED/UNRUN**.

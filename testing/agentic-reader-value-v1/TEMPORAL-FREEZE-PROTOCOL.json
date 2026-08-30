@@ -1,0 +1,207 @@
+{
+  "schema_version": 1,
+  "packet_id": "AG-RV-PILOT-001",
+  "packet_version": "1.2.2",
+  "allowed_completion_states": [
+    "INITIAL COMPLETE",
+    "REVISED COMPLETE",
+    "HANDOFF COMPLETE",
+    "SECTION 1 COMPLETE",
+    "SECTION 2 COMPLETE",
+    "SECTIONS 3-5 COMPLETE"
+  ],
+  "freeze_chains": [
+    {
+      "id": "stage_a_initial",
+      "results_label": "Initial Stage A",
+      "output_role": "governed_outputs",
+      "output_filename": null,
+      "output_artifact_id": null,
+      "output_version": null,
+      "completion_state": "INITIAL COMPLETE",
+      "governing_manifest": "STAGE-A-INITIAL-SHA256SUMS",
+      "detached_record": "STAGE-A-INITIAL-FREEZE-VERIFICATION-RECORD.md",
+      "order": ["complete", "manifest", "verify", "record"],
+      "manifest_membership": ["governed_outputs"],
+      "manifest_exclusions": ["governing_manifest", "detached_record"],
+      "next_release": "initial_to_live_update"
+    },
+    {
+      "id": "stage_a_revised",
+      "results_label": "Revised Stage A",
+      "output_role": "governed_outputs",
+      "output_filename": null,
+      "output_artifact_id": null,
+      "output_version": null,
+      "completion_state": "REVISED COMPLETE",
+      "governing_manifest": "STAGE-A-REVISED-FREEZE-SHA256SUMS",
+      "detached_record": "STAGE-A-REVISED-FREEZE-RECORD.md",
+      "order": ["complete", "manifest", "verify", "record"],
+      "manifest_membership": ["governed_outputs"],
+      "manifest_exclusions": ["governing_manifest", "detached_record"],
+      "next_release": "revised_to_handoff"
+    },
+    {
+      "id": "stage_a_handoff",
+      "results_label": "Handoff",
+      "output_role": "governed_outputs",
+      "output_filename": "AG-A-ONE-SCREEN-HANDOFF-v1.md",
+      "output_artifact_id": "AG-A-ONE-SCREEN-HANDOFF",
+      "output_version": "1",
+      "completion_state": "HANDOFF COMPLETE",
+      "governing_manifest": "STAGE-A-HANDOFF-SHA256SUMS",
+      "detached_record": "STAGE-A-HANDOFF-FREEZE-VERIFICATION-RECORD.md",
+      "order": ["complete", "manifest", "verify", "record"],
+      "manifest_membership": ["governed_outputs"],
+      "manifest_exclusions": ["governing_manifest", "detached_record"],
+      "next_release": "handoff_to_stage_b_section_1"
+    },
+    {
+      "id": "stage_b_section_1",
+      "results_label": "Stage B Section 1",
+      "output_role": "governed_outputs",
+      "output_filename": "STAGE-B-SECTION-1-v1.md",
+      "output_artifact_id": "STAGE-B-SECTION-1",
+      "output_version": "1",
+      "completion_state": "SECTION 1 COMPLETE",
+      "governing_manifest": "STAGE-B-SECTION-1-SHA256SUMS",
+      "detached_record": "STAGE-B-SECTION-1-FREEZE-VERIFICATION-RECORD.md",
+      "order": ["complete", "manifest", "verify", "record"],
+      "manifest_membership": ["governed_outputs"],
+      "manifest_exclusions": ["governing_manifest", "detached_record"],
+      "next_release": "section_1_to_section_2"
+    },
+    {
+      "id": "stage_b_section_2",
+      "results_label": "Stage B Section 2",
+      "output_role": "governed_outputs",
+      "output_filename": "STAGE-B-SECTION-2-v1.md",
+      "output_artifact_id": "STAGE-B-SECTION-2",
+      "output_version": "1",
+      "completion_state": "SECTION 2 COMPLETE",
+      "governing_manifest": "STAGE-B-SECTION-2-SHA256SUMS",
+      "detached_record": "STAGE-B-SECTION-2-FREEZE-VERIFICATION-RECORD.md",
+      "order": ["complete", "manifest", "verify", "record"],
+      "manifest_membership": ["governed_outputs"],
+      "manifest_exclusions": ["governing_manifest", "detached_record"],
+      "next_release": "section_2_to_sections_3_5"
+    },
+    {
+      "id": "stage_b_sections_3_5",
+      "results_label": "Stage B Sections 3-5",
+      "output_role": "governed_outputs",
+      "output_filename": "STAGE-B-SECTIONS-3-5-v1.md",
+      "output_artifact_id": "STAGE-B-SECTIONS-3-5",
+      "output_version": "1",
+      "completion_state": "SECTIONS 3-5 COMPLETE",
+      "governing_manifest": "STAGE-B-SECTIONS-3-5-SHA256SUMS",
+      "detached_record": "STAGE-B-SECTIONS-3-5-FREEZE-VERIFICATION-RECORD.md",
+      "order": ["complete", "manifest", "verify", "record"],
+      "manifest_membership": ["governed_outputs"],
+      "manifest_exclusions": ["governing_manifest", "detached_record"],
+      "next_release": null
+    }
+  ],
+  "release_triples": [
+    {
+      "id": "initial_to_live_update",
+      "from_phase": "stage_a_initial",
+      "manifest": "STAGE-A-LIVE-UPDATE-INPUT-SHA256SUMS",
+      "required_prior_bundle": ["governed_outputs", "governing_manifest", "detached_record"],
+      "new_inputs": ["live_update"],
+      "exact_membership": ["governed_outputs", "governing_manifest", "detached_record", "live_update"]
+    },
+    {
+      "id": "revised_to_handoff",
+      "from_phase": "stage_a_revised",
+      "manifest": "STAGE-A-HANDOFF-INPUT-SHA256SUMS",
+      "required_prior_bundle": ["governed_outputs", "governing_manifest", "detached_record"],
+      "new_inputs": ["blank_handoff"],
+      "exact_membership": ["governed_outputs", "governing_manifest", "detached_record", "blank_handoff"]
+    },
+    {
+      "id": "handoff_to_stage_b_section_1",
+      "from_phase": "stage_a_handoff",
+      "manifest": "STAGE-B-PHASE-1-INPUT-SHA256SUMS",
+      "required_prior_bundle": ["governed_outputs", "governing_manifest", "detached_record"],
+      "new_inputs": ["packet_route", "blank_decision_owner_workbook"],
+      "exact_membership": ["governed_outputs", "governing_manifest", "detached_record", "packet_route", "blank_decision_owner_workbook"]
+    },
+    {
+      "id": "section_1_to_section_2",
+      "from_phase": "stage_b_section_1",
+      "manifest": "STAGE-B-PHASE-2-INPUT-SHA256SUMS",
+      "required_prior_bundle": ["governed_outputs", "governing_manifest", "detached_record"],
+      "new_inputs": ["scenario", "revised_governed_outputs", "revised_governing_manifest", "revised_detached_record"],
+      "exact_membership": ["governed_outputs", "governing_manifest", "detached_record", "scenario", "revised_governed_outputs", "revised_governing_manifest", "revised_detached_record"]
+    },
+    {
+      "id": "section_2_to_sections_3_5",
+      "from_phase": "stage_b_section_2",
+      "manifest": "STAGE-B-PHASE-3-INPUT-SHA256SUMS",
+      "required_prior_bundle": ["governed_outputs", "governing_manifest", "detached_record"],
+      "new_inputs": ["executive_decision_brief", "value_and_evidence_ledger"],
+      "exact_membership": ["governed_outputs", "governing_manifest", "detached_record", "executive_decision_brief", "value_and_evidence_ledger"]
+    }
+  ],
+  "correction_requirements": {
+    "preserve_prior_chain": true,
+    "new_filename": true,
+    "new_artifact_id": true,
+    "new_version": true,
+    "new_completion_timestamp": true,
+    "new_governing_manifest": true,
+    "new_verification_event": true,
+    "new_detached_record": true,
+    "new_next_release_manifest_when_applicable": true,
+    "stop_current_attempt": true
+  },
+  "artifact_bindings": [
+    {
+      "artifact_id": "AG-A-ONE-SCREEN-HANDOFF",
+      "version": "1",
+      "filename": "AG-A-ONE-SCREEN-HANDOFF-v1.md",
+      "documents": ["README.md", "participant/00-packet-route.md", "participant/05-one-screen-handoff.md"]
+    },
+    {
+      "artifact_id": "STAGE-B-SECTION-1",
+      "version": "1",
+      "filename": "STAGE-B-SECTION-1-v1.md",
+      "documents": ["participant/00-packet-route.md", "participant/04-decision-owner-workbook.md"]
+    },
+    {
+      "artifact_id": "STAGE-B-SECTION-2",
+      "version": "1",
+      "filename": "STAGE-B-SECTION-2-v1.md",
+      "documents": ["participant/00-packet-route.md", "participant/04-decision-owner-workbook.md"]
+    },
+    {
+      "artifact_id": "STAGE-B-SECTIONS-3-5",
+      "version": "1",
+      "filename": "STAGE-B-SECTIONS-3-5-v1.md",
+      "documents": ["participant/00-packet-route.md", "participant/04-decision-owner-workbook.md"]
+    }
+  ],
+  "results_inventory": [
+    "stage_a_initial",
+    "stage_a_revised",
+    "stage_a_handoff",
+    "stage_b_section_1",
+    "stage_b_section_2",
+    "stage_b_sections_3_5"
+  ],
+  "protected_documents": {
+    "README.md": "34f0edcafa2ed2890c8c470c8041d78a6341aecd144ff358ef45ea5964a51db7",
+    "TEMPORAL-FREEZE-PROTOCOL-VALIDATION.md": "05dda1d9caa6febc8dd7896302b223dd911dbec3cd4beb233638de9cbf03b716",
+    "facilitator-only/01-facilitator-guide.md": "fb4e9b9b700c91e5b4d7d78484cec5405eec8cc87e073523f852680ea0dccffb",
+    "facilitator-only/02-observation-and-scoring-rubric.md": "f607ff59a4a52ce5ec5f43533494fca9b0bb11771157943e981944fea16bdc82",
+    "facilitator-only/03-results-and-deviation-log.md": "2fee4c2d5615a3b53ebb1f63cf76b80d4cba999d320a958d28f3de1b92165efd",
+    "facilitator-only/04-freeze-and-correction-record-templates.md": "c1ca6bf9b7ac8b14b2319d16b4856c38f8055f94f7d3a8ad1a28e04bb500844f",
+    "participant/00-packet-route.md": "e273d495e3e5461fd1b2128aa5b106a05b6c9a35a5ee73b150f792832ebb6630",
+    "participant/01-consent-and-privacy.md": "2feb5c0355a9ccea768c7fea151b88561fc53e75e4310bf11e10363c58cb0e15",
+    "participant/02-scenario-and-task.md": "0654c5b41197004e6b7d2f932a7db1d5087111da5151b82a227438d0472358e0",
+    "participant/03-practitioner-workbook.md": "7a02dbc55e73df8408731e6332245d6fc3985dc96f4d751c4c9c00bac7eeca50",
+    "participant/04-decision-owner-workbook.md": "1d910a455c10c2258a5750e227d90bb20e4515b3a2a6c9ea74cbd64cd7803f2f",
+    "participant/05-one-screen-handoff.md": "15ff4f94a9e00cf560bab58195640486b03e5d8b33231075ee2168643f86fc99"
+  }
+}

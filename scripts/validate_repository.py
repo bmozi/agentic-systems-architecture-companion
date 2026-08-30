@@ -16,6 +16,121 @@ MANIFEST = ROOT / "companion.json"
 LINK_PATTERN = re.compile(r"!?\[[^\]]*\]\(([^)]+)\)")
 COMMIT_PATTERN = re.compile(r"^[0-9a-f]{7,40}$")
 CHECKSUM_PATTERN = re.compile(r"^([0-9a-f]{64})  (.+)$")
+FREEZE_ORDER = ["complete", "manifest", "verify", "record"]
+PRIOR_TRIPLE = ["governed_outputs", "governing_manifest", "detached_record"]
+PHASE_PROTOCOL = {
+    "stage_a_initial": {
+        "results_label": "Initial Stage A",
+        "state": "INITIAL COMPLETE",
+        "manifest": "STAGE-A-INITIAL-SHA256SUMS",
+        "record": "STAGE-A-INITIAL-FREEZE-VERIFICATION-RECORD.md",
+        "next_release": "initial_to_live_update",
+        "output": None,
+    },
+    "stage_a_revised": {
+        "results_label": "Revised Stage A",
+        "state": "REVISED COMPLETE",
+        "manifest": "STAGE-A-REVISED-FREEZE-SHA256SUMS",
+        "record": "STAGE-A-REVISED-FREEZE-RECORD.md",
+        "next_release": "revised_to_handoff",
+        "output": None,
+    },
+    "stage_a_handoff": {
+        "results_label": "Handoff",
+        "state": "HANDOFF COMPLETE",
+        "manifest": "STAGE-A-HANDOFF-SHA256SUMS",
+        "record": "STAGE-A-HANDOFF-FREEZE-VERIFICATION-RECORD.md",
+        "next_release": "handoff_to_stage_b_section_1",
+        "output": ("AG-A-ONE-SCREEN-HANDOFF", "1", "AG-A-ONE-SCREEN-HANDOFF-v1.md"),
+    },
+    "stage_b_section_1": {
+        "results_label": "Stage B Section 1",
+        "state": "SECTION 1 COMPLETE",
+        "manifest": "STAGE-B-SECTION-1-SHA256SUMS",
+        "record": "STAGE-B-SECTION-1-FREEZE-VERIFICATION-RECORD.md",
+        "next_release": "section_1_to_section_2",
+        "output": ("STAGE-B-SECTION-1", "1", "STAGE-B-SECTION-1-v1.md"),
+    },
+    "stage_b_section_2": {
+        "results_label": "Stage B Section 2",
+        "state": "SECTION 2 COMPLETE",
+        "manifest": "STAGE-B-SECTION-2-SHA256SUMS",
+        "record": "STAGE-B-SECTION-2-FREEZE-VERIFICATION-RECORD.md",
+        "next_release": "section_2_to_sections_3_5",
+        "output": ("STAGE-B-SECTION-2", "1", "STAGE-B-SECTION-2-v1.md"),
+    },
+    "stage_b_sections_3_5": {
+        "results_label": "Stage B Sections 3-5",
+        "state": "SECTIONS 3-5 COMPLETE",
+        "manifest": "STAGE-B-SECTIONS-3-5-SHA256SUMS",
+        "record": "STAGE-B-SECTIONS-3-5-FREEZE-VERIFICATION-RECORD.md",
+        "next_release": None,
+        "output": ("STAGE-B-SECTIONS-3-5", "1", "STAGE-B-SECTIONS-3-5-v1.md"),
+    },
+}
+RELEASE_PROTOCOL = {
+    "initial_to_live_update": {
+        "from_phase": "stage_a_initial",
+        "manifest": "STAGE-A-LIVE-UPDATE-INPUT-SHA256SUMS",
+        "new_inputs": ["live_update"],
+    },
+    "revised_to_handoff": {
+        "from_phase": "stage_a_revised",
+        "manifest": "STAGE-A-HANDOFF-INPUT-SHA256SUMS",
+        "new_inputs": ["blank_handoff"],
+    },
+    "handoff_to_stage_b_section_1": {
+        "from_phase": "stage_a_handoff",
+        "manifest": "STAGE-B-PHASE-1-INPUT-SHA256SUMS",
+        "new_inputs": ["packet_route", "blank_decision_owner_workbook"],
+    },
+    "section_1_to_section_2": {
+        "from_phase": "stage_b_section_1",
+        "manifest": "STAGE-B-PHASE-2-INPUT-SHA256SUMS",
+        "new_inputs": [
+            "scenario",
+            "revised_governed_outputs",
+            "revised_governing_manifest",
+            "revised_detached_record",
+        ],
+    },
+    "section_2_to_sections_3_5": {
+        "from_phase": "stage_b_section_2",
+        "manifest": "STAGE-B-PHASE-3-INPUT-SHA256SUMS",
+        "new_inputs": ["executive_decision_brief", "value_and_evidence_ledger"],
+    },
+}
+CORRECTION_REQUIREMENTS = {
+    "preserve_prior_chain": True,
+    "new_filename": True,
+    "new_artifact_id": True,
+    "new_version": True,
+    "new_completion_timestamp": True,
+    "new_governing_manifest": True,
+    "new_verification_event": True,
+    "new_detached_record": True,
+    "new_next_release_manifest_when_applicable": True,
+    "stop_current_attempt": True,
+}
+BINDING_DOCUMENTS = {
+    "AG-A-ONE-SCREEN-HANDOFF": {
+        "README.md",
+        "participant/00-packet-route.md",
+        "participant/05-one-screen-handoff.md",
+    },
+    "STAGE-B-SECTION-1": {
+        "participant/00-packet-route.md",
+        "participant/04-decision-owner-workbook.md",
+    },
+    "STAGE-B-SECTION-2": {
+        "participant/00-packet-route.md",
+        "participant/04-decision-owner-workbook.md",
+    },
+    "STAGE-B-SECTIONS-3-5": {
+        "participant/00-packet-route.md",
+        "participant/04-decision-owner-workbook.md",
+    },
+}
 
 
 def markdown_links(path: Path):
@@ -62,70 +177,183 @@ def sha256(path: Path) -> str:
 
 
 def validate_temporal_freeze_protocol(errors: list[str]) -> None:
-    """Protect the v1.2.2 complete-hash-verify-record ordering."""
+    """Validate the canonical v1.2.2 freeze and release graph."""
     packet = ROOT / "testing" / "agentic-reader-value-v1"
-    required: dict[str, list[str]] = {
-        "participant/00-packet-route.md": [
-            "STAGE-A-HANDOFF-INPUT-SHA256SUMS",
-            "STAGE-A-LIVE-UPDATE-INPUT-SHA256SUMS",
-            "STAGE-B-PHASE-1-INPUT-SHA256SUMS",
-            "STAGE-B-PHASE-2-INPUT-SHA256SUMS",
-            "STAGE-B-PHASE-3-INPUT-SHA256SUMS",
-            "never itself or the later detached record",
-        ],
-        "participant/03-practitioner-workbook.md": [
-            "Do not put this workbook's own hash",
-            "STAGE-A-REVISED-FREEZE-RECORD.md",
-        ],
-        "participant/04-decision-owner-workbook.md": [
-            "STAGE-B-SECTION-1-FREEZE-VERIFICATION-RECORD.md",
-            "STAGE-B-SECTION-2-FREEZE-VERIFICATION-RECORD.md",
-            "STAGE-B-SECTIONS-3-5-FREEZE-VERIFICATION-RECORD.md",
-        ],
-        "participant/05-one-screen-handoff.md": [
-            "Do not put this handoff's own hash",
-            "HANDOFF COMPLETE",
-        ],
-        "facilitator-only/04-freeze-and-correction-record-templates.md": [
-            "Create it only after the governing manifest",
-            "does not list or hash itself or this later record",
-        ],
-        "TEMPORAL-FREEZE-PROTOCOL-VALIDATION.md": [
-            "complete governed bytes",
-            "create a detached freeze-verification record",
-        ],
-    }
-    for relative, phrases in required.items():
-        path = packet / relative
-        if not path.is_file():
-            errors.append(f"temporal protocol missing file: {path.relative_to(ROOT)}")
-            continue
-        content = path.read_text(encoding="utf-8")
-        normalized = " ".join(content.split())
-        for phrase in phrases:
-            if " ".join(phrase.split()) not in normalized:
-                errors.append(
-                    f"{path.relative_to(ROOT)}: missing temporal protocol language: {phrase!r}"
-                )
+    protocol_path = packet / "TEMPORAL-FREEZE-PROTOCOL.json"
+    try:
+        protocol = json.loads(protocol_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        errors.append(f"temporal protocol inventory is unreadable: {exc}")
+        return
 
-    forbidden = {
-        "manifest hashes the record and every governed artifact",
-        "manifest must hash every governed revised artifact and the freeze record",
-        "hash the completed freeze record and create",
-        "Section 1 freeze timestamp",
-        "Section 2 freeze timestamp",
-        "Handoff freeze timestamp",
+    if protocol.get("schema_version") != 1:
+        errors.append("temporal protocol: schema_version must be 1")
+    if protocol.get("packet_id") != "AG-RV-PILOT-001":
+        errors.append("temporal protocol: packet_id mismatch")
+    if protocol.get("packet_version") != "1.2.2":
+        errors.append("temporal protocol: packet_version must be 1.2.2")
+
+    expected_states = [entry["state"] for entry in PHASE_PROTOCOL.values()]
+    if protocol.get("allowed_completion_states") != expected_states:
+        errors.append("temporal protocol: allowed completion states are incomplete or stale")
+
+    chains = protocol.get("freeze_chains")
+    if not isinstance(chains, list):
+        errors.append("temporal protocol: freeze_chains must be a list")
+        chains = []
+    chain_by_id = {
+        entry.get("id"): entry for entry in chains if isinstance(entry, dict)
     }
+    if len(chain_by_id) != len(chains) or set(chain_by_id) != set(PHASE_PROTOCOL):
+        errors.append("temporal protocol: freeze inventory must contain each of six phases exactly once")
+    for phase, expected in PHASE_PROTOCOL.items():
+        chain = chain_by_id.get(phase)
+        if chain is None:
+            continue
+        checks = {
+            "results_label": expected["results_label"],
+            "output_role": "governed_outputs",
+            "completion_state": expected["state"],
+            "governing_manifest": expected["manifest"],
+            "detached_record": expected["record"],
+            "order": FREEZE_ORDER,
+            "manifest_membership": ["governed_outputs"],
+            "manifest_exclusions": ["governing_manifest", "detached_record"],
+            "next_release": expected["next_release"],
+        }
+        for field, wanted in checks.items():
+            if chain.get(field) != wanted:
+                errors.append(f"temporal protocol: {phase}.{field} must equal {wanted!r}")
+        output = expected["output"]
+        actual_output = (
+            chain.get("output_artifact_id"),
+            chain.get("output_version"),
+            chain.get("output_filename"),
+        )
+        if output is None:
+            if actual_output != (None, None, None):
+                errors.append(f"temporal protocol: {phase} must use the governed-output set")
+        elif actual_output != output:
+            errors.append(f"temporal protocol: {phase} artifact ID/version/filename mismatch")
+
+    releases = protocol.get("release_triples")
+    if not isinstance(releases, list):
+        errors.append("temporal protocol: release_triples must be a list")
+        releases = []
+    release_by_id = {
+        entry.get("id"): entry for entry in releases if isinstance(entry, dict)
+    }
+    if len(release_by_id) != len(releases) or set(release_by_id) != set(RELEASE_PROTOCOL):
+        errors.append("temporal protocol: release inventory must contain each of five releases exactly once")
+    for release_id, expected in RELEASE_PROTOCOL.items():
+        release = release_by_id.get(release_id)
+        if release is None:
+            continue
+        if release.get("from_phase") != expected["from_phase"]:
+            errors.append(f"temporal protocol: {release_id} has the wrong predecessor")
+        if release.get("manifest") != expected["manifest"]:
+            errors.append(f"temporal protocol: {release_id} manifest filename mismatch")
+        if release.get("required_prior_bundle") != PRIOR_TRIPLE:
+            errors.append(f"temporal protocol: {release_id} must bind the completed triple")
+        if release.get("new_inputs") != expected["new_inputs"]:
+            errors.append(f"temporal protocol: {release_id} new-input inventory mismatch")
+        exact_membership = PRIOR_TRIPLE + expected["new_inputs"]
+        if release.get("exact_membership") != exact_membership:
+            errors.append(f"temporal protocol: {release_id} exact membership mismatch")
+
+    if protocol.get("correction_requirements") != CORRECTION_REQUIREMENTS:
+        errors.append("temporal protocol: immutable correction requirements are incomplete")
+    if protocol.get("results_inventory") != list(PHASE_PROTOCOL):
+        errors.append("temporal protocol: results inventory must list all six phases in order")
+
+    bindings = protocol.get("artifact_bindings")
+    if not isinstance(bindings, list):
+        errors.append("temporal protocol: artifact_bindings must be a list")
+        bindings = []
+    binding_by_id = {
+        entry.get("artifact_id"): entry for entry in bindings if isinstance(entry, dict)
+    }
+    expected_outputs = {
+        value["output"][0]: value["output"]
+        for value in PHASE_PROTOCOL.values()
+        if value["output"] is not None
+    }
+    if len(binding_by_id) != len(bindings) or set(binding_by_id) != set(expected_outputs):
+        errors.append("temporal protocol: artifact binding inventory mismatch")
+    for artifact_id, expected in expected_outputs.items():
+        binding = binding_by_id.get(artifact_id)
+        if binding is None:
+            continue
+        wanted_documents = BINDING_DOCUMENTS[artifact_id]
+        if (
+            binding.get("version"),
+            binding.get("filename"),
+        ) != (expected[1], expected[2]):
+            errors.append(f"temporal protocol: {artifact_id} version/filename mismatch")
+        documents = binding.get("documents")
+        if not isinstance(documents, list) or set(documents) != wanted_documents:
+            errors.append(f"temporal protocol: {artifact_id} document binding mismatch")
+            continue
+        variant = re.compile(rf"{re.escape(artifact_id)}-v([0-9]+)\.md")
+        for relative in documents:
+            path = packet / relative
+            if not path.is_file():
+                errors.append(f"temporal protocol: missing binding document {relative}")
+                continue
+            content = path.read_text(encoding="utf-8")
+            if expected[2] not in content:
+                errors.append(f"temporal protocol: {relative} omits {expected[2]}")
+            wrong_versions = {match.group(1) for match in variant.finditer(content)} - {expected[1]}
+            if wrong_versions:
+                errors.append(f"temporal protocol: {relative} has stale {artifact_id} versions")
+
+    results_path = packet / "facilitator-only" / "03-results-and-deviation-log.md"
+    try:
+        results_text = results_path.read_text(encoding="utf-8")
+    except OSError as exc:
+        errors.append(f"temporal protocol: results inventory is unreadable: {exc}")
+    else:
+        section = results_text.split("## Temporal freeze chain", 1)
+        section = section[1].split("\n## ", 1)[0] if len(section) == 2 else ""
+        rows = []
+        for line in section.splitlines():
+            if not line.startswith("|") or line.startswith("| ---"):
+                continue
+            label = line.split("|", 2)[1].strip()
+            if label and label != "Output phase":
+                rows.append(label)
+        expected_rows = [entry["results_label"] for entry in PHASE_PROTOCOL.values()]
+        if rows != expected_rows or len(rows) != 6:
+            errors.append("temporal protocol: results log must contain all six freeze rows in order")
+
+    handoff_path = packet / "participant" / "05-one-screen-handoff.md"
+    handoff_text = handoff_path.read_text(encoding="utf-8") if handoff_path.is_file() else ""
+    state_rows = [
+        line for line in handoff_text.splitlines()
+        if line.startswith("| Handoff state before hashing |")
+    ]
+    if state_rows != ["| Handoff state before hashing | `HANDOFF COMPLETE` / invalid |"]:
+        errors.append("temporal protocol: handoff state field must require HANDOFF COMPLETE")
+
+    protected = protocol.get("protected_documents")
+    expected_protected = {
+        str(path.relative_to(packet))
+        for path in packet.rglob("*.md")
+    }
+    if not isinstance(protected, dict) or set(protected) != expected_protected:
+        errors.append("temporal protocol: protected-document inventory is incomplete")
+    else:
+        for relative, expected_hash in protected.items():
+            path = packet / relative
+            if not re.fullmatch(r"[0-9a-f]{64}", str(expected_hash)):
+                errors.append(f"temporal protocol: invalid protected hash for {relative}")
+            elif sha256(path) != expected_hash:
+                errors.append(f"temporal protocol: protected document drift: {relative}")
+
     for path in sorted(packet.rglob("*.md")):
-        content = path.read_text(encoding="utf-8")
-        header = "\n".join(content.splitlines()[:6])
+        header = "\n".join(path.read_text(encoding="utf-8").splitlines()[:6])
         if ("**Packet:**" in header or "**Version:**" in header) and "1.2.2" not in header:
             errors.append(f"{path.relative_to(ROOT)}: packet header is not version 1.2.2")
-        for phrase in forbidden:
-            if phrase.casefold() in content.casefold():
-                errors.append(
-                    f"{path.relative_to(ROOT)}: forbidden temporal self-reference: {phrase!r}"
-                )
 
 
 def main() -> int:

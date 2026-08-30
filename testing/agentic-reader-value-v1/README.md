@@ -178,6 +178,13 @@ files.
 
 ## Temporal sealing rule
 
+[`TEMPORAL-FREEZE-PROTOCOL.json`](TEMPORAL-FREEZE-PROTOCOL.json) is the
+machine-readable canonical inventory for the six output freezes, five
+next-release triples, completion states, correction rules, artifact bindings,
+and results rows. Reader-facing instructions must agree with that inventory;
+the repository validator also checks reviewed protocol-document hashes so a
+prose change cannot silently bypass structural review.
+
 For initial and revised Stage A, the handoff, and each Stage B output:
 
 1. complete the governed artifact with ID, version, exact completion
