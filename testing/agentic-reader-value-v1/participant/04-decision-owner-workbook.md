@@ -1,6 +1,6 @@
 # Stage B Decision-Owner Workbook
 
-**Packet:** AG-RV-PILOT-001 version 1.2.4
+**Packet:** AG-RV-PILOT-001 version 1.2.5
 **Status:** Blank independent read-back record
 
 - Reviewer code:
@@ -11,11 +11,6 @@
 - Stage A artifact ID/version:
 - Exact Stage B start before first scored read of the packet route, with timezone:
 - `STAGE_B_STARTED` log checkpoint sequence/hash:
-- Exact scoring-end timestamp/timezone and `SCORING_ENDED` checkpoint:
-- Exact debrief-input manifest verification timestamp/timezone and checkpoint:
-- Exact Section 6/debrief completion timestamp/timezone and `DEBRIEF_COMPLETED` checkpoint:
-- Exact Stage B end, with timezone:
-- `STAGE_B_ENDED` log checkpoint sequence/hash:
 - Exact supplied-file route and manifest:
 - Exact `STAGE-A-REVISED-FREEZE-RECORD.md` received and verified: write
   `NOT RELEASED — PHASE 2 CHECK` until Phase 2:
@@ -28,6 +23,11 @@
 - Detailed execution evidence verified: write
   `NOT RELEASED — PHASE 2 CHECK` until Phase 2
 - Prior involvement with Stage A: none required for first calibration
+
+Scoring end, debrief, Stage B end, and their checkpoints are later observed
+facts. Record them only in the facilitator execution/access log and immutable
+run-specific results after they occur. Do not add a future post-scoring,
+debrief, or end field to this scored workbook or a scored export.
 
 Do not ask the Stage A practitioner to explain or repair the artifact until
 Sections 1–5 are complete.

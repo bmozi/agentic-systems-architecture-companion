@@ -389,6 +389,36 @@ def mutations():
             lambda root: mutate_protocol(root, allow_layout_claim_without_proof),
             "one-page handoff proof contract is incomplete or stale",
         ),
+        (
+            "reader route starts the run before selecting its entry branch",
+            lambda root: change_text(
+                root,
+                "participant/00-packet-route.md",
+                "record `ENTRY_BRANCH_SELECTED` before `RUN_STARTED`",
+                "record `RUN_STARTED` before `ENTRY_BRANCH_SELECTED`",
+            ),
+            "omits required semantic guard 'record `ENTRY_BRANCH_SELECTED` before `RUN_STARTED`'",
+        ),
+        (
+            "governed Stage A workbook requests a future end field",
+            lambda root: append_text(
+                root,
+                "participant/03-practitioner-workbook.md",
+                "\n- Exact Stage A end, with timezone:\n"
+                "- `STAGE_A_ENDED` log checkpoint sequence/hash:\n",
+            ),
+            "governed Stage A workbook contains a future stage-end field",
+        ),
+        (
+            "scored Stage B workbook requests a future end field",
+            lambda root: append_text(
+                root,
+                "participant/04-decision-owner-workbook.md",
+                "\n- Exact Stage B end, with timezone:\n"
+                "- `STAGE_B_ENDED` log checkpoint sequence/hash:\n",
+            ),
+            "scored Stage B workbook contains a future post-scoring or stage-end field",
+        ),
     ]
 
 

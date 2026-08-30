@@ -1,13 +1,13 @@
 # Exact Packet Route
 
-**Packet:** AG-RV-PILOT-001 version 1.2.4
+**Packet:** AG-RV-PILOT-001 version 1.2.5
 **Status:** Prepared and unrun; this route records no human result
 
 ## Before either stage
 
-The facilitator first creates the run-specific execution/access log and records
-`RUN_STARTED`. Choose exactly one entry branch for the entire attempt and
-record `ENTRY_BRANCH_SELECTED`. The branches are
+Choose exactly one entry branch for the entire attempt before the run begins.
+The facilitator then creates the run-specific execution/access log and must
+record `ENTRY_BRANCH_SELECTED` before `RUN_STARTED`. The branches are
 mutually exclusive and may not change or mix between stages:
 
 - **Human branch:** complete every execution-owner, storage, access,

@@ -1,6 +1,6 @@
 # External Run Closeout Record Template
 
-**Packet:** AG-RV-PILOT-001 version 1.2.4
+**Packet:** AG-RV-PILOT-001 version 1.2.5
 **Status:** Facilitator-only blank post-log record; prepared and unrun
 **Artifact identity:** `AG-RUN-CLOSEOUT` / `v1`
 **Exact run filename:** `AG-RUN-CLOSEOUT-<ATTEMPT-ID>-v1.md`

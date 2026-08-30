@@ -1,6 +1,6 @@
 # Detached Freeze-Verification and Correction Record Templates
 
-**Packet:** AG-RV-PILOT-001 version 1.2.4
+**Packet:** AG-RV-PILOT-001 version 1.2.5
 **Status:** Facilitator-only blank records; prepared and unrun
 
 These schemas create run evidence. Never supply this source template during a

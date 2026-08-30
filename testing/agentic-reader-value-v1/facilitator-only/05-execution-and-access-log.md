@@ -1,6 +1,6 @@
 # Execution and Access Log
 
-**Packet:** AG-RV-PILOT-001 version 1.2.4
+**Packet:** AG-RV-PILOT-001 version 1.2.5
 **Status:** Facilitator-only schema and blank run template; prepared and unrun
 
 This log proves the order in which inputs were admitted, files were released
@@ -70,8 +70,8 @@ appends events and preserves the earlier chain.
 The log must preserve these non-substitutable route boundaries around the six
 scored freeze chains:
 
-1. `RUN_STARTED`
-2. `ENTRY_BRANCH_SELECTED`
+1. `ENTRY_BRANCH_SELECTED`
+2. `RUN_STARTED`
 3. `STAGE_A_CONTEXT_MANIFEST_CREATED` and
    `STAGE_A_CONTEXT_MANIFEST_VERIFIED`
 4. `STAGE_A_STARTED`

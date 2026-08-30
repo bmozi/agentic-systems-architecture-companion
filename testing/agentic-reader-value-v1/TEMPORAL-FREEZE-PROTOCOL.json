@@ -1,7 +1,7 @@
 {
   "schema_version": 3,
   "packet_id": "AG-RV-PILOT-001",
-  "packet_version": "1.2.4",
+  "packet_version": "1.2.5",
   "allowed_completion_states": [
     "INITIAL COMPLETE",
     "REVISED COMPLETE",
@@ -208,8 +208,8 @@
     "detached_record_checkpoint_event": "GOVERNING_MANIFEST_VERIFIED",
     "final_log_bound_by_closeout_manifest": true,
     "required_route_boundaries": [
-      "RUN_STARTED",
       "ENTRY_BRANCH_SELECTED",
+      "RUN_STARTED",
       "STAGE_A_CONTEXT_MANIFEST_VERIFIED",
       "STAGE_A_STARTED",
       "STAGE_A_FEEDBACK_COMPLETED",
@@ -314,8 +314,8 @@
   "full_route_closure": {
     "six_scored_freeze_chains_are_not_full_route": true,
     "required_boundary_events": [
-      "RUN_STARTED",
       "ENTRY_BRANCH_SELECTED",
+      "RUN_STARTED",
       "STAGE_A_CONTEXT_MANIFEST_VERIFIED",
       "STAGE_A_STARTED",
       "STAGE_A_FEEDBACK_COMPLETED",
@@ -447,22 +447,22 @@
     "stage_b_sections_3_5"
   ],
   "protected_documents": {
-    "README.md": "1cf3b9b700f46001a1b7852b1357e415315e3af7d4755d8a096d331a94214e29",
-    "TEMPORAL-FREEZE-PROTOCOL-VALIDATION.md": "2cf1c6ac95b710a96473629169d042492b73521132c05ecc238bd26a9c8c20d9",
-    "facilitator-only/01-facilitator-guide.md": "e22a1420fde9e21554a568862aa1d854a153491478dbc4c5b0cbee7e2627327f",
-    "facilitator-only/02-observation-and-scoring-rubric.md": "b91956f851a99bb01a9b60449f688ac56c0e78e50431dd41cc3d403e8857c971",
-    "facilitator-only/03-results-and-deviation-log.md": "513f4524df1638abc5cab9a735de6354ceb7bc36e11a9c8faead99e7aa03e1c8",
-    "facilitator-only/04-freeze-and-correction-record-templates.md": "2bd54dbce90f7a3be25db9e13c54a55b170eff8b9a0f63c10581570a967bb939",
-    "facilitator-only/05-execution-and-access-log.md": "9d59d8858a56bb54c0cd3914e3490619da301d763af2a4b0cb3c181bd2bfba25",
-    "facilitator-only/06-handoff-layout-proof-record.md": "f3d167d3225c462c6dd1d00953af8b5efda43d10cf4e0755d6e3e055265b8f3e",
-    "facilitator-only/07-external-closeout-record.md": "c592d233eec2a09020b53057ca74b77188045959f2e440bd8b4c06756eb7b0ef",
-    "participant/00-packet-route.md": "81957159dc99e8b5d96ad7733962e09f87ec5964758b06bb0b2cca0addd3128e",
-    "participant/01-consent-and-privacy.md": "0aaca6e34b36ea1e9b4b01da74c196a3b2ade7f5898b46f0043145e7361e6b9b",
-    "participant/01-synthetic-context-record.md": "bb06ee72489bd5c4a41b53f70e2517d07bfd4be196d7af2af2d3068650607db6",
-    "participant/02-scenario-and-task.md": "a265b9fcf7bb13bbd59ebff49f6fbb16fb74c398b4cd8a1a05e0d5e5f909e124",
-    "participant/03-practitioner-workbook.md": "4cb82124adce87b73458c8e27cabf3907e0641f7a7ca8586c99672854eb46fa1",
-    "participant/04-decision-owner-workbook.md": "53b2b6079ad56cdcb3d91f51f15e35752487980d7f6dd1c37504cc79cae7cf5c",
-    "participant/05-one-screen-handoff.md": "bfb4fb4ddd7a385238294453a1d389e0424366e008d2ffe97539306fb673f550",
-    "participant/06-section-6-debrief.md": "3c373aeb4adcea9a619197d01555251d0adce288d2de64f284b9331fba92cc83"
+    "README.md": "cdd8f4c501266b327ae17beb0cfb873a84e0515eb11bc16efb5fd9cbdb32c609",
+    "TEMPORAL-FREEZE-PROTOCOL-VALIDATION.md": "06873dada7f7d7ac2dbd7c724f22c71066c5c1bb97170f066ca24b2a574a9e95",
+    "facilitator-only/01-facilitator-guide.md": "040860a6858a5a1da53f1a129ba406c571f1109c2ac8d7b330ef95cdc1d1e647",
+    "facilitator-only/02-observation-and-scoring-rubric.md": "547680a64a66544e77aab1e9c95d28ec499282b1813aa5f0c7dbe0cc4187e75d",
+    "facilitator-only/03-results-and-deviation-log.md": "b69186f1d6a3f16a20e9832b2024abc2df73c3a1b0962277fbcc3b903bc0949d",
+    "facilitator-only/04-freeze-and-correction-record-templates.md": "5732cca7acf155aaa5607a352081a7e7083f39400316a29b87ecff402b9b42f6",
+    "facilitator-only/05-execution-and-access-log.md": "0dc815290860b79a27041cb464d3de2c89bb62c9787bf373c543cec19b2ad4e4",
+    "facilitator-only/06-handoff-layout-proof-record.md": "567d2276aad9dbd201fedf6861125eba739f9a4dbb788f5837f6377cdeba55aa",
+    "facilitator-only/07-external-closeout-record.md": "dd93a64664f2adc33d04ede68e331341f6c10afa3691cad6f726b3209c679a61",
+    "participant/00-packet-route.md": "f74bbae3d4176a3ba20d2f7ed1a283952d617c4c66c56017aac2b506f2f271b6",
+    "participant/01-consent-and-privacy.md": "a299dd63c1607645e995b976a0f6fb1b6fcc97a854e44bed84d03dfa2d521310",
+    "participant/01-synthetic-context-record.md": "e28d3ed364dd4aa9fd745f744b050589fc934ade3ea7d0df636fe7a5fbd61f4c",
+    "participant/02-scenario-and-task.md": "a97cf7b00ee82ae05b2ddec44b314dd79aac8d01530d122904aea8ac95cbc806",
+    "participant/03-practitioner-workbook.md": "69ea4c2c8c5e97c6e158e38a82407004f044a115a9b8c1ddb435c38bec200468",
+    "participant/04-decision-owner-workbook.md": "d0cee153b5b2df36411fd6e3133dc6b83aa411e7fd9fceb0aae82215766679e4",
+    "participant/05-one-screen-handoff.md": "4df608c94480cd0e7bec5f6b62a2ceb48d8139e3d6006c09d366c3351b19bd28",
+    "participant/06-section-6-debrief.md": "e615a754088433ac3036ec3fc3c653429e335e813839c4cf6fd8b346ff1460a0"
   }
 }

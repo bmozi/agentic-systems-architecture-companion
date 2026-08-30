@@ -18,7 +18,7 @@ COMMIT_PATTERN = re.compile(r"^[0-9a-f]{7,40}$")
 CHECKSUM_PATTERN = re.compile(r"^([0-9a-f]{64})  (.+)$")
 FREEZE_ORDER = ["complete", "manifest", "verify", "record"]
 PRIOR_TRIPLE = ["governed_outputs", "governing_manifest", "detached_record"]
-PACKET_VERSION = "1.2.4"
+PACKET_VERSION = "1.2.5"
 REQUIRED_RECORD_FIELDS = [
     "attempt_id",
     "phase_id",
@@ -51,8 +51,8 @@ ORDERED_LOG_EVENTS = [
     "PHASE_COMPLETED",
 ]
 ALL_LOG_EVENTS = [
-    "RUN_STARTED",
     "ENTRY_BRANCH_SELECTED",
+    "RUN_STARTED",
     "ORCHESTRATION_MANIFEST_VERIFIED",
     "STAGE_A_CONTEXT_MANIFEST_CREATED",
     "STAGE_A_CONTEXT_MANIFEST_VERIFIED",
@@ -237,8 +237,8 @@ EXECUTION_LOG_PROTOCOL = {
     "detached_record_checkpoint_event": "GOVERNING_MANIFEST_VERIFIED",
     "final_log_bound_by_closeout_manifest": True,
     "required_route_boundaries": [
-        "RUN_STARTED",
         "ENTRY_BRANCH_SELECTED",
+        "RUN_STARTED",
         "STAGE_A_CONTEXT_MANIFEST_VERIFIED",
         "STAGE_A_STARTED",
         "STAGE_A_FEEDBACK_COMPLETED",
@@ -329,8 +329,8 @@ ENTRY_BRANCH_PROTOCOL = {
     },
 }
 FULL_ROUTE_BOUNDARY_EVENTS = [
-    "RUN_STARTED",
     "ENTRY_BRANCH_SELECTED",
+    "RUN_STARTED",
     "STAGE_A_CONTEXT_MANIFEST_VERIFIED",
     "STAGE_A_STARTED",
     "STAGE_A_FEEDBACK_COMPLETED",
@@ -479,7 +479,7 @@ def sha256(path: Path) -> str:
 
 
 def validate_temporal_freeze_protocol(errors: list[str]) -> None:
-    """Validate the canonical v1.2.4 scored-freeze and full-route graph."""
+    """Validate the canonical v1.2.5 scored-freeze and full-route graph."""
     packet = ROOT / "testing" / "agentic-reader-value-v1"
     protocol_path = packet / "TEMPORAL-FREEZE-PROTOCOL.json"
     try:
@@ -721,8 +721,12 @@ def validate_temporal_freeze_protocol(errors: list[str]) -> None:
             errors.append("temporal protocol: verification log events must require observations")
 
     required_snippets = {
+        "README.md": [
+            "record `ENTRY_BRANCH_SELECTED` before `RUN_STARTED`",
+        ],
         "participant/00-packet-route.md": [
             "Choose exactly one entry branch",
+            "record `ENTRY_BRANCH_SELECTED` before `RUN_STARTED`",
             "RUN_STARTED",
             "ENTRY_BRANCH_SELECTED",
             "STAGE_A_STARTED",
@@ -752,11 +756,13 @@ def validate_temporal_freeze_protocol(errors: list[str]) -> None:
             "Present authorization and current authority evidence, or `NOT AUTHORIZED`",
             "current ID/version and the initial ID/version it supersedes",
             "FICTIONAL REPORTED EFFECTS EXIST;",
+            "Stage A end and `STAGE_A_ENDED` are later observed facts",
         ],
         "participant/04-decision-owner-workbook.md": [
             "Present authorization evidenced by the handoff",
             "Do not edit the frozen Section 1",
             "Presently authorized scope and current authority evidence, or `NOT AUTHORIZED`",
+            "Scoring end, debrief, Stage B end, and their checkpoints are later observed facts",
         ],
         "participant/05-one-screen-handoff.md": [
             "US Letter portrait",
@@ -773,6 +779,7 @@ def validate_temporal_freeze_protocol(errors: list[str]) -> None:
             "must not rewrite or upgrade frozen scored bytes",
         ],
         "facilitator-only/01-facilitator-guide.md": [
+            "record `ENTRY_BRANCH_SELECTED` before `RUN_STARTED`",
             "STAGE-A-CONTEXT-SHA256SUMS",
             "STAGE-B-CONTEXT-SHA256SUMS",
             "AG-RUN-RESULTS-<ATTEMPT-ID>-v1.md",
@@ -794,6 +801,8 @@ def validate_temporal_freeze_protocol(errors: list[str]) -> None:
             "Execution-log checkpoint entry SHA-256",
         ],
         "facilitator-only/05-execution-and-access-log.md": [
+            "1. `ENTRY_BRANCH_SELECTED`",
+            "2. `RUN_STARTED`",
             "RUN_RESULTS_COMPLETED",
             "before `LOG_CLOSED`",
             "external closeout",
@@ -851,6 +860,26 @@ def validate_temporal_freeze_protocol(errors: list[str]) -> None:
                     "temporal protocol: synthetic context claims human consent or human results"
                 )
                 break
+
+    future_stage_end_fields = (
+        (
+            packet / "participant" / "03-practitioner-workbook.md",
+            re.compile(
+                r"(?im)^\s*-\s*(?:(?:exact\s+)?stage\s+a\s+end\b|`?stage_a_ended`?\b)[^\n]*:\s*$"
+            ),
+            "temporal protocol: governed Stage A workbook contains a future stage-end field",
+        ),
+        (
+            packet / "participant" / "04-decision-owner-workbook.md",
+            re.compile(
+                r"(?im)^\s*-\s*(?:(?:exact\s+)?stage\s+b\s+end\b|`?stage_b_ended`?\b|exact\s+scoring-end\b|exact\s+debrief-input\b|exact\s+section\s+6/debrief\b)[^\n]*:\s*$"
+            ),
+            "temporal protocol: scored Stage B workbook contains a future post-scoring or stage-end field",
+        ),
+    )
+    for workbook, pattern, message in future_stage_end_fields:
+        if workbook.is_file() and pattern.search(workbook.read_text(encoding="utf-8")):
+            errors.append(message)
 
     results_text = results_path.read_text(encoding="utf-8") if results_path.is_file() else ""
     if "Final closed-log SHA-256: `PREDICTED`" in results_text:

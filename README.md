@@ -59,15 +59,17 @@ useful work without claiming unmeasured benefits, then exercise the design with
 the [Failure Lab](FAILURE-LAB.md) and
 [Pilot Route](PILOT-AND-USABILITY.md).
 
-The current checksum-locked reader-value packet is version 1.2.4. Its temporal
+The current checksum-locked reader-value packet is version 1.2.5. Its temporal
 sealing protocol completes artifacts before hashing, verifies the governing
 manifest, and only then writes a detached verification record with the
 observed command/output/exit/time and a later record-completion time. A
 facilitator-only hash-linked event log records every ordered gate, file open,
 completion, manifest, verification, and record; undeclared orchestration is
-forbidden. Version 1.2.4 adds mutually exclusive human-consent and synthetic-
-context entry branches, explicit Stage A/Stage B/debrief/results/closeout
-boundaries, and a proof-gated one-page handoff layout contract. It remains
+forbidden. Version 1.2.5 preserves version 1.2.4's mutually exclusive human-
+consent and synthetic-context entry branches, explicit Stage A/Stage B/
+debrief/results/closeout boundaries, and proof-gated one-page handoff layout
+contract while keeping future stage-end facts out of governed/scored
+workbooks. It remains
 **PREPARED/UNRUN** for humans; real-world execution remains **UNRUN**.
 
 ## Development boundary

@@ -115,6 +115,23 @@
   usability, safety, effectiveness, reader value, runtime enforcement, or
   business result
 
+## 2026-08-30 future-boundary field repair v1.2.5
+
+- **Authority:** Independent cross-packet temporal-consistency review
+- **Preserved:** all version 1.2.4 entry, stage/debrief/results/closeout,
+  layout-proof, six-freeze, execution-log, and evidence-boundary controls
+- **Repair:** removes future `STAGE_A_ENDED` facts from the governed Stage A
+  workbook and future post-scoring/`STAGE_B_ENDED` facts from the scored Stage
+  B workbook; those observed facts belong only in the facilitator execution/
+  access log and immutable run-specific results after they occur
+- **Enforcement:** two new checksum-refreshed mutations permanently reject a
+  future Stage A end field in the governed workbook or a future Stage B end
+  field in the scored workbook
+- **Execution status:** version 1.2.5 remains PREPARED and UNRUN; no human
+  recruitment, consent, session, observation, score, retest, or result exists
+- **Real-world status:** UNRUN; no runtime, production, customer, safety, or
+  business result exists
+
 Future changes must record the source-book commit or independent authority used,
 whether an example is genuine, anonymized, constructed, scenario, or observed,
 and which validation or usability state actually changed.

@@ -14,10 +14,11 @@ Versions 1.0.0 through 1.2.3 received synthetic AI preflight, regression, or
 independent audit runs used only to find defects in routing, transfer, timing,
 incident authority,
 order correction, numeric prompts, freeze evidence, and artifact provenance.
-They were not human or practitioner sessions. Version 1.2.4 contains the latest
-mutually exclusive entry-branch, full-route boundary, results/closeout, and
-one-page proof-contract repairs in addition to the non-self-referential
-temporal sealing and exact execution log. It remains
+They were not human or practitioner sessions. Version 1.2.5 preserves the
+version 1.2.4 mutually exclusive entry-branch, full-route boundary, results/
+closeout, and one-page proof-contract repairs, and removes future stage-end
+facts from governed/scored workbooks. It retains non-self-referential temporal
+sealing and the exact execution log. It remains
 **PREPARED/UNRUN**.
 Real-world execution remains **UNRUN**. No version establishes usability,
 safety, effectiveness, human comprehension, or reader/customer value.

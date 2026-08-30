@@ -1,6 +1,6 @@
 # One-Page Handoff Layout Proof Record Template
 
-**Packet:** AG-RV-PILOT-001 version 1.2.4
+**Packet:** AG-RV-PILOT-001 version 1.2.5
 **Status:** Facilitator-only blank proof; prepared and unrun
 **Exact run filename:** `AG-A-HANDOFF-LAYOUT-PROOF-<ATTEMPT-ID>-v1.md`
 

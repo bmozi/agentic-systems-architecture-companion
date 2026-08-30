@@ -1,6 +1,6 @@
 # Stage B Section 6 Debrief Template
 
-**Packet:** AG-RV-PILOT-001 version 1.2.4
+**Packet:** AG-RV-PILOT-001 version 1.2.5
 **Status:** Blank post-scoring input; not a scored artifact or completed result
 **Output identity:** `STAGE-B-SECTION-6-DEBRIEF` / `v1`
 **Exact output filename:** `STAGE-B-SECTION-6-DEBRIEF-v1.md`

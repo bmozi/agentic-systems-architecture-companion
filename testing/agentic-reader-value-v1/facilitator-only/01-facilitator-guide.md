@@ -1,6 +1,6 @@
 # Facilitator Guide
 
-**Packet:** AG-RV-PILOT-001 version 1.2.4
+**Packet:** AG-RV-PILOT-001 version 1.2.5
 **Status:** Facilitator-only; prepared and unrun
 
 ## Purpose
@@ -40,9 +40,10 @@ problem, and intervention with exact time and level.
 
 ## Sealed delivery and byte identity
 
-First create `AG-EXECUTION-ACCESS-LOG-<ATTEMPT-ID>-v1.jsonl` and record
-`RUN_STARTED`. Choose exactly one attempt entry branch, record
-`ENTRY_BRANCH_SELECTED`, and then build the delivery directories.
+Choose exactly one attempt entry branch before the run begins. Then create
+`AG-EXECUTION-ACCESS-LOG-<ATTEMPT-ID>-v1.jsonl` and record
+`ENTRY_BRANCH_SELECTED` before `RUN_STARTED`. Only then build the delivery
+directories.
 For the human branch, complete a separate run-specific human consent record
 for each participant. For the synthetic branch, complete
 `AG-SYNTHETIC-CONTEXT-<ATTEMPT-ID>-v1.md` with artifact identity

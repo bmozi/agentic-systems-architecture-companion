@@ -1,6 +1,6 @@
 # Stage A Practitioner Workbook
 
-**Packet:** AG-RV-PILOT-001 version 1.2.4
+**Packet:** AG-RV-PILOT-001 version 1.2.5
 **Status:** Blank participant record
 
 - Participant code:
@@ -10,9 +10,12 @@
 - Broad role and experience band, optional:
 - Exact Stage A start before first scored read of the packet route, with timezone:
 - `STAGE_A_STARTED` log checkpoint sequence/hash:
-- Exact Stage A end, with timezone:
-- `STAGE_A_ENDED` log checkpoint sequence/hash:
 - Frozen supplied-file manifest and route record:
+
+Stage A end and `STAGE_A_ENDED` are later observed facts. Record them only in
+the facilitator execution/access log and immutable run-specific results after
+material feedback completes. Do not add a future end field or checkpoint to
+this governed workbook.
 
 ## 1. Recognition before terminology
 

@@ -22,7 +22,7 @@
   ],
   "properties": {
     "packet_id": { "const": "AG-RV-PILOT-001" },
-    "packet_version": { "const": "1.2.4" },
+    "packet_version": { "const": "1.2.5" },
     "attempt_id": { "type": "string", "minLength": 1 },
     "sequence": { "type": "integer", "minimum": 1 },
     "phase": {
@@ -45,8 +45,8 @@
     },
     "event_type": {
       "enum": [
-        "RUN_STARTED",
         "ENTRY_BRANCH_SELECTED",
+        "RUN_STARTED",
         "ORCHESTRATION_MANIFEST_VERIFIED",
         "STAGE_A_CONTEXT_MANIFEST_CREATED",
         "STAGE_A_CONTEXT_MANIFEST_VERIFIED",

@@ -1,6 +1,6 @@
 # Temporal Freeze Protocol Static Validation
 
-**Packet:** AG-RV-PILOT-001 version 1.2.4
+**Packet:** AG-RV-PILOT-001 version 1.2.5
 **Validation type:** Static source review; not a human run
 **Validation date:** 2026-08-30
 **Result:** PASS for the reviewed prepared source protocol; executable
@@ -28,7 +28,8 @@ completed detached record, and new inputs.
 
 - Exactly one run-specific entry branch is required: the human consent record
   or the synthetic context record, never both and never neither. The synthetic
-  branch cannot claim human consent or human results.
+  branch cannot claim human consent or human results. The selected branch is
+  recorded as `ENTRY_BRANCH_SELECTED` before `RUN_STARTED`.
 - Every detached record names one attempt and phase, the facilitator and
   actor codes, the exact observed verification evidence, and the execution-
   log checkpoint through `GOVERNING_MANIFEST_VERIFIED`.
@@ -65,6 +66,10 @@ completed detached record, and new inputs.
 - Stage B workbook fields reference each exported section's governing manifest
   and detached verification record rather than embedding a self-hash or future
   freeze time.
+- The governed Stage A workbook contains no future Stage A end event or
+  checkpoint field. The scored Stage B workbook contains no future scoring,
+  debrief, or Stage B end event/checkpoint field. Those facts are recorded in
+  the facilitator log and immutable run results only after they occur.
 - A correction retains the prior chain and creates an immutable replacement
   artifact set, manifest, observed verification event, and detached record.
 - Revised outputs cannot present the initial ID/version pair as their current
@@ -86,7 +91,8 @@ requires one positive control plus permanent rejection of structural and
 semantic mutations. These include branch omission/mixing, synthetic human-
 result claims, missing stage boundaries, missing scoring end or debrief,
 missing immutable results, premature log close, a predicted future log hash,
-missing external closeout, and a favorable one-page claim without proof.
+missing external closeout, a favorable one-page claim without proof, and
+future Stage A or Stage B end fields in governed/scored workbooks.
 
 This PASS means only that the reviewed prepared source and executable mutation
 checks agree on the stated temporal invariants. It does not establish that a

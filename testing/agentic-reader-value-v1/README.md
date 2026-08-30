@@ -1,14 +1,17 @@
 # Agentic Systems Reader-Value Pilot Packet
 
 **Packet ID:** AG-RV-PILOT-001
-**Version:** 1.2.4
+**Version:** 1.2.5
 **Status:** Prepared and unrun; no participant recruited or consented
 **Scenario:** Cedar Lane Supply, entirely fictional
 
 ## Version and evidence note
 
-Version 1.2.4 repairs full-route closure defects found by the independent
-synthetic replay of version 1.2.3. Each attempt now enters through exactly one
+Version 1.2.5 preserves the full-route closure repair introduced in version
+1.2.4 and removes future end-event facts from governed/scored workbooks. Stage
+A end and Stage B scoring/debrief/end facts are recorded only in the
+facilitator execution/access log and immutable run-specific results after they
+occur. Each attempt enters through exactly one
 run-specific branch: a human consent record or the exact synthetic context
 record `AG-SYNTHETIC-CONTEXT-<ATTEMPT-ID>-v1.md`. The branches may not be
 omitted, mixed, or used to fictionalize consent. Stage A and Stage B have
@@ -18,7 +21,7 @@ later external closeout are separately ordered and recorded. The six scored
 freeze chains remain intact, but they no longer substitute for full-route
 closure.
 
-Version 1.2.4 also declares a local handoff-layout proof: one US Letter page,
+Version 1.2.4 also declared a local handoff-layout proof: one US Letter page,
 at least 0.5-inch margins, at least 9-point reader-facing type, no more than
 450 reader-facing words excluding provenance, and no clipping or overlap. A
 favorable `LAYOUT PASSED` claim requires a completed run-specific proof. That
@@ -225,10 +228,10 @@ Before recruitment:
 6. keep scheduling identity separate from participant codes; and
 7. assign a facilitator and evaluator with disclosed relationships.
 
-Before any run, create the facilitator-side execution/access log and record
-`RUN_STARTED`. Select exactly one human or synthetic entry branch, record
-`ENTRY_BRANCH_SELECTED`, create its exact run-specific record, and bind that
-record into both stage context manifests. The execution/access log is
+Before any run, select exactly one human or synthetic entry branch. Create the
+facilitator-side execution/access log and record `ENTRY_BRANCH_SELECTED`
+before `RUN_STARTED`; then create the exact run-specific branch record and
+bind it into both stage context manifests. The execution/access log is
 not supplied to participants and is not a member of a scored phase-input
 manifest. It records the exact order of every admitted input, release, open,
 completion, manifest, verification, and detached-record event. Each detached
