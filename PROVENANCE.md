@@ -45,7 +45,7 @@
   register, and separated numeric evidence classes
 - **Synthetic boundary:** the version 1.0.0 AI route preflight was synthetic
   defect-finding only, not human or practitioner validation
-- **Current execution status:** version 1.1.0 is PREPARED and UNRUN; no human
+- **Execution status at that revision:** version 1.1.0 was PREPARED and UNRUN; no human
   recruitment, consent, session, observation, score, retest, or result exists
 - **Claim boundary:** no usability, safety, effectiveness, reader value,
   customer value, runtime enforcement, or business-result claim is supported
@@ -62,6 +62,25 @@
 - **Execution status:** every practitioner session and scenario test remains
   PLANNED/UNRUN; zero usability, runtime, safety, legal, production, or
   business results exist
+
+## 2026-08-29 Stage A-to-B evidence-integrity repair
+
+- **Authority:** Author-directed repair of defects retained in the synthetic
+  version 1.2.0 regression evaluation
+- **Prior candidate:** `AG-RV-PILOT-001` version 1.2.0
+- **Repair:** version 1.2.1 requires every handoff-linked detail to reach Stage
+  B under its exact immutable local filename with its governing manifest;
+  freezes revised Stage A detail through a detached exact freeze record before
+  the handoff opens; separates the planned live-update revision from any later
+  correction of frozen bytes; and forbids self-referential manifests
+- **Record structure:** post-freeze correction evidence preserves exact old and
+  new filenames, artifact IDs/versions, hashes, reason, timestamp/timezone,
+  replacement freeze record, and replacement manifest
+- **Execution status:** version 1.2.1 is PREPARED and UNRUN; no human
+  recruitment, consent, session, observation, score, retest, or result exists
+- **Synthetic boundary:** earlier AI runs found defects but establish no
+  usability, safety, effectiveness, reader value, runtime enforcement, or
+  business result
 
 Future changes must record the source-book commit or independent authority used,
 whether an example is genuine, anonymized, constructed, scenario, or observed,

@@ -1,6 +1,6 @@
 # Facilitator Guide
 
-**Packet:** AG-RV-PILOT-001 version 1.2.0
+**Packet:** AG-RV-PILOT-001 version 1.2.1
 **Status:** Facilitator-only; prepared and unrun
 
 ## Purpose
@@ -49,10 +49,43 @@ assets must be exact immutable copies named `START-HERE.md`,
 manifest covering every supplied file. Do not substitute a repository path,
 live link, summary, renamed file, or newer byte sequence during a run.
 
-After any scored freeze, preserve the prior frozen artifact. A correction must
-record the exact old text, exact new text, reason, new timestamp, and new hash.
-If supplied source bytes change, stop and record the deviation; do not silently
-continue the same run.
+The manifest is detached and must not list or hash itself. A later-stage
+delivery manifest may hash the earlier manifest as one supplied file.
+
+The planned live update creates the first revised Stage A artifact set and is
+not a post-freeze correction. After any scored freeze, preserve every prior
+frozen artifact. A later correction must use a new immutable filename and
+version and record exact old/new text, filenames, IDs/versions, hashes, reason,
+correction timestamp/timezone, replacement freeze record, and replacement
+manifest. If supplied source bytes change, stop and record the deviation; do
+not silently continue the same run.
+
+## Required detached revised-freeze record
+
+After Stage A completes all planned live-update revisions, but before the
+handoff is opened, use the run-record schema in
+[`04-freeze-and-correction-record-templates.md`](04-freeze-and-correction-record-templates.md):
+
+1. confirm that every revised artifact has an immutable literal local filename,
+   artifact ID, and version;
+2. reject any revised artifact that still says `DRAFT`, `PENDING FREEZE`, or
+   otherwise claims its freeze is pending; if it contains a status/state
+   field, reject a blank field and require `REVISED COMPLETE` before hashing;
+3. calculate the SHA-256 hash of each exact revised artifact;
+4. create `STAGE-A-REVISED-FREEZE-RECORD.md` containing one row per governed
+   artifact with its exact filename, ID, version, and hash, plus one exact
+   freeze timestamp/timezone and the literal governing manifest name
+   `STAGE-A-REVISED-FREEZE-SHA256SUMS`;
+5. hash the completed freeze record and create
+   `STAGE-A-REVISED-FREEZE-SHA256SUMS` listing the freeze record and every
+   governed revised artifact, but not the manifest itself; and
+6. verify every listed hash from the sealed directory and record verification
+   time/timezone in the facilitator log.
+
+Only then may Stage A open and complete `05-one-screen-handoff.md`. Its detail
+links must enumerate every governed detail under the exact literal filename in
+the freeze record. A link to a directory, repository, alias, summary, or
+artifact ID without the literal filename is not sufficient.
 
 ## Stage A sequence
 
@@ -82,10 +115,12 @@ continue the same run.
 
 6. Ask only: “What can each party safely say or do now, and what changes in
    your artifacts?”
-7. Freeze revised detailed artifacts, including the four-order/correction
-   register, separately. Then have Stage A complete and freeze the one-screen
-   handoff. Record initial, revised, and one-screen timestamps and manifests;
-   do not let the handoff erase earlier evidence. The handoff must distinguish
+7. Finish revised detailed artifacts, including the four-order register, and
+   apply the required detached revised-freeze procedure above. Do not open the
+   handoff until the record and manifest verify. Then have Stage A complete and
+   freeze the one-screen handoff. Record initial, revised, and one-screen
+   timestamps and manifests; do not let the handoff erase earlier evidence.
+   The handoff must distinguish
    a recommended stop or containment from evidence that containment was
    actually executed. When execution is not evidenced, the actual status must
    be `UNKNOWN`.
@@ -99,8 +134,13 @@ continue the same run.
    packet read.
 3. Supply the frozen one-screen handoff first. Complete and checksum-freeze
    Section 1 before supplying the scenario or detailed artifacts.
-4. Supply the scenario and detailed Stage A artifacts. Complete and checksum-
-   freeze Section 2 before supplying either executive file.
+4. Supply the scenario; every handoff-linked detail under the exact literal
+   local filename; `STAGE-A-REVISED-FREEZE-RECORD.md`; and
+   `STAGE-A-REVISED-FREEZE-SHA256SUMS`. Supply the governing manifest as a file,
+   not merely its name or a facilitator assertion. Verify exact filenames and
+   hashes. Do not rename, substitute, regenerate, summarize, or omit a linked
+   detail. Any mismatch is a recorded deviation and stop. Complete and
+   checksum-freeze Section 2 before supplying either executive file.
 5. Supply `EXECUTIVE-DECISION-BRIEF.md` and
    `VALUE-AND-EVIDENCE-LEDGER.md`, in that order. Complete and checksum-freeze
    Sections 3–5.

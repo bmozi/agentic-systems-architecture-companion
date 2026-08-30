@@ -1,6 +1,6 @@
 # Stage B Decision-Owner Workbook
 
-**Packet:** AG-RV-PILOT-001 version 1.2.0
+**Packet:** AG-RV-PILOT-001 version 1.2.1
 **Status:** Blank independent read-back record
 
 - Reviewer code:
@@ -9,15 +9,18 @@
 - Exact Stage B start before first scored read of the packet route, with timezone:
 - Exact Stage B end, with timezone:
 - Exact supplied-file route and manifest:
+- Exact `STAGE-A-REVISED-FREEZE-RECORD.md` received and verified:
+- Exact `STAGE-A-REVISED-FREEZE-SHA256SUMS` received and verified:
+- Every handoff-linked filename received unchanged: yes / no / deviation
 - Prior involvement with Stage A: none required for first calibration
 
 Do not ask the Stage A practitioner to explain or repair the artifact until
 Sections 1–5 are complete.
 
-Each freeze must record timestamp, timezone, artifact version, and SHA-256
-hash. Never overwrite a frozen section. Record any later correction in the
-correction register with the exact old text, exact new text, reason, new
-timestamp, and new hash.
+Each freeze must record timestamp, timezone, literal local filename, artifact
+ID/version, and SHA-256 hash. Never overwrite a frozen section. Record any
+later correction in the correction register with exact old/new text,
+filenames, IDs/versions, hashes, reason, and correction timestamp/timezone.
 
 ## 1. Handoff-only read-back and scanability freeze
 
@@ -46,6 +49,12 @@ invented ownership, authority, dates, budgets, or evidence.
 
 Complete and checksum-freeze this section before opening
 `EXECUTIVE-DECISION-BRIEF.md` or `VALUE-AND-EVIDENCE-LEDGER.md`.
+
+Before reading detail, verify that every detailed artifact named in the
+handoff arrived under that exact literal local filename and matches the
+detached freeze record and governing manifest. Do not accept a renamed,
+substituted, regenerated, summarized, or omitted file. Record a mismatch as a
+deviation and stop.
 
 - Who receives value and what work is delegated?
 - What may the agent perceive, decide, and do?
@@ -104,6 +113,6 @@ scoring has ended.
 
 Leave blank when no frozen section changed. Preserve the prior frozen artifact.
 
-| Section | Exact old text | Exact new text | Reason | New timestamp and timezone | New artifact version | New SHA-256 hash |
-| --- | --- | --- | --- | --- | --- | --- |
-| | | | | | | |
+| Section | Exact old text | Exact new text | Reason | Correction timestamp/timezone | Exact old filename, ID/version, SHA-256 | Exact new filename, ID/version, SHA-256 | Replacement freeze record and manifest |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| | | | | | | | |

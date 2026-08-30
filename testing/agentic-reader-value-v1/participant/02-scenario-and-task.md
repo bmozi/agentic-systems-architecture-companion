@@ -1,6 +1,6 @@
 # Cedar Lane Scenario: Replenish Safety Supplies Without Surrendering Control
 
-**Packet:** AG-RV-PILOT-001 version 1.2.0
+**Packet:** AG-RV-PILOT-001 version 1.2.1
 **Status:** Fictional, prepared, and unrun
 
 Cedar Lane Supply keeps protective gloves and eye protection in stock for
@@ -90,6 +90,9 @@ Without discussing the intended answer with a facilitator:
 
 The facilitator will provide one update after the initial artifact is frozen.
 Revise only after hearing it. Record the original and revised answer.
+This planned live-update revision creates the first revised artifact set. It is
+not a correction of the later revised freeze. A change after that freeze must
+preserve both the exact old and new immutable artifacts and their provenance.
 
 ## Boundary
 

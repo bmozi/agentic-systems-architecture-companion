@@ -1,17 +1,22 @@
 # Agentic Systems Reader-Value Pilot Packet
 
 **Packet ID:** AG-RV-PILOT-001
-**Version:** 1.2.0
+**Version:** 1.2.1
 **Status:** Prepared and unrun; no participant recruited or consented
 **Scenario:** Cedar Lane Supply, entirely fictional
 
 ## Version and evidence note
 
-Version 1.2.0 repairs sealed-delivery portability, containment-state transfer,
-and auditable Stage B freezes after a synthetic AI regression of version 1.1.0.
-The regression was defect-finding only. It was not a human or practitioner
-session and establishes no usability, safety, effectiveness, or value result.
-Version 1.2.0 remains **PREPARED/UNRUN** for human testing.
+Version 1.2.1 repairs Stage A-to-B artifact routing, detached revised-artifact
+freeze evidence, and post-freeze correction provenance after a synthetic AI
+regression of version 1.2.0. The regression was defect-finding only. It was not
+a human or practitioner session and establishes no usability, safety,
+effectiveness, or value result. Version 1.2.1 remains **PREPARED/UNRUN** for
+human testing.
+
+Version 1.2.0 had repaired sealed-delivery portability, containment-state
+transfer, and auditable Stage B freezes after a synthetic AI regression of
+version 1.1.0.
 
 Version 1.1.0 had already repaired route clarity, transfer density, timing
 instrumentation, incident authority, order/correction tracking, and numeric-
@@ -62,11 +67,16 @@ back to a working repository:
 
 Follow the route exactly: recognition comes before companion assets; the
 initial detailed artifact is frozen before the live update; the revised
-detailed artifact and one-screen handoff are completed and frozen after the
-update. The miniature example embedded in the Agent Authority Map is authorized
-and may be read. Do not follow its links to full worked examples, or supply the
-repository Failure Lab, facilitator materials, executive brief, value ledger,
-or any omitted file during Stage A.
+detailed artifacts are sealed under immutable, literal local filenames after
+the update; and only then may the one-screen handoff be opened, completed, and
+frozen. The detached `STAGE-A-REVISED-FREEZE-RECORD.md` records the exact
+artifact IDs, versions, filenames, SHA-256 hashes, timestamp, timezone, and
+governing `STAGE-A-REVISED-FREEZE-SHA256SUMS` reference. The manifest hashes
+the record and every governed artifact, but never itself. The miniature
+example embedded in the Agent Authority Map is authorized and may be read. Do
+not follow its links to full worked examples, or supply the repository Failure
+Lab, facilitator materials, executive brief, value ledger, or any omitted file
+during Stage A.
 
 ### Stage B — independent decision owner
 
@@ -78,7 +88,10 @@ copies with the filenames shown below. Supply them in the route's phases:
 3. the frozen [One-Screen Decision Handoff](participant/05-one-screen-handoff.md)
    as the first scored content;
 4. [Decision-owner workbook](participant/04-decision-owner-workbook.md);
-5. the frozen scenario and unchanged detailed Stage A artifacts;
+5. the frozen scenario; every detailed artifact named and linked in the
+   handoff under that exact literal local filename; the detached
+   `STAGE-A-REVISED-FREEZE-RECORD.md`; and its governing
+   `STAGE-A-REVISED-FREEZE-SHA256SUMS` manifest;
 6. [Executive Decision Brief](../../EXECUTIVE-DECISION-BRIEF.md), delivered as
    `EXECUTIVE-DECISION-BRIEF.md`; and
 7. [Value and Evidence Ledger](../../VALUE-AND-EVIDENCE-LEDGER.md), delivered as
@@ -90,6 +103,10 @@ read-back. Freeze Section 1 before supplying detailed artifacts. Freeze Section
 2 before supplying the executive brief or value ledger. Supply no other files
 or omitted links.
 
+Do not rename, summarize, regenerate, substitute, or omit a handoff-linked
+detail. A route or manifest mismatch is a recorded deviation and stop, not a
+file-access problem to repair silently.
+
 For each stage, create a run-specific SHA-256 manifest that covers every exact
 file supplied, including each of the six companion assets assigned to that
 stage above. Verify the manifest before the participant starts and retain it
@@ -98,11 +115,22 @@ changes, stop, preserve the earlier evidence, record the exact change, and
 issue a new timestamp and hash; a meaning change also requires a new packet
 version.
 
+The planned revision after the facilitator's live update is part of the Stage
+A procedure: it produces the first revised freeze and is not a post-freeze
+correction. A later change to any already frozen byte is a correction. It must
+use a new immutable filename and artifact version and record the exact old and
+new filenames, versions, hashes, reason, timestamp, timezone, freeze record,
+and manifest. Never overwrite the earlier artifact or reuse its filename.
+Operational correction in the four-order register means reconciling an order,
+event, budget, receiving, or inventory consequence; it does not authorize a
+change to frozen evidence bytes.
+
 ## Facilitator only
 
 - [Facilitator guide](facilitator-only/01-facilitator-guide.md)
 - [Observation and scoring rubric](facilitator-only/02-observation-and-scoring-rubric.md)
 - [Results and deviation log](facilitator-only/03-results-and-deviation-log.md)
+- [Freeze and correction record templates](facilitator-only/04-freeze-and-correction-record-templates.md)
 
 Never supply these files before either scored stage ends.
 
@@ -125,6 +153,11 @@ cover companion assets stored outside this packet. Each run-specific manifest
 must hash every exact delivered file, including those companion assets, under
 its delivery filename. Any byte change requires a new timestamp and hash and,
 when meaning changes, a new packet version.
+
+A manifest cannot truthfully hash itself. Every run manifest is detached: it
+hashes the governed artifacts and any governing freeze record, but excludes
+its own bytes. The next-stage delivery manifest may hash the prior-stage
+manifest as a supplied file.
 
 ## Evidence boundary
 

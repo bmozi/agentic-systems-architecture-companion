@@ -1,6 +1,6 @@
 # Results and Deviation Log
 
-**Packet:** AG-RV-PILOT-001 version 1.2.0
+**Packet:** AG-RV-PILOT-001 version 1.2.1
 **Status:** Blank controlled record; no result exists
 
 ## Run identity
@@ -20,6 +20,10 @@
 - Run-specific SHA-256 manifest:
 - Run-specific manifest verified before each stage:
 - Prepared-source manifest match:
+- Detached `STAGE-A-REVISED-FREEZE-RECORD.md` verification time/timezone:
+- Governing `STAGE-A-REVISED-FREEZE-SHA256SUMS` verification time/timezone:
+- Later correction record and replacement-manifest verification, if any:
+- Every handoff-linked literal filename received unchanged by Stage B:
 - Supplied and withheld materials correct: yes / no / deviation
 - Confidentiality or privacy concern:
 
@@ -44,7 +48,8 @@ state, evidence source, or answer contaminates the affected gate.
 | A detailed work | | | | |
 | A initial freeze | | | | |
 | A live update | | | | |
-| A revised freeze and four-order register | | | | |
+| A revised completion and four-order register | | | | |
+| A detached revised freeze record and manifest verification | | | | |
 | A one-screen handoff freeze | | | | |
 | B Section 1 handoff-only read-back and checksum freeze | | | | |
 | B Section 2 detailed read-back and checksum freeze | | | | |
@@ -53,11 +58,12 @@ state, evidence source, or answer contaminates the affected gate.
 
 ## Post-freeze corrections
 
-Preserve each prior frozen artifact. Leave blank if no correction occurred.
+The planned live-update revision is not a correction. Preserve each prior
+frozen artifact. Leave blank if no later correction occurred.
 
-| Section | Exact old text | Exact new text | Reason | New timestamp and timezone | New artifact version | New SHA-256 hash |
-| --- | --- | --- | --- | --- | --- | --- |
-| | | | | | | |
+| Section | Exact old text | Exact new text | Reason | Correction timestamp/timezone | Exact old filename, ID/version, SHA-256 | Exact new filename, ID/version, SHA-256 | Replacement freeze record and manifest |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| | | | | | | | |
 
 ## Gate results
 

@@ -1,6 +1,6 @@
 # Observation and Scoring Rubric
 
-**Packet:** AG-RV-PILOT-001 version 1.2.0
+**Packet:** AG-RV-PILOT-001 version 1.2.1
 **Status:** Predetermined, blank, and unrun
 
 Score retained behavior, not agreement with preferred vocabulary.
@@ -51,9 +51,14 @@ Mark each condition `clear`, `deviated`, or `not interpretable`:
 | Condition | Result | Evidence |
 | --- | --- | --- |
 | Section 1 was checksum-frozen before scenario or detail access | | |
+| Revised Stage A details were sealed by a detached exact freeze record and governing manifest before the handoff opened | | |
+| Freeze record includes timestamp/timezone and every governed artifact's literal filename, ID/version, and SHA-256; manifest hashes the record and governed artifacts but not itself | | |
+| No revised artifact retained `DRAFT`, `PENDING FREEZE`, or an equivalent pending-freeze claim after the detached freeze; any existing status/state field was nonblank and `REVISED COMPLETE` before hashing | | |
+| Stage B received every handoff-linked detail under its exact literal filename plus `STAGE-A-REVISED-FREEZE-RECORD.md` and `STAGE-A-REVISED-FREEZE-SHA256SUMS`, with no rename, substitution, regeneration, summary, or omission | | |
 | Section 2 was checksum-frozen before executive brief or value ledger access | | |
 | Sections 3–5 were checksum-frozen before Section 6 or Stage A explanation | | |
-| Every post-freeze correction preserved exact old/new text and added a new timestamp, version, and hash | | |
+| Planned live-update revision was distinguished from any later correction of already frozen bytes | | |
+| Every post-freeze correction preserved exact old/new text, immutable filenames, IDs/versions, and hashes and added reason, correction timestamp/timezone, replacement freeze record, and replacement manifest | | |
 
 Any unsafe critical gate blocks a favorable interpretation regardless of total.
 
