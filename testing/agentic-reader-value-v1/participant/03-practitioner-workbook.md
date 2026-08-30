@@ -1,6 +1,6 @@
 # Stage A Practitioner Workbook
 
-**Packet:** AG-RV-PILOT-001 version 1.1.0
+**Packet:** AG-RV-PILOT-001 version 1.2.0
 **Status:** Blank participant record
 
 - Participant code:
@@ -125,6 +125,8 @@ full.
 
 - Handoff artifact ID/version:
 - Handoff freeze timestamp, timezone, and manifest reference:
+- Recommended stop/containment:
+- Actual containment execution status and evidence, or `UNKNOWN`:
 
 ## 9. Material feedback
 

@@ -1,6 +1,6 @@
 # Stage B Decision-Owner Workbook
 
-**Packet:** AG-RV-PILOT-001 version 1.1.0
+**Packet:** AG-RV-PILOT-001 version 1.2.0
 **Status:** Blank independent read-back record
 
 - Reviewer code:
@@ -14,6 +14,11 @@
 Do not ask the Stage A practitioner to explain or repair the artifact until
 Sections 1–5 are complete.
 
+Each freeze must record timestamp, timezone, artifact version, and SHA-256
+hash. Never overwrite a frozen section. Record any later correction in the
+correction register with the exact old text, exact new text, reason, new
+timestamp, and new hash.
+
 ## 1. Handoff-only read-back and scanability freeze
 
 Complete this section from the frozen one-screen handoff before receiving the
@@ -25,16 +30,22 @@ scenario or detailed Stage A artifacts.
 - Assigned owner, or did the handoff honestly say `UNASSIGNED`?
 - Assigning/acting authority, or did the handoff honestly say `UNKNOWN`?
 - Known evidence, material unknowns, and largest unacceptable outcome:
+- Recommended stop or containment action:
+- Actual containment execution status and evidence, or did the handoff say
+  `UNKNOWN` because execution was not evidenced?
 - Immediate next action:
 - Reconsideration date or evidence-based trigger:
 - Could you find those fields on one screen without verbal repair? yes / partly / no
-- Initial read-back freeze timestamp, timezone, and artifact reference:
+- Section 1 freeze timestamp, timezone, artifact version, and SHA-256 hash:
 
 Do not ask the Stage A practitioner to explain or repair the handoff. Do not
 penalize an honest `UNASSIGNED`, `UNKNOWN`, or evidence-based trigger. Do flag
 invented ownership, authority, dates, budgets, or evidence.
 
 ## 2. Detailed read-back
+
+Complete and checksum-freeze this section before opening
+`EXECUTIVE-DECISION-BRIEF.md` or `VALUE-AND-EVIDENCE-LEDGER.md`.
 
 - Who receives value and what work is delegated?
 - What may the agent perceive, decide, and do?
@@ -48,6 +59,7 @@ invented ownership, authority, dates, budgets, or evidence.
   shipment/return, event acknowledgement, receiving, budget, inventory, and
   closure without treating unknown as complete?
 - What evidence proves what the agent and surrounding system actually did?
+- Section 2 freeze timestamp, timezone, artifact version, and SHA-256 hash:
 
 ## 3. Decision legibility
 
@@ -77,9 +89,21 @@ Choose one: `EXPLORE` / `PROCEED BOUNDED` / `INVEST` / `HOLD` / `STOP`
 - Unsupported benefit or certainty, if any:
 - Smallest change that would improve the handoff:
 - Detailed-artifact link that was missing or failed:
+- Sections 3–5 freeze timestamp, timezone, artifact version, and SHA-256 hash:
 
 ## 6. Debrief after scoring
+
+Do not begin this section until Sections 1–5 have been checksum-frozen and
+scoring has ended.
 
 - Stage A explanation that changed your interpretation:
 - Decision changed after discussion:
 - Why:
+
+## Frozen-artifact correction register
+
+Leave blank when no frozen section changed. Preserve the prior frozen artifact.
+
+| Section | Exact old text | Exact new text | Reason | New timestamp and timezone | New artifact version | New SHA-256 hash |
+| --- | --- | --- | --- | --- | --- | --- |
+| | | | | | | |

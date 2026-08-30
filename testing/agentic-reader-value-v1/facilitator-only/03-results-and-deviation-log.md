@@ -1,6 +1,6 @@
 # Results and Deviation Log
 
-**Packet:** AG-RV-PILOT-001 version 1.1.0
+**Packet:** AG-RV-PILOT-001 version 1.2.0
 **Status:** Blank controlled record; no result exists
 
 ## Run identity
@@ -18,6 +18,7 @@
 - Consent records completed before either scored stage:
 - Storage/access/retention authority:
 - Run-specific SHA-256 manifest:
+- Run-specific manifest verified before each stage:
 - Prepared-source manifest match:
 - Supplied and withheld materials correct: yes / no / deviation
 - Confidentiality or privacy concern:
@@ -45,9 +46,18 @@ state, evidence source, or answer contaminates the affected gate.
 | A live update | | | | |
 | A revised freeze and four-order register | | | | |
 | A one-screen handoff freeze | | | | |
-| B handoff-only read-back and freeze | | | | |
-| B detailed read-back | | | | |
-| B bounded decision freeze | | | | |
+| B Section 1 handoff-only read-back and checksum freeze | | | | |
+| B Section 2 detailed read-back and checksum freeze | | | | |
+| B Sections 3–5 bounded-decision checksum freeze | | | | |
+| B Section 6 debrief after scoring | | | | |
+
+## Post-freeze corrections
+
+Preserve each prior frozen artifact. Leave blank if no correction occurred.
+
+| Section | Exact old text | Exact new text | Reason | New timestamp and timezone | New artifact version | New SHA-256 hash |
+| --- | --- | --- | --- | --- | --- | --- |
+| | | | | | | |
 
 ## Gate results
 

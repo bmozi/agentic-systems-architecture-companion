@@ -1,6 +1,6 @@
 # One-Screen Decision Handoff
 
-**Packet:** AG-RV-PILOT-001 version 1.1.0
+**Packet:** AG-RV-PILOT-001 version 1.2.0
 **Status:** Blank Stage A transfer; complete only after the live update
 
 Keep this to one screen or one printed page. Link detailed artifacts instead of
@@ -19,6 +19,8 @@ copying them. `UNASSIGNED` and `UNKNOWN` are valid and preferable to invention.
 | Known evidence | |
 | Material unknowns | |
 | Largest unacceptable outcome | |
+| Recommended stop or containment | What should be stopped, held, isolated, or reconciled now |
+| Actual containment execution status | Evidence of what was actually executed; write `UNKNOWN` when execution is not evidenced |
 | Immediate next action | |
 | Reconsideration | Date **or** evidence-based trigger |
 | Detailed artifact IDs/versions and links | |
