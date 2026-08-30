@@ -52,6 +52,13 @@ def mutate_protocol(root: Path, mutation) -> None:
     write_protocol(root, protocol)
 
 
+def mutate_log_schema(root: Path, mutation) -> None:
+    path = root / PACKET_RELATIVE / "facilitator-only/05-execution-access-log-schema.json"
+    schema = json.loads(path.read_text(encoding="utf-8"))
+    mutation(schema)
+    path.write_text(json.dumps(schema, indent=2) + "\n", encoding="utf-8")
+
+
 def remove_release_binding(release_id: str):
     def mutation(protocol: dict) -> None:
         release = next(
@@ -69,6 +76,21 @@ def change_text(root: Path, relative: str, old: str, new: str) -> None:
     if content.count(old) != 1:
         raise AssertionError(f"mutation fixture not unique in {relative}: {old!r}")
     path.write_text(content.replace(old, new, 1), encoding="utf-8")
+    refresh_protected_hash(root, relative)
+
+
+def change_all_text(root: Path, relative: str, old: str, new: str) -> None:
+    path = root / PACKET_RELATIVE / relative
+    content = path.read_text(encoding="utf-8")
+    if old not in content:
+        raise AssertionError(f"mutation fixture absent in {relative}: {old!r}")
+    path.write_text(content.replace(old, new), encoding="utf-8")
+    refresh_protected_hash(root, relative)
+
+
+def append_text(root: Path, relative: str, text: str) -> None:
+    path = root / PACKET_RELATIVE / relative
+    path.write_text(path.read_text(encoding="utf-8") + text, encoding="utf-8")
     refresh_protected_hash(root, relative)
 
 
@@ -91,6 +113,25 @@ def mutations():
         requirements["new_filename"] = False
         requirements["new_artifact_id"] = False
         requirements["new_version"] = False
+
+    def incomplete_record_contract(protocol: dict) -> None:
+        protocol["detached_record_contract"]["required_fields"].remove(
+            "record_completion_timestamp"
+        )
+
+    def incomplete_log_order(protocol: dict) -> None:
+        protocol["execution_access_log"]["ordered_phase_events"].remove("FILE_OPENED")
+
+    def allow_undeclared_input(protocol: dict) -> None:
+        protocol["orchestration_input_policy"]["undeclared_inputs_forbidden"] = False
+
+    def allow_stale_revised_identity(protocol: dict) -> None:
+        protocol["content_guards"][
+            "revised_current_identity_must_differ_from_initial_identity_version_pair"
+        ] = False
+
+    def log_actor_without_code(schema: dict) -> None:
+        schema["properties"]["actor"]["required"].remove("code")
 
     return [
         (
@@ -123,6 +164,90 @@ def mutations():
             "same-path and unchanged-ID correction",
             lambda root: mutate_protocol(root, same_path_correction),
             "immutable correction requirements",
+        ),
+        (
+            "detached record omits later record completion time",
+            lambda root: mutate_protocol(root, incomplete_record_contract),
+            "detached-record contract",
+        ),
+        (
+            "execution log omits exact file-open event",
+            lambda root: mutate_protocol(root, incomplete_log_order),
+            "execution/access-log contract",
+        ),
+        (
+            "execution log actor has no required code",
+            lambda root: mutate_log_schema(root, log_actor_without_code),
+            "execution-log actor code/role",
+        ),
+        (
+            "undeclared orchestration input is allowed",
+            lambda root: mutate_protocol(root, allow_undeclared_input),
+            "orchestration-input policy",
+        ),
+        (
+            "stale revised identity is allowed",
+            lambda root: mutate_protocol(root, allow_stale_revised_identity),
+            "content guards",
+        ),
+        (
+            "revised workbook no longer requires new current identity",
+            lambda root: change_text(
+                root,
+                "participant/03-practitioner-workbook.md",
+                "new current ID/version and the initial ID/version it supersedes",
+                "current ID/version and a related initial artifact",
+            ),
+            "omits required semantic guard 'current ID/version and the initial ID/version it supersedes'",
+        ),
+        (
+            "reported fictional effects are contradicted",
+            lambda root: append_text(
+                root,
+                "participant/02-scenario-and-task.md",
+                "\nNo implementation, enforcement test, or execution occurred.\n",
+            ),
+            "stale no-execution wording contradicts reported effects",
+        ),
+        (
+            "candidate scope and present authority are conflated",
+            lambda root: change_text(
+                root,
+                "participant/05-one-screen-handoff.md",
+                "| Candidate proposal scope under evaluation | This is proposed scope, not proof of authority |",
+                "| Authorized proposal scope | The proposed scope is authorized |",
+            ),
+            "omits required semantic guard 'Candidate proposal scope under evaluation'",
+        ),
+        (
+            "largest unacceptable outcome is optional",
+            lambda root: change_text(
+                root,
+                "participant/05-one-screen-handoff.md",
+                "| Largest unacceptable outcome (required; blank invalid) | Write the outcome, or `UNKNOWN` plus the evidence owner/trigger |",
+                "| Largest risk, optional | |",
+            ),
+            "handoff must require a nonblank largest unacceptable outcome",
+        ),
+        (
+            "Stage B Phase 1 deferred fields remain unresolved",
+            lambda root: change_all_text(
+                root,
+                "participant/04-decision-owner-workbook.md",
+                "NOT RELEASED — PHASE 2 CHECK",
+                "UNKNOWN",
+            ),
+            "Stage B Phase 1 has unresolved withheld fields",
+        ),
+        (
+            "detached record drops observed stdout",
+            lambda root: change_text(
+                root,
+                "facilitator-only/04-freeze-and-correction-record-templates.md",
+                "- Exact observed verification stdout, verbatim:\n",
+                "",
+            ),
+            "omits required semantic guard 'Exact observed verification stdout, verbatim'",
         ),
         (
             "stale pending handoff state",
@@ -177,8 +302,9 @@ def main() -> int:
     print("PASS positive control")
 
     failures = 0
+    cases = mutations()
     with tempfile.TemporaryDirectory(prefix="ag-temporal-mutations-") as temporary:
-        for index, (name, mutation, expected_error) in enumerate(mutations(), start=1):
+        for index, (name, mutation, expected_error) in enumerate(cases, start=1):
             copy = Path(temporary) / f"case-{index:02d}"
             shutil.copytree(
                 ROOT,
@@ -198,7 +324,9 @@ def main() -> int:
     if failures:
         print(f"temporal mutation suite failed with {failures} error(s)", file=sys.stderr)
         return 1
-    print("temporal mutation suite passed: positive control plus 11 rejected mutations")
+    print(
+        f"temporal mutation suite passed: positive control plus {len(cases)} rejected mutations"
+    )
     return 0
 
 

@@ -1,6 +1,6 @@
 # Stage A Practitioner Workbook
 
-**Packet:** AG-RV-PILOT-001 version 1.2.2
+**Packet:** AG-RV-PILOT-001 version 1.2.3
 **Status:** Blank participant record
 
 - Participant code:
@@ -28,6 +28,8 @@ Cedar Lane can prove what occurred.
 ## 3. Delegated-action record
 
 - Beneficiary and bounded outcome:
+- Candidate proposal scope under evaluation:
+- Present authorization and current authority evidence, or `NOT AUTHORIZED`:
 - Principal, agent identity, subject, purpose, and protected object:
 - Delegated action and withheld actions:
 - Authority source, version, validity, expiry, and revocation:
@@ -117,14 +119,20 @@ Use one row per possible order. `UNKNOWN` is valid. For cancellation state, use
 | Order 4 | | | | | | | | | |
 
 - Revised artifact literal local filenames and IDs/versions:
+- Initial-to-revised identity lineage: for each revised artifact, state its
+  new current ID/version and the initial ID/version it supersedes. The current
+  revised pair must not equal the initial pair:
 - Revised artifact state: write `REVISED COMPLETE` only after every intended
   revision is present; do not write `FROZEN` here:
+- Scenario-effect statement: write `FICTIONAL REPORTED EFFECTS EXIST;
+  REAL-WORLD EXECUTION EVIDENCE DOES NOT` after the live update. Do not write
+  `no execution occurred`:
 
 The facilitator creates the detached freeze evidence after the revised bytes
 are complete. Before the handoff opens, no revised artifact may contain
 `DRAFT`, `PENDING FREEZE`, or an equivalent pending-freeze marker. If an
 artifact contains a status/state field, it must say `REVISED COMPLETE`, not
-remain blank. The detached
+remain blank. The governing manifest
 `STAGE-A-REVISED-FREEZE-SHA256SUMS` and the later
 `STAGE-A-REVISED-FREEZE-RECORD.md`—not a self-referential field inside this
 artifact—govern and document the freeze. The manifest hashes only completed
@@ -154,6 +162,9 @@ assigning authority, date, budget, or evidence to make the handoff look full.
 - Handoff-input manifest filename: `STAGE-A-HANDOFF-INPUT-SHA256SUMS`
 - Recommended stop/containment:
 - Actual containment execution status and evidence, or `UNKNOWN`:
+- Largest unacceptable outcome (required; blank is invalid):
+- Candidate scope proposed for evaluation:
+- Presently authorized scope and current authority evidence, or `NOT AUTHORIZED`:
 
 If a frozen revised byte later changes, do not call it the planned live-update
 revision and do not overwrite it. Stop and preserve both versions. Record the

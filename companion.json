@@ -22,6 +22,8 @@
     "testing/agentic-reader-value-v1/TEMPORAL-FREEZE-PROTOCOL.json",
     "testing/agentic-reader-value-v1/participant/00-packet-route.md",
     "testing/agentic-reader-value-v1/participant/05-one-screen-handoff.md",
+    "testing/agentic-reader-value-v1/facilitator-only/05-execution-and-access-log.md",
+    "testing/agentic-reader-value-v1/facilitator-only/05-execution-access-log-schema.json",
     "testing/agentic-reader-value-v1/SHA256SUMS",
     "scripts/test_temporal_freeze_protocol.py"
   ],

@@ -1,6 +1,6 @@
 # One-Screen Decision Handoff
 
-**Packet:** AG-RV-PILOT-001 version 1.2.2
+**Packet:** AG-RV-PILOT-001 version 1.2.3
 **Status:** Blank Stage A transfer; complete only after the live update
 
 Keep this to one screen or one printed page. Do not open or complete it until
@@ -18,6 +18,8 @@ preferable to invention.
 | Handoff state before hashing | `HANDOFF COMPLETE` / invalid |
 | Evidence class and current state | |
 | Beneficiary and useful delegated outcome | |
+| Candidate proposal scope under evaluation | This is proposed scope, not proof of authority |
+| Presently authorized scope and current authority evidence | Exact current grant and scope, or `NOT AUTHORIZED` |
 | Recommended decision | `EXPLORE` / `PROCEED BOUNDED` / `INVEST` / `HOLD` / `STOP` |
 | Allowed now | |
 | Withheld | |
@@ -25,7 +27,7 @@ preferable to invention.
 | Assigning/acting authority | Name source/trigger or write `UNKNOWN` |
 | Known evidence | |
 | Material unknowns | |
-| Largest unacceptable outcome | |
+| Largest unacceptable outcome (required; blank invalid) | Write the outcome, or `UNKNOWN` plus the evidence owner/trigger |
 | Recommended stop or containment | What should be stopped, held, isolated, or reconciled now |
 | Actual containment execution status | Evidence of what was actually executed; write `UNKNOWN` when execution is not evidenced |
 | Immediate next action | |
@@ -39,6 +41,12 @@ Evidence guard: keep an authorized limit, unproved hypothesis, reported
 exposure, and observed terminal consequence separate. Do not invent a numeric
 budget. Link the four-order/correction register when any order remains open or
 `UNKNOWN`.
+
+After the live update, do not say `no execution occurred`. Use the exact
+boundary `FICTIONAL REPORTED EFFECTS EXIST; REAL-WORLD EXECUTION EVIDENCE DOES
+NOT`, then state which reported scenario effects remain unreconciled. A
+candidate capability, technical access, or recommended decision does not make
+the capability presently authorized.
 
 - Revised Stage A manifest-verification timestamp/timezone from the detached record:
 - Revised freeze record verified: yes / no

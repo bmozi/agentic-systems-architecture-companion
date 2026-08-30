@@ -1,6 +1,6 @@
 # Exact Packet Route
 
-**Packet:** AG-RV-PILOT-001 version 1.2.2
+**Packet:** AG-RV-PILOT-001 version 1.2.3
 **Status:** Prepared and unrun; this route records no human result
 
 ## Before either stage
@@ -16,6 +16,15 @@ by the run-specific SHA-256 manifest. Do not navigate to a repository, follow
 an embedded link unless this route names its target, omit, replace, summarize,
 or add a file. Record any access problem, question, pause, or facilitator
 intervention; do not silently repair the route.
+
+The facilitator keeps a separate append-only execution/access log. It is not
+participant input. Every admitted file, release, open, completion, manifest,
+verification, and detached record is logged with one exact filename, actor,
+timestamp/timezone, and continuity hash. Receive no prompt, file, message,
+tool result, or instruction outside the current declared phase inputs. In a
+synthetic rehearsal, additional orchestration must be immutable, declared,
+manifest-verified, and logged before use. Any undeclared input is a deviation,
+stop, and new attempt.
 
 ## Stage A — exact read and work order
 
@@ -37,6 +46,10 @@ intervention; do not silently repair the route.
    verify `STAGE-A-INITIAL-SHA256SUMS`, capture the verification timestamp and
    timezone, and only then create
    `STAGE-A-INITIAL-FREEZE-VERIFICATION-RECORD.md`.
+   That record must name the attempt and phase, facilitator and participant or
+   synthetic-actor codes, exact observed verification command/stdout/stderr/
+   exit code/time/timezone, log checkpoint, governed artifacts and manifest,
+   and a record-completion timestamp/timezone later than verification.
 8. The facilitator exports the exact authorized update as
    `STAGE-A-LIVE-UPDATE-v1.md` and creates
    `STAGE-A-LIVE-UPDATE-INPUT-SHA256SUMS`, hashing the initial artifacts, their
@@ -45,7 +58,10 @@ intervention; do not silently repair the route.
    update and record it exactly; revise only after the initial freeze. Complete
    the four-order/correction register.
 9. Finish the revised workbook and every revised detailed artifact. Assign each
-   an immutable literal local filename, artifact ID, and version. Before any
+   an immutable literal local filename, artifact ID, and version. Its current
+   ID/version pair must differ from the corresponding initial pair; the
+   initial pair may appear only as a `Supersedes` or other explicit lineage
+   reference, never as the revised artifact's current identity. Before any
    handoff work, remove every `DRAFT`, `PENDING FREEZE`, or equivalent pending-
    freeze marker. If an artifact contains a status or state field, it must not
    remain blank: mark it `REVISED COMPLETE` before hashing.
@@ -54,7 +70,10 @@ intervention; do not silently repair the route.
     manifest from the sealed directory and capture the exact verification
     timestamp/timezone. Only then create
     `STAGE-A-REVISED-FREEZE-RECORD.md`. It must describe that already-observed
-    verification event and contain every governed artifact's literal local
+    verification event and contain the attempt and phase, facilitator and
+    actor codes, exact command/stdout/stderr/exit code/time/timezone, later
+    record-completion timestamp/timezone, execution-log checkpoint, and every
+    governed artifact's literal local
     filename, ID, version, completion timestamp/timezone, completion state,
     and SHA-256 hash, plus the governing manifest's exact filename and hash.
 11. Create and verify `STAGE-A-HANDOFF-INPUT-SHA256SUMS`, hashing every revised
@@ -74,6 +93,9 @@ intervention; do not silently repair the route.
     invent an owner, authority, date, number, budget, or evidence source: use
     `UNASSIGNED` or `UNKNOWN` where appropriate and an evidence-based trigger
     when no honest date exists.
+    The handoff must contain a nonblank largest unacceptable outcome. It must
+    also separate the candidate scope being evaluated from capability that is
+    presently authorized by current authority evidence.
 12. Complete material feedback and record the exact Stage A end timestamp.
 
 The live update in Step 8 intentionally creates the first revised artifact
@@ -101,6 +123,10 @@ Never overwrite or relabel frozen bytes.
    `STAGE-B-SECTION-1-SHA256SUMS`; only then create
    `STAGE-B-SECTION-1-FREEZE-VERIFICATION-RECORD.md`, without Stage A
    explanation or repair.
+   While Section 1 is frozen, every field that depends on the still-withheld
+   scenario, revised artifacts, or revised freeze evidence must say exactly
+   `NOT RELEASED — PHASE 2 CHECK`; do not leave it blank, infer it from the
+   handoff, or call it verified.
 5. Receive `02-scenario-and-task.md`; every handoff-linked detailed artifact
    under the exact literal filename in the handoff; the detached
    `STAGE-A-REVISED-FREEZE-RECORD.md`; and the governing
@@ -136,6 +162,10 @@ written. The next phase-input manifest hashes the completed output, governing
 manifest, detached record, and new inputs. Any correction must preserve the
 prior chain and create an immutable replacement set, manifest, observed
 verification event, detached record, and next-phase manifest when applicable.
+Every detached record uses the required attempt/phase/actor, observed-command,
+observed-output, exit, verification-time, later record-completion-time, and
+execution-log checkpoint fields. Each event is recorded in the facilitator
+log; that log remains outside participant input.
 
 Synthetic route preflight may identify wording or routing defects, but it is
 not human consent, practitioner validation, or evidence that the packet is

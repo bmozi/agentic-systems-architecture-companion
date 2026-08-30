@@ -1,6 +1,6 @@
 # Facilitator Guide
 
-**Packet:** AG-RV-PILOT-001 version 1.2.2
+**Packet:** AG-RV-PILOT-001 version 1.2.3
 **Status:** Facilitator-only; prepared and unrun
 
 ## Purpose
@@ -57,6 +57,22 @@ timestamp/timezone, and only then create the detached freeze-verification
 record. A later phase-input manifest hashes the prior outputs, manifest,
 detached record, and new inputs.
 
+Create `AG-EXECUTION-ACCESS-LOG-<ATTEMPT-ID>-v1.jsonl` from
+[`05-execution-and-access-log.md`](05-execution-and-access-log.md) before the
+attempt. Keep it facilitator-side. Record every phase-input gate, exact-file
+release and open, output completion, manifest creation, observed verification,
+detached-record completion, and phase completion with actor, one exact
+filename, timestamp/timezone, and previous-entry continuity hash. Every
+detached record checkpoints this log through its governing-manifest
+verification. Close and bind the completed log in the run closeout manifest.
+
+Do not admit undeclared orchestration. Human participants receive only current
+phase-manifest inputs. For a synthetic rehearsal, preserve every added system,
+developer, user, tool, or orchestration instruction as immutable bytes in
+`ORCHESTRATION-INPUT-SHA256SUMS`; verify and log that manifest before use.
+Label the result orchestration-aided. An undeclared input requires a recorded
+deviation, stop, preserved partial chain, and new attempt.
+
 The planned live update creates the first revised Stage A artifact set and is
 not a post-freeze correction. After any scored freeze, preserve every prior
 frozen artifact. A later correction must use a new immutable filename and
@@ -85,7 +101,10 @@ handoff is opened, use the run-record schema in
    `STAGE-A-REVISED-FREEZE-RECORD.md` containing one row per governed artifact
    with its exact filename, ID/version, completion time/state, and hash, plus
    the already-observed verification timestamp/timezone and the governing
-   manifest's literal filename and SHA-256; and
+   manifest's literal filename and SHA-256. Also record the attempt, phase,
+   facilitator and actor codes, exact verification command/stdout/stderr/exit
+   code/timestamp/timezone, execution-log filename/checkpoint sequence/hash,
+   and a record-completion timestamp/timezone later than verification; and
 6. create and verify `STAGE-A-HANDOFF-INPUT-SHA256SUMS`, listing the revised
    artifacts, their governing manifest, the completed detached record, and the
    blank handoff input.
@@ -113,6 +132,10 @@ artifact ID without the literal filename is not sufficient.
    `STAGE-A-LIVE-UPDATE-INPUT-SHA256SUMS`, covering the initial artifacts,
    their manifest and detached record, and that update file. Do not read the
    update until this phase-input manifest passes.
+   The initial detached record uses the same complete record contract as the
+   revised record: attempt, phase, facilitator/actor codes, exact observed
+   command/output/exit/time/timezone, log checkpoint, manifest/artifact
+   bindings, and later record-completion timestamp/timezone.
 5. Read the live update:
 
 > One duplicated low-stock record reached three depot workers. The old memory
@@ -142,6 +165,13 @@ artifact ID without the literal filename is not sufficient.
    a recommended stop or containment from evidence that containment was
    actually executed. When execution is not evidenced, the actual status must
    be `UNKNOWN`.
+   Reject a revised output whose current ID/version pair still equals its
+   initial pair; the initial pair may appear only in explicit lineage. Require
+   the handoff's candidate proposal scope and presently authorized scope to be
+   separate, and require a nonblank largest unacceptable outcome.
+   Because the update reports fictional actions and effects, reject `no
+   execution occurred`; require `FICTIONAL REPORTED EFFECTS EXIST; REAL-WORLD
+   EXECUTION EVIDENCE DOES NOT` plus the unreconciled scenario effects.
 8. Record exact Stage A end.
 
 ## Stage B sequence
@@ -159,6 +189,10 @@ artifact ID without the literal filename is not sufficient.
    `STAGE-B-SECTION-1-SHA256SUMS`; only then create
    `STAGE-B-SECTION-1-FREEZE-VERIFICATION-RECORD.md`, before supplying the
    scenario or detailed artifacts.
+   Section 1 must use the exact literal `NOT RELEASED — PHASE 2 CHECK` for the
+   revised record, revised manifest, detailed files, and detailed execution
+   evidence. Blank, `UNKNOWN`, or claimed verification is a deviation at this
+   gate. Do not edit frozen Section 1 after Phase 2 supplies those files.
 4. Supply the scenario; every handoff-linked detail under the exact literal
    local filename; `STAGE-A-REVISED-FREEZE-RECORD.md`; and
    `STAGE-A-REVISED-FREEZE-SHA256SUMS`. Supply the governing manifest as a file,
@@ -185,6 +219,11 @@ artifact ID without the literal filename is not sufficient.
 7. Record exact Stage B end. Record every open time, pause, question, access
    problem, intervention, completion timestamp, manifest verification event,
    detached record, artifact version, and hash.
+
+Every one of the six detached records—not only the revised Stage A record—uses
+the complete record contract and cites the corresponding execution-log
+checkpoint. The results log is a summary; it does not replace the item-level
+JSON Lines evidence.
 
 ## Intervention levels
 

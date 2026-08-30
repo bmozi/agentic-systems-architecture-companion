@@ -1,0 +1,159 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.invalid/agentic-reader-value/execution-access-log-entry-v1.schema.json",
+  "title": "Agentic reader-value execution and access log entry",
+  "description": "One append-only JSON Lines event. The log is facilitator-side run evidence and is never participant input.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "packet_id",
+    "packet_version",
+    "attempt_id",
+    "sequence",
+    "phase",
+    "event_type",
+    "actor",
+    "exact_filename",
+    "artifact",
+    "timestamp",
+    "timezone",
+    "observation",
+    "continuity"
+  ],
+  "properties": {
+    "packet_id": { "const": "AG-RV-PILOT-001" },
+    "packet_version": { "const": "1.2.3" },
+    "attempt_id": { "type": "string", "minLength": 1 },
+    "sequence": { "type": "integer", "minimum": 1 },
+    "phase": {
+      "enum": [
+        "attempt",
+        "stage_a_initial",
+        "stage_a_revised",
+        "stage_a_handoff",
+        "stage_b_section_1",
+        "stage_b_section_2",
+        "stage_b_sections_3_5",
+        "closeout"
+      ]
+    },
+    "event_type": {
+      "enum": [
+        "ATTEMPT_STARTED",
+        "ORCHESTRATION_MANIFEST_VERIFIED",
+        "PHASE_INPUT_MANIFEST_CREATED",
+        "PHASE_INPUT_MANIFEST_VERIFIED",
+        "FILE_RELEASED",
+        "FILE_OPENED",
+        "OUTPUT_COMPLETED",
+        "GOVERNING_MANIFEST_CREATED",
+        "GOVERNING_MANIFEST_VERIFIED",
+        "DETACHED_RECORD_COMPLETED",
+        "PHASE_COMPLETED",
+        "DEVIATION",
+        "STOP",
+        "LOG_CLOSED"
+      ]
+    },
+    "actor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["code", "role"],
+      "properties": {
+        "code": { "type": "string", "minLength": 1 },
+        "role": {
+          "enum": [
+            "facilitator",
+            "stage_a_participant",
+            "stage_b_reviewer",
+            "synthetic_actor",
+            "evaluator",
+            "execution_owner"
+          ]
+        }
+      }
+    },
+    "exact_filename": {
+      "description": "One literal local filename per event, or NOT_APPLICABLE when the event has no file.",
+      "type": "string",
+      "minLength": 1
+    },
+    "artifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version", "state"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "minLength": 1 },
+        "state": { "type": "string", "minLength": 1 }
+      }
+    },
+    "timestamp": {
+      "description": "RFC 3339 timestamp with a numeric UTC offset.",
+      "type": "string",
+      "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}(\\.[0-9]+)?[+-][0-9]{2}:[0-9]{2}$"
+    },
+    "timezone": {
+      "description": "IANA zone plus observed abbreviation, for example America/Denver MDT.",
+      "type": "string",
+      "minLength": 3
+    },
+    "observation": {
+      "oneOf": [
+        { "type": "null" },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["command", "stdout", "stderr", "exit_code"],
+          "properties": {
+            "command": { "type": "string", "minLength": 1 },
+            "stdout": { "type": "string" },
+            "stderr": { "type": "string" },
+            "exit_code": { "type": "integer" }
+          }
+        }
+      ]
+    },
+    "continuity": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["previous_sequence", "previous_entry_sha256", "entry_sha256"],
+      "properties": {
+        "previous_sequence": {
+          "oneOf": [
+            { "const": "GENESIS" },
+            { "type": "integer", "minimum": 1 }
+          ]
+        },
+        "previous_entry_sha256": {
+          "pattern": "^(GENESIS|[0-9a-f]{64})$",
+          "type": "string"
+        },
+        "entry_sha256": {
+          "pattern": "^[0-9a-f]{64}$",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "event_type": {
+            "enum": [
+              "ORCHESTRATION_MANIFEST_VERIFIED",
+              "PHASE_INPUT_MANIFEST_VERIFIED",
+              "GOVERNING_MANIFEST_VERIFIED"
+            ]
+          }
+        }
+      },
+      "then": {
+        "properties": {
+          "observation": { "type": "object" }
+        }
+      }
+    }
+  ]
+}

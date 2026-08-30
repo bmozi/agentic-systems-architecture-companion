@@ -18,6 +18,56 @@ COMMIT_PATTERN = re.compile(r"^[0-9a-f]{7,40}$")
 CHECKSUM_PATTERN = re.compile(r"^([0-9a-f]{64})  (.+)$")
 FREEZE_ORDER = ["complete", "manifest", "verify", "record"]
 PRIOR_TRIPLE = ["governed_outputs", "governing_manifest", "detached_record"]
+PACKET_VERSION = "1.2.3"
+REQUIRED_RECORD_FIELDS = [
+    "attempt_id",
+    "phase_id",
+    "facilitator_code",
+    "actor_code",
+    "verification_command",
+    "verification_stdout",
+    "verification_stderr",
+    "verification_exit_code",
+    "verification_timestamp",
+    "verification_timezone",
+    "record_completion_timestamp",
+    "record_completion_timezone",
+    "governing_manifest_filename",
+    "governing_manifest_sha256",
+    "execution_log_filename",
+    "execution_log_checkpoint_sequence",
+    "execution_log_checkpoint_entry_sha256",
+    "governed_artifacts",
+]
+ORDERED_LOG_EVENTS = [
+    "PHASE_INPUT_MANIFEST_CREATED",
+    "PHASE_INPUT_MANIFEST_VERIFIED",
+    "FILE_RELEASED",
+    "FILE_OPENED",
+    "OUTPUT_COMPLETED",
+    "GOVERNING_MANIFEST_CREATED",
+    "GOVERNING_MANIFEST_VERIFIED",
+    "DETACHED_RECORD_COMPLETED",
+    "PHASE_COMPLETED",
+]
+ALL_LOG_EVENTS = [
+    "ATTEMPT_STARTED",
+    "ORCHESTRATION_MANIFEST_VERIFIED",
+    *ORDERED_LOG_EVENTS,
+    "DEVIATION",
+    "STOP",
+    "LOG_CLOSED",
+]
+LOG_PHASES = [
+    "attempt",
+    "stage_a_initial",
+    "stage_a_revised",
+    "stage_a_handoff",
+    "stage_b_section_1",
+    "stage_b_section_2",
+    "stage_b_sections_3_5",
+    "closeout",
+]
 PHASE_PROTOCOL = {
     "stage_a_initial": {
         "results_label": "Initial Stage A",
@@ -131,6 +181,72 @@ BINDING_DOCUMENTS = {
         "participant/04-decision-owner-workbook.md",
     },
 }
+DETACHED_RECORD_CONTRACT = {
+    "required_fields": REQUIRED_RECORD_FIELDS,
+    "verification_output_must_be_verbatim": True,
+    "successful_exit_code": 0,
+    "record_completion_must_follow_verification": True,
+    "phase_id_must_match_freeze_chain": True,
+    "actor_codes_must_be_nonempty": True,
+    "record_is_excluded_from_governing_manifest": True,
+}
+EXECUTION_LOG_PROTOCOL = {
+    "template": "facilitator-only/05-execution-and-access-log.md",
+    "entry_schema": "facilitator-only/05-execution-access-log-schema.json",
+    "run_filename_pattern": "AG-EXECUTION-ACCESS-LOG-<ATTEMPT-ID>-v1.jsonl",
+    "participant_input": False,
+    "phase_input_member": False,
+    "append_only": True,
+    "one_exact_filename_per_entry": True,
+    "continuity_fields": [
+        "sequence",
+        "previous_sequence",
+        "previous_entry_sha256",
+        "entry_sha256",
+    ],
+    "ordered_phase_events": ORDERED_LOG_EVENTS,
+    "verification_event_required_fields": [
+        "command",
+        "stdout",
+        "stderr",
+        "exit_code",
+        "timestamp",
+        "timezone",
+    ],
+    "detached_record_checkpoint_event": "GOVERNING_MANIFEST_VERIFIED",
+    "final_log_bound_by_closeout_manifest": True,
+}
+ORCHESTRATION_POLICY = {
+    "human_participant_inputs_are_exact_phase_manifest_only": True,
+    "facilitator_materials_are_not_participant_inputs": True,
+    "synthetic_orchestration_requires_prior_immutable_files": True,
+    "synthetic_orchestration_manifest": "ORCHESTRATION-INPUT-SHA256SUMS",
+    "synthetic_orchestration_must_be_verified_before_delivery": True,
+    "synthetic_results_must_be_labeled_orchestration_aided": True,
+    "undeclared_inputs_forbidden": True,
+    "undeclared_input_action": [
+        "record_deviation",
+        "stop_attempt",
+        "preserve_partial_chain",
+        "start_new_attempt",
+    ],
+}
+CONTENT_GUARDS = {
+    "revised_current_identity_must_differ_from_initial_identity_version_pair": True,
+    "initial_identity_allowed_only_as_lineage_reference_in_revised_output": True,
+    "fictional_reported_effects_must_not_be_described_as_no_execution_occurred": True,
+    "fictional_reported_effects_are_not_real_world_execution_evidence": True,
+    "candidate_proposal_scope_must_be_separate_from_present_authorization": True,
+    "present_authorization_requires_current_authority_evidence": True,
+    "handoff_required_field": "Largest unacceptable outcome (required; blank invalid)",
+    "phase_1_not_released_literal": "NOT RELEASED — PHASE 2 CHECK",
+    "phase_1_deferred_fields": [
+        "revised_freeze_record_received_and_verified",
+        "revised_governing_manifest_received_and_verified",
+        "every_handoff_linked_filename_received_unchanged",
+        "detailed_execution_evidence_verified",
+    ],
+}
 
 
 def markdown_links(path: Path):
@@ -177,7 +293,7 @@ def sha256(path: Path) -> str:
 
 
 def validate_temporal_freeze_protocol(errors: list[str]) -> None:
-    """Validate the canonical v1.2.2 freeze and release graph."""
+    """Validate the canonical v1.2.3 freeze, release, and execution graph."""
     packet = ROOT / "testing" / "agentic-reader-value-v1"
     protocol_path = packet / "TEMPORAL-FREEZE-PROTOCOL.json"
     try:
@@ -186,12 +302,12 @@ def validate_temporal_freeze_protocol(errors: list[str]) -> None:
         errors.append(f"temporal protocol inventory is unreadable: {exc}")
         return
 
-    if protocol.get("schema_version") != 1:
-        errors.append("temporal protocol: schema_version must be 1")
+    if protocol.get("schema_version") != 2:
+        errors.append("temporal protocol: schema_version must be 2")
     if protocol.get("packet_id") != "AG-RV-PILOT-001":
         errors.append("temporal protocol: packet_id mismatch")
-    if protocol.get("packet_version") != "1.2.2":
-        errors.append("temporal protocol: packet_version must be 1.2.2")
+    if protocol.get("packet_version") != PACKET_VERSION:
+        errors.append(f"temporal protocol: packet_version must be {PACKET_VERSION}")
 
     expected_states = [entry["state"] for entry in PHASE_PROTOCOL.values()]
     if protocol.get("allowed_completion_states") != expected_states:
@@ -260,6 +376,15 @@ def validate_temporal_freeze_protocol(errors: list[str]) -> None:
         exact_membership = PRIOR_TRIPLE + expected["new_inputs"]
         if release.get("exact_membership") != exact_membership:
             errors.append(f"temporal protocol: {release_id} exact membership mismatch")
+
+    if protocol.get("detached_record_contract") != DETACHED_RECORD_CONTRACT:
+        errors.append("temporal protocol: detached-record contract is incomplete or stale")
+    if protocol.get("execution_access_log") != EXECUTION_LOG_PROTOCOL:
+        errors.append("temporal protocol: execution/access-log contract is incomplete or stale")
+    if protocol.get("orchestration_input_policy") != ORCHESTRATION_POLICY:
+        errors.append("temporal protocol: orchestration-input policy is incomplete or stale")
+    if protocol.get("content_guards") != CONTENT_GUARDS:
+        errors.append("temporal protocol: content guards are incomplete or stale")
 
     if protocol.get("correction_requirements") != CORRECTION_REQUIREMENTS:
         errors.append("temporal protocol: immutable correction requirements are incomplete")
@@ -334,6 +459,136 @@ def validate_temporal_freeze_protocol(errors: list[str]) -> None:
     ]
     if state_rows != ["| Handoff state before hashing | `HANDOFF COMPLETE` / invalid |"]:
         errors.append("temporal protocol: handoff state field must require HANDOFF COMPLETE")
+    required_handoff_row = (
+        "| Largest unacceptable outcome (required; blank invalid) | "
+        "Write the outcome, or `UNKNOWN` plus the evidence owner/trigger |"
+    )
+    if required_handoff_row not in handoff_text:
+        errors.append("temporal protocol: handoff must require a nonblank largest unacceptable outcome")
+
+    schema_path = packet / EXECUTION_LOG_PROTOCOL["entry_schema"]
+    try:
+        log_schema = json.loads(schema_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as exc:
+        errors.append(f"temporal protocol: execution-log entry schema is unreadable: {exc}")
+    else:
+        required_entry_fields = {
+            "packet_id",
+            "packet_version",
+            "attempt_id",
+            "sequence",
+            "phase",
+            "event_type",
+            "actor",
+            "exact_filename",
+            "artifact",
+            "timestamp",
+            "timezone",
+            "observation",
+            "continuity",
+        }
+        if set(log_schema.get("required", [])) != required_entry_fields:
+            errors.append("temporal protocol: execution-log schema required fields are incomplete")
+        properties = log_schema.get("properties", {})
+        if properties.get("packet_id", {}).get("const") != "AG-RV-PILOT-001":
+            errors.append("temporal protocol: execution-log schema packet ID mismatch")
+        if properties.get("packet_version", {}).get("const") != PACKET_VERSION:
+            errors.append("temporal protocol: execution-log schema packet version mismatch")
+        if properties.get("phase", {}).get("enum") != LOG_PHASES:
+            errors.append("temporal protocol: execution-log phase inventory is incomplete")
+        if properties.get("event_type", {}).get("enum") != ALL_LOG_EVENTS:
+            errors.append("temporal protocol: execution-log event inventory is incomplete")
+        actor = properties.get("actor", {})
+        if set(actor.get("required", [])) != {"code", "role"}:
+            errors.append("temporal protocol: execution-log actor code/role are not required")
+        continuity = properties.get("continuity", {})
+        if set(continuity.get("required", [])) != {
+            "previous_sequence",
+            "previous_entry_sha256",
+            "entry_sha256",
+        }:
+            errors.append("temporal protocol: execution-log continuity fields are incomplete")
+        verification_events = {
+            "ORCHESTRATION_MANIFEST_VERIFIED",
+            "PHASE_INPUT_MANIFEST_VERIFIED",
+            "GOVERNING_MANIFEST_VERIFIED",
+        }
+        all_of = log_schema.get("allOf", [])
+        guarded = set()
+        for rule in all_of if isinstance(all_of, list) else []:
+            guarded.update(
+                rule.get("if", {})
+                .get("properties", {})
+                .get("event_type", {})
+                .get("enum", [])
+            )
+        if guarded != verification_events:
+            errors.append("temporal protocol: verification log events must require observations")
+
+    required_snippets = {
+        "participant/00-packet-route.md": [
+            "Any undeclared input is a deviation,",
+            "current ID/version pair must differ",
+            "NOT RELEASED — PHASE 2 CHECK",
+        ],
+        "participant/02-scenario-and-task.md": [
+            "candidate scope for evaluation",
+            "present authorization is `NOT",
+            "fictional reported effects exist; real-world execution evidence does not",
+        ],
+        "participant/03-practitioner-workbook.md": [
+            "Present authorization and current authority evidence, or `NOT AUTHORIZED`",
+            "current ID/version and the initial ID/version it supersedes",
+            "FICTIONAL REPORTED EFFECTS EXIST;",
+        ],
+        "participant/04-decision-owner-workbook.md": [
+            "Present authorization evidenced by the handoff",
+            "Do not edit the frozen Section 1",
+            "Presently authorized scope and current authority evidence, or `NOT AUTHORIZED`",
+        ],
+        "participant/05-one-screen-handoff.md": [
+            "Candidate proposal scope under evaluation",
+            "Presently authorized scope and current authority evidence",
+            "FICTIONAL REPORTED EFFECTS EXIST; REAL-WORLD EXECUTION EVIDENCE DOES",
+        ],
+        "facilitator-only/01-facilitator-guide.md": [
+            "ORCHESTRATION-INPUT-SHA256SUMS",
+            "exact verification command/stdout/stderr/exit",
+            "NOT RELEASED — PHASE 2 CHECK",
+        ],
+        "facilitator-only/04-freeze-and-correction-record-templates.md": [
+            "Exact observed verification command",
+            "Exact observed verification stdout, verbatim",
+            "Record completion timestamp, RFC 3339 numeric offset",
+            "Execution-log checkpoint entry SHA-256",
+        ],
+        "facilitator-only/05-execution-and-access-log.md": [
+            "one JSON object conforming",
+            "previous entry's sequence/hash",
+            "undeclared prompt, message, file, tool result, or",
+        ],
+    }
+    for relative, snippets in required_snippets.items():
+        path = packet / relative
+        if not path.is_file():
+            errors.append(f"temporal protocol: missing semantic source {relative}")
+            continue
+        content = path.read_text(encoding="utf-8")
+        normalized = " ".join(content.split())
+        for snippet in snippets:
+            if snippet not in content and " ".join(snippet.split()) not in normalized:
+                errors.append(f"temporal protocol: {relative} omits required semantic guard {snippet!r}")
+
+    decision_owner = packet / "participant" / "04-decision-owner-workbook.md"
+    if decision_owner.is_file():
+        marker_count = decision_owner.read_text(encoding="utf-8").count(
+            CONTENT_GUARDS["phase_1_not_released_literal"]
+        )
+        if marker_count < 8:
+            errors.append("temporal protocol: Stage B Phase 1 has unresolved withheld fields")
+    scenario = packet / "participant" / "02-scenario-and-task.md"
+    if scenario.is_file() and "No implementation, enforcement test" in scenario.read_text(encoding="utf-8"):
+        errors.append("temporal protocol: stale no-execution wording contradicts reported effects")
 
     protected = protocol.get("protected_documents")
     expected_protected = {
@@ -352,8 +607,8 @@ def validate_temporal_freeze_protocol(errors: list[str]) -> None:
 
     for path in sorted(packet.rglob("*.md")):
         header = "\n".join(path.read_text(encoding="utf-8").splitlines()[:6])
-        if ("**Packet:**" in header or "**Version:**" in header) and "1.2.2" not in header:
-            errors.append(f"{path.relative_to(ROOT)}: packet header is not version 1.2.2")
+        if ("**Packet:**" in header or "**Version:**" in header) and PACKET_VERSION not in header:
+            errors.append(f"{path.relative_to(ROOT)}: packet header is not version {PACKET_VERSION}")
 
 
 def main() -> int:

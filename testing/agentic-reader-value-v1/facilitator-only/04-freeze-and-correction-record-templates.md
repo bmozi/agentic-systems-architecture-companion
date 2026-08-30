@@ -1,6 +1,6 @@
 # Detached Freeze-Verification and Correction Record Templates
 
-**Packet:** AG-RV-PILOT-001 version 1.2.2
+**Packet:** AG-RV-PILOT-001 version 1.2.3
 **Status:** Facilitator-only blank records; prepared and unrun
 
 These schemas create run evidence. Never supply this source template during a
@@ -18,21 +18,36 @@ COMPLETE`, `SECTION 2 COMPLETE`, or `SECTIONS 3-5 COMPLETE`.
 Do not place the output's own hash, a future verification time, or a claim that
 verification succeeded inside the governed output.
 
-## Revised Stage A freeze-verification record
+## Required detached record for every output phase
 
-Save the completed record as exactly
-`STAGE-A-REVISED-FREEZE-RECORD.md`. Create it only after the governing manifest
-has been created and successfully verified.
+Use this complete schema separately for all six record filenames in the table
+below. Create a record only after its governing manifest has been created and
+successfully verified. Do not reuse one record across phases.
 
 - Attempt ID:
-- Record completion timestamp and timezone:
-- Manifest verification timestamp and timezone:
-- Verification method and result:
-- Governing manifest exact filename: `STAGE-A-REVISED-FREEZE-SHA256SUMS`
+- Phase ID: `stage_a_initial` / `stage_a_revised` /
+  `stage_a_handoff` / `stage_b_section_1` / `stage_b_section_2` /
+  `stage_b_sections_3_5`
+- Facilitator code:
+- Participant, reviewer, or synthetic actor code:
+- Exact observed verification command:
+- Exact observed verification stdout, verbatim:
+- Exact observed verification stderr, verbatim; blank only when truly empty:
+- Observed verification exit code; must be `0` for a valid freeze:
+- Observed manifest verification timestamp, RFC 3339 numeric offset:
+- Observed manifest verification timezone, IANA zone and abbreviation:
+- Record completion timestamp, RFC 3339 numeric offset; must be later than
+  manifest verification:
+- Record completion timezone, IANA zone and abbreviation:
+- Governing manifest exact filename:
 - Governing manifest SHA-256:
-- Handoff had not been opened at the manifest-verification timestamp: yes / no / deviation
-- All planned live-update revisions were complete: yes / no / deviation
-- No governed artifact retained a draft or pending-freeze state: yes / no / deviation
+- Facilitator-side execution/access log exact filename:
+- Execution-log checkpoint sequence for the corresponding
+  `GOVERNING_MANIFEST_VERIFIED` event:
+- Execution-log checkpoint entry SHA-256:
+- Required prior gate and file-open order satisfied: yes / no / deviation
+- No undeclared participant or orchestration input occurred: yes / no /
+  deviation and stop
 
 | Exact immutable local filename | Artifact ID/version | Artifact completion timestamp/timezone | Artifact state before hashing | SHA-256 |
 | --- | --- | --- | --- | --- |
@@ -40,10 +55,27 @@ has been created and successfully verified.
 
 The governing manifest lists only the completed governed artifacts above. It
 does not list or hash itself or this later record. After this record is
-complete, `STAGE-A-HANDOFF-INPUT-SHA256SUMS` hashes those artifacts, their
-governing manifest, this record, and the blank handoff input.
+complete, the next applicable phase-input manifest hashes the governed
+artifacts, governing manifest, completed record, and only the new inputs
+declared in the canonical protocol.
 
-- Facilitator code:
+### Additional revised Stage A assertions
+
+Complete these fields in `STAGE-A-REVISED-FREEZE-RECORD.md` in addition to the
+required schema above:
+
+- Handoff had not been opened at the manifest-verification timestamp: yes / no / deviation
+- All planned live-update revisions were complete: yes / no / deviation
+- No governed artifact retained a draft or pending-freeze state: yes / no / deviation
+- Every revised current ID/version pair differs from its initial pair: yes /
+  no / deviation
+- Initial identity appears only as explicit lineage: yes / no / deviation
+- Fictional reported effects acknowledged without `no execution occurred`
+  wording or real-world-evidence promotion: yes / no / deviation
+
+After this record is complete,
+`STAGE-A-HANDOFF-INPUT-SHA256SUMS` hashes those artifacts, their governing
+manifest, this record, and the blank handoff input.
 
 ## Exact output chains
 
@@ -57,9 +89,10 @@ governing manifest, this record, and the blank handoff input.
 | Stage B Sections 3-5 | `STAGE-B-SECTIONS-3-5-SHA256SUMS` | `STAGE-B-SECTIONS-3-5-FREEZE-VERIFICATION-RECORD.md` |
 
 For every row: complete the output; create the manifest; verify the manifest
-and capture the exact timestamp/timezone; then create the detached record with
-all literal filenames, IDs/versions, completion states/times, artifact hashes,
-and the manifest filename/hash.
+and capture the exact command, stdout, stderr, exit code, timestamp/timezone,
+and execution-log checkpoint; then create the detached record using every
+field in the required schema, including its later completion
+timestamp/timezone.
 
 ## Next phase-input manifests
 
@@ -73,6 +106,9 @@ and the manifest filename/hash.
 
 Each next phase-input manifest hashes the prior completed output, governing
 manifest, detached record, and new inputs. Verify it before new material opens.
+No other participant file, prompt, message, tool output, or instruction is
+permitted. Synthetic orchestration uses a separate predeclared, verified
+`ORCHESTRATION-INPUT-SHA256SUMS` and remains unscored facilitator evidence.
 
 ## Correction of already frozen bytes
 

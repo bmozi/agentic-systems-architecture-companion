@@ -1,6 +1,6 @@
 # Temporal Freeze Protocol Static Validation
 
-**Packet:** AG-RV-PILOT-001 version 1.2.2
+**Packet:** AG-RV-PILOT-001 version 1.2.3
 **Validation type:** Static source review; not a human run
 **Validation date:** 2026-08-29
 **Result:** PASS for the reviewed prepared source protocol; executable
@@ -17,11 +17,25 @@ require this irreversible order:
 3. verify the manifest from sealed storage and capture the exact verification
    timestamp/timezone; and
 4. create a detached freeze-verification record describing that already-
-   observed event.
+   observed event, including the exact command/stdout/stderr/exit/time/timezone
+   and an explicit later record-completion timestamp/timezone.
 
 The governing manifest cannot hash itself or the later record. The next phase-
 input manifest hashes the completed governed artifacts, prior manifest,
 completed detached record, and new inputs.
+
+## Execution-chain checks
+
+- Every detached record names one attempt and phase, the facilitator and
+  actor codes, the exact observed verification evidence, and the execution-
+  log checkpoint through `GOVERNING_MANIFEST_VERIFIED`.
+- The facilitator log is append-only JSON Lines, uses contiguous sequence and
+  previous-entry hashes, records one exact filename per event, and remains
+  outside participant input.
+- Every synthetic orchestration instruction must be immutable, declared,
+  manifest-verified, and logged before use. An undeclared input stops the
+  attempt.
+- The completed log is bound by the run closeout manifest.
 
 ## Self-reference checks
 
@@ -35,6 +49,13 @@ completed detached record, and new inputs.
   freeze time.
 - A correction retains the prior chain and creates an immutable replacement
   artifact set, manifest, observed verification event, and detached record.
+- Revised outputs cannot present the initial ID/version pair as their current
+  identity; the initial pair may appear only as lineage.
+- Candidate proposal scope and present authorization are separate fields.
+- A fictional reported action cannot be summarized as “no execution
+  occurred,” while the packet continues to deny real-world execution evidence.
+- The handoff requires a nonblank largest-unacceptable-outcome entry, and
+  Phase 1 uses `NOT RELEASED — PHASE 2 CHECK` for withheld details.
 
 ## Evidence boundary
 
@@ -43,7 +64,8 @@ The canonical inventory is
 `python3 scripts/validate_repository.py` and
 `python3 scripts/test_temporal_freeze_protocol.py` from the repository root.
 The latter uses disposable copies, refreshes ordinary packet checksums, and
-requires one positive control plus rejection of eleven structural mutations.
+requires one positive control plus rejection of structural and semantic
+mutations.
 
 This PASS means only that the reviewed prepared source and executable mutation
 checks agree on the stated temporal invariants. It does not establish that a

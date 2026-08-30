@@ -1,6 +1,6 @@
 # Stage B Decision-Owner Workbook
 
-**Packet:** AG-RV-PILOT-001 version 1.2.2
+**Packet:** AG-RV-PILOT-001 version 1.2.3
 **Status:** Blank independent read-back record
 
 - Reviewer code:
@@ -9,11 +9,16 @@
 - Exact Stage B start before first scored read of the packet route, with timezone:
 - Exact Stage B end, with timezone:
 - Exact supplied-file route and manifest:
-- Exact `STAGE-A-REVISED-FREEZE-RECORD.md` received and verified:
-- Exact `STAGE-A-REVISED-FREEZE-SHA256SUMS` received and verified:
+- Exact `STAGE-A-REVISED-FREEZE-RECORD.md` received and verified: write
+  `NOT RELEASED — PHASE 2 CHECK` until Phase 2:
+- Exact `STAGE-A-REVISED-FREEZE-SHA256SUMS` received and verified: write
+  `NOT RELEASED — PHASE 2 CHECK` until Phase 2:
 - Exact `STAGE-A-HANDOFF-SHA256SUMS` received and verified:
 - Exact `STAGE-A-HANDOFF-FREEZE-VERIFICATION-RECORD.md` received and verified:
-- Every handoff-linked filename received unchanged: yes / no / deviation
+- Every handoff-linked filename received unchanged: write
+  `NOT RELEASED — PHASE 2 CHECK` until Phase 2; then yes / no / deviation
+- Detailed execution evidence verified: write
+  `NOT RELEASED — PHASE 2 CHECK` until Phase 2
 - Prior involvement with Stage A: none required for first calibration
 
 Do not ask the Stage A practitioner to explain or repair the artifact until
@@ -24,6 +29,10 @@ completion timestamp/timezone, and required `COMPLETE` state before hashing.
 Its governing manifest is then created and verified. Only afterward does the
 facilitator create the detached freeze-verification record. Never put the
 section's own hash or a future verification time inside the section artifact.
+Each later detached record names the attempt and phase, facilitator and
+reviewer or synthetic-actor codes, exact observed verification command,
+stdout, stderr, exit code, verification timestamp/timezone, log checkpoint,
+and a later record-completion timestamp/timezone.
 
 ## 1. Handoff-only read-back and scanability freeze
 
@@ -31,16 +40,24 @@ Complete this section from the verified one-screen handoff before receiving the
 scenario or detailed Stage A artifacts.
 
 - Who receives value and what outcome is proposed?
+- Candidate proposal scope described by the handoff:
+- Present authorization evidenced by the handoff: `AUTHORIZED` / `NOT
+  AUTHORIZED` / `UNKNOWN` — do not infer authorization from the proposal:
 - Recommended decision and what is allowed now:
 - What is withheld?
 - Assigned owner, or did the handoff honestly say `UNASSIGNED`?
 - Assigning/acting authority, or did the handoff honestly say `UNKNOWN`?
-- Known evidence, material unknowns, and largest unacceptable outcome:
+- Known evidence, material unknowns, and largest unacceptable outcome
+  (required; blank is invalid):
 - Recommended stop or containment action:
 - Actual containment execution status and evidence, or did the handoff say
   `UNKNOWN` because execution was not evidenced?
 - Immediate next action:
 - Reconsideration date or evidence-based trigger:
+- Revised freeze record verified: `NOT RELEASED — PHASE 2 CHECK`
+- Revised governing manifest verified: `NOT RELEASED — PHASE 2 CHECK`
+- Detailed artifacts received unchanged: `NOT RELEASED — PHASE 2 CHECK`
+- Detailed execution evidence verified: `NOT RELEASED — PHASE 2 CHECK`
 - Could you find those fields on one screen without verbal repair? yes / partly / no
 - Phase-input manifest verified: `STAGE-B-PHASE-1-INPUT-SHA256SUMS` / deviation
 - Section 1 output: `STAGE-B-SECTION-1-v1.md`; artifact ID/version:
@@ -65,7 +82,13 @@ detached freeze record and governing manifest. Do not accept a renamed,
 substituted, regenerated, summarized, or omitted file. Record a mismatch as a
 deviation and stop.
 
+Now replace each `NOT RELEASED — PHASE 2 CHECK` marker from Section 1 with the
+actual Phase 2 result in this section. Do not edit the frozen Section 1
+artifact.
+
 - Who receives value and what work is delegated?
+- Candidate scope under evaluation:
+- Presently authorized scope and current authority evidence, or `NOT AUTHORIZED`:
 - What may the agent perceive, decide, and do?
 - Which actions and decisions remain withheld?
 - Who grants and can revoke authority?
@@ -77,6 +100,10 @@ deviation and stop.
   shipment/return, event acknowledgement, receiving, budget, inventory, and
   closure without treating unknown as complete?
 - What evidence proves what the agent and surrounding system actually did?
+- Revised freeze record verification result:
+- Revised governing manifest verification result:
+- Every detailed artifact received unchanged: yes / no / deviation
+- Detailed execution evidence result, or `UNKNOWN`:
 - Phase-input manifest verified: `STAGE-B-PHASE-2-INPUT-SHA256SUMS` / deviation
 - Section 2 output: `STAGE-B-SECTION-2-v1.md`; artifact ID/version:
 - Section 2 completion timestamp/timezone and `SECTION 2 COMPLETE` state:

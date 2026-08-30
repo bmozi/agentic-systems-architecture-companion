@@ -1,6 +1,6 @@
 # Results and Deviation Log
 
-**Packet:** AG-RV-PILOT-001 version 1.2.2
+**Packet:** AG-RV-PILOT-001 version 1.2.3
 **Status:** Blank controlled record; no result exists
 
 ## Run identity
@@ -9,15 +9,21 @@
 - Execution owner and authorization:
 - Stage A participant code:
 - Stage B reviewer code:
-- Facilitator:
+- Facilitator code:
 - Evaluator and independence disclosure:
 - Date, mode, and timezone:
+- Human or synthetic; if synthetic, exact actor code and orchestration-aided label:
 
 ## Consent, privacy, and freeze
 
 - Consent records completed before either scored stage:
 - Storage/access/retention authority:
 - Run-specific SHA-256 manifest:
+- Facilitator-side execution/access log exact filename:
+- Final execution/access log SHA-256 and closeout manifest:
+- Execution-log sequence/continuity verification result:
+- Synthetic `ORCHESTRATION-INPUT-SHA256SUMS`, or `NOT APPLICABLE`:
+- Undeclared input check: none / deviation and stop
 - Run-specific manifest verified before each stage:
 - Prepared-source manifest match:
 - Governing `STAGE-A-REVISED-FREEZE-SHA256SUMS` verification time/timezone:
@@ -40,6 +46,11 @@
 No coaching is allowed. Repeating text or resolving access is still logged.
 Supplying an owner, authority, date, number, baseline, limit, budget, order
 state, evidence source, or answer contaminates the affected gate.
+
+This table summarizes the item-level JSON Lines execution/access log; it does
+not replace it. Every file release or open is a separate log event naming one
+exact filename. Every manifest verification records verbatim command, stdout,
+stderr, exit code, timestamp/timezone, actor, and continuity hash.
 
 ## Timing and freezes
 
@@ -68,7 +79,7 @@ frozen artifact. Leave blank if no later correction occurred.
 
 ## Temporal freeze chain
 
-| Output phase | Completed artifact filename + ID/version + completion time/state | Governing manifest filename/hash | Manifest verification method + exact timestamp/timezone + result | Detached record filename/hash + completion timestamp/timezone | Next phase-input manifest filename/hash + verification time |
+| Output phase | Completed artifact filename + ID/version + completion time/state | Governing manifest filename/hash | Observed command/stdout/stderr/exit + exact verification timestamp/timezone | Detached record filename/hash + attempt/phase/actor + completion timestamp/timezone + log checkpoint | Next phase-input manifest filename/hash + verification time |
 | --- | --- | --- | --- | --- | --- |
 | Initial Stage A | | | | | |
 | Revised Stage A | | | | | |
@@ -80,6 +91,23 @@ frozen artifact. Leave blank if no later correction occurred.
 A detached record is valid only when created after the manifest verification
 it describes. No governing manifest may list itself or that later record. No
 governed output may embed its own hash or a future verification timestamp.
+Each detached record includes the same attempt ID; matching phase; nonblank
+facilitator and actor codes; exact observed command, stdout, stderr, exit code,
+timestamp and timezone; a later record-completion timestamp/timezone; the
+manifest/artifact bindings; and the execution-log filename, checkpoint
+sequence, and entry hash.
+
+## Content-integrity findings
+
+- Revised current ID/version pairs differ from initial pairs; initial pairs
+  appear only as lineage:
+- Candidate proposal scope is separate from present authorization and current
+  authority evidence:
+- Handoff largest unacceptable outcome is nonblank:
+- Stage B Section 1 uses `NOT RELEASED — PHASE 2 CHECK` for every withheld
+  detail and was not edited after freeze:
+- Fictional reported effects are acknowledged without claiming real-world
+  execution evidence or saying `no execution occurred`:
 
 ## Gate results
 

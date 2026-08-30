@@ -1,6 +1,6 @@
 # Cedar Lane Scenario: Replenish Safety Supplies Without Surrendering Control
 
-**Packet:** AG-RV-PILOT-001 version 1.2.2
+**Packet:** AG-RV-PILOT-001 version 1.2.3
 **Status:** Fictional, prepared, and unrun
 
 Cedar Lane Supply keeps protective gloves and eye protection in stock for
@@ -13,6 +13,13 @@ stockouts. The proposed design is:
 
 You are reviewing what the agent may perceive, decide, do, and prove before it
 receives purchasing authority.
+
+The proposed design is a **candidate scope for evaluation**, not present
+authorization. A capability becomes presently authorized only when a current
+authority source grants that exact action, subject, purpose, amount, period,
+and scope and an enforcement path applies it. Technical access, a service
+identity, model confidence, a past approval, or a candidate design is not that
+grant.
 
 ## Known facts
 
@@ -45,8 +52,12 @@ receives purchasing authority.
 11. No one has assigned kill authority, treatment of queued or in-flight work,
     ambiguous-outcome recovery, or the evidence required before autonomy may
     expand.
-12. No implementation, enforcement test, incident exercise, practitioner
-    session, cost measurement, or business-result evidence exists.
+12. At the scenario's starting point, Cedar Lane has no confirmed
+    implementation, enforcement test, incident exercise, practitioner
+    session, cost measurement, or business-result evidence for this proposed
+    design. The later fictional live update reports actions and effects inside
+    the exercise. Those reported effects must be reconciled within the
+    scenario; they are not proof of real-world execution or business value.
 
 ## Numeric evidence classes
 
@@ -72,6 +83,9 @@ Without discussing the intended answer with a facilitator:
 
 1. Explain in plain language what useful work Cedar Lane might delegate and
    what decision remains human or institutional.
+   State the candidate scope separately from what is presently authorized;
+   absent current authority evidence, present authorization is `NOT
+   AUTHORIZED`.
 2. Complete the first pass and relevant portions of the supplied Agent
    Authority Map for the smallest useful action.
 3. Define the governed tool outcome, business identity, unknown-outcome rule,
@@ -93,6 +107,11 @@ Revise only after hearing it. Record the original and revised answer.
 This planned live-update revision creates the first revised artifact set. It is
 not a correction of the later revised freeze. A change after that freeze must
 preserve both the exact old and new immutable artifacts and their provenance.
+
+After the update, do not write “no execution occurred.” Within this fictional
+scenario, reported ordering, reservation, and event effects did occur and
+remain partly unreconciled. The accurate boundary is: **fictional reported
+effects exist; real-world execution evidence does not**.
 
 ## Boundary
 

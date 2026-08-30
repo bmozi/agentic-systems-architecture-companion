@@ -1,13 +1,32 @@
 # Agentic Systems Reader-Value Pilot Packet
 
 **Packet ID:** AG-RV-PILOT-001
-**Version:** 1.2.2
+**Version:** 1.2.3
 **Status:** Prepared and unrun; no participant recruited or consented
 **Scenario:** Cedar Lane Supply, entirely fictional
 
 ## Version and evidence note
 
-Version 1.2.2 repairs a temporal self-reference defect in version 1.2.1's
+Version 1.2.3 repairs execution-chain and content defects found by the
+independent replay of version 1.2.2. Every detached record now carries the
+attempt, phase, facilitator/actor codes, exact observed verification
+command/output/exit/time/timezone, a later record-completion time/timezone,
+and an execution-log checkpoint. A facilitator-side append-only log records
+each input gate, release, open, completion, manifest, verification, and record
+with exact actor, filename, time, timezone, and hash-linked continuity. It is
+never participant input. Undeclared orchestration inputs are forbidden; a
+synthetic rehearsal must freeze and verify every orchestration instruction in
+a separate declared manifest before use.
+
+Version 1.2.3 also requires revised identities to differ from their initial
+ID/version pairs, distinguishes fictional reported effects from real-world
+execution evidence, separates a candidate scope from present authorization,
+requires the largest unacceptable outcome in the handoff, and makes withheld
+Stage B Phase 1 details say `NOT RELEASED — PHASE 2 CHECK` rather than remain
+blank. The replay that found these defects remains synthetic, not human
+evidence. Version 1.2.3 remains **PREPARED/UNRUN** for human testing.
+
+Version 1.2.2 repaired a temporal self-reference defect in version 1.2.1's
 freeze procedure. Governed bytes now record their completion state and time
 before hashing. Their governing manifest hashes only those completed bytes and
 is then verified at an exact timestamp/timezone. Only after that observed
@@ -17,8 +36,7 @@ input manifest hashes the completed artifacts, governing manifest, and
 detached record. This sequence now governs initial and revised Stage A artifacts, the
 handoff, and all three Stage B freezes. Earlier synthetic regressions were
 defect-finding only, not human or practitioner sessions, and establish no
-usability, safety, effectiveness, or value result. Version 1.2.2 remains
-**PREPARED/UNRUN** for human testing.
+usability, safety, effectiveness, or value result.
 
 Version 1.2.0 had repaired sealed-delivery portability, containment-state
 transfer, and auditable Stage B freezes after a synthetic AI regression of
@@ -146,6 +164,8 @@ change to frozen evidence bytes.
 - [Observation and scoring rubric](facilitator-only/02-observation-and-scoring-rubric.md)
 - [Results and deviation log](facilitator-only/03-results-and-deviation-log.md)
 - [Freeze and correction record templates](facilitator-only/04-freeze-and-correction-record-templates.md)
+- [Execution and access log](facilitator-only/05-execution-and-access-log.md)
+- [Execution-log entry schema](facilitator-only/05-execution-access-log-schema.json)
 
 Never supply these files before either scored stage ends.
 
@@ -162,6 +182,19 @@ Before recruitment:
 5. record SHA-256 values in a run-specific evidence manifest;
 6. keep scheduling identity separate from participant codes; and
 7. assign a facilitator and evaluator with disclosed relationships.
+
+Before any run, also create the facilitator-side execution/access log. It is
+not supplied to participants and is not a member of a scored phase-input
+manifest. It records the exact order of every admitted input, release, open,
+completion, manifest, verification, and detached-record event. Each detached
+record checkpoints the log through the governing-manifest verification it
+describes; the next release and later log entries continue the chain.
+
+For a synthetic rehearsal, preserve every additional system, developer, user,
+tool, or orchestration instruction as immutable bytes, list it in
+`ORCHESTRATION-INPUT-SHA256SUMS`, verify that manifest before delivery, and
+record the event in the facilitator log. An undeclared input is a stop and new
+attempt, not an omission to repair after the fact.
 
 The checked-in `SHA256SUMS` records the prepared source packet. It does not
 cover companion assets stored outside this packet. Each run-specific manifest
@@ -193,8 +226,11 @@ For initial and revised Stage A, the handoff, and each Stage B output:
 3. verify the manifest from sealed storage and capture the exact verification
    timestamp/timezone; and
 4. write the detached freeze-verification record describing that observed
-   event, including literal filenames, IDs, versions, artifact hashes, and the
-   manifest's filename and hash.
+   event. It must include attempt ID, phase, facilitator and actor codes,
+   literal filenames, IDs, versions, artifact hashes, the manifest filename
+   and hash, the exact verification command/stdout/stderr/exit code/time/
+   timezone, the execution-log checkpoint, and an explicit later record-
+   completion timestamp/timezone.
 
 The next phase-input manifest hashes the completed artifact, governing
 manifest, detached record, and newly released inputs. See

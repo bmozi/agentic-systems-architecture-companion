@@ -19,10 +19,13 @@ result, or evidence-state transition.
 - [Agentic Systems Reader-Value Pilot Packet](agentic-reader-value-v1/README.md)
   — a separately versioned, checksum-locked two-stage route focused on first
   understanding, one bounded action, failure discovery, and decision transfer.
-  Version 1.2.2 is a human-unrun repair after synthetic preflight and audit.
+  Version 1.2.3 is a human-unrun repair after synthetic preflight and audit.
   It completes governed bytes, hashes them, verifies the manifest, and only
-  then writes the detached verification record. These checks supplied defect-
-  finding and static protocol evidence, not practitioner evidence.
+  then writes the detached verification record with observed verification
+  evidence and a later record-completion time. Its facilitator-side event log
+  and predeclared-orchestration rule close route-order gaps. These checks
+  supplied defect-finding and static protocol evidence, not practitioner
+  evidence.
 
 ## Advanced technical-transfer packet
 

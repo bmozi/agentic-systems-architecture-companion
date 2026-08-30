@@ -87,7 +87,17 @@
   exclusions, states, correction rules, artifact versions, results rows, and
   reviewed protocol documents. An executable positive control and eleven
   checksum-refreshed negative mutations guard those invariants
-- **Execution status:** version 1.2.2 is PREPARED and UNRUN; no human
+- **Version 1.2.3 repair:** requires every detached record to carry the attempt,
+  phase, facilitator/actor codes, verbatim verification command/output/exit/
+  time/timezone, execution-log checkpoint, and later record-completion time;
+  adds an append-only facilitator event-log schema and forbids undeclared
+  orchestration; separates candidate scope from present authorization;
+  strengthens revised identity lineage, fictional-effect wording, the largest-
+  unacceptable-outcome handoff field, and Stage B Phase 1 withholding markers
+- **Version 1.2.3 enforcement:** the positive control and 22 checksum-refreshed
+  negative mutations cover temporal, execution-log, orchestration, identity,
+  authority, transfer, and Phase 1 invariants
+- **Execution status:** version 1.2.3 is PREPARED and UNRUN; no human
   recruitment, consent, session, observation, score, retest, or result exists
 - **Synthetic boundary:** earlier AI runs found defects but establish no
   usability, safety, effectiveness, reader value, runtime enforcement, or
