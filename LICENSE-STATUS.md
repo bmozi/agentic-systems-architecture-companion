@@ -1,14 +1,15 @@
 # License and Distribution Status
 
-**Status:** Private development material. All rights reserved pending an
-approved distribution and licensing decision.
+**Status:** Owner-approved for release packaging; all rights reserved unless a
+separate final license is named in the release package.
 
-No permission to redistribute, publish, sell, train on, or incorporate these
-materials into a product is granted by this development repository. A future
-release may adopt separate licenses for executable code and written assets, as
-other John Briggs companion repositories do, but that decision has not been
-made for this field guide.
+The repository owner has approved distribution of the identified release
+materials. This approval does not grant rights to unapproved third-party
+material, and it does not authorize anyone to represent the materials as a
+certification, safety guarantee, or production implementation.
 
-Do not make this repository public until content ownership, third-party
-material, commercial-use terms, attribution, security disclosure, and the
-corresponding book edition have been reviewed.
+The owner's dated scope and boundaries are recorded in
+[OWNER-RELEASE-APPROVAL.md](OWNER-RELEASE-APPROVAL.md). The final package must
+record its exact contents, corresponding book edition, metadata, and checksum.
+New or changed third-party material requires a fresh provenance and permission
+record before distribution.

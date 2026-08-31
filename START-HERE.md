@@ -1,7 +1,16 @@
 # Start Here: One Delegated Action in Thirty Minutes
 
+**Reader route:** Complete the thirty-minute exercise output first. The
+facilitator-only freeze, manifest, and evidence protocol is a separate route
+for controlled pilots; do not open it until the first-pass artifact is done.
+
 Choose one consequential action you would like AI to assist or perform. Do not
 map “the agent” as one permission.
+
+**Reader translation:** *Delegated authority* means the specific power an agent
+is allowed to use, who granted it, and where the system enforces the limit. A
+valid login or service token is not proof that the business delegation is
+legitimate.
 
 ## 0–5 minutes: name the useful work
 
