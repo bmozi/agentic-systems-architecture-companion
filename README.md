@@ -1,4 +1,7 @@
-# Architecting Agentic Systems — Companion
+# Agentic Systems in the Age of AI — Companion
+
+**Series:** *Solution Architecture in the Age of AI — Software Engineering Field Guides*
+**Previous working title:** *Architecting Agentic Systems*.
 
 Take one consequential AI-assisted action and make its delegated authority,
 governed tool path, memory influence, action budget, stop conditions, and
@@ -26,6 +29,11 @@ or ready for production.
   incident plans, and constructed transfer examples.
 - **The book stands alone:** this repository extends *Architecting Agentic
   Systems* without replacing its reasoning, threat analysis, or story.
+
+For the full intended learning path, use the book as the required source for
+the judgment behind each exercise and this companion as the working resource.
+The companion is useful on its own for a first bounded artifact, but it does
+not contain the book's complete reasoning, threat analysis, or story.
 
 ## Start here
 
@@ -74,9 +82,9 @@ workbooks. It remains
 
 ## Development boundary
 
-This is a private development companion. All included outcomes remain
-constructed, scenario, planned, unrun, or otherwise bounded as labeled.
-Licensing and distribution remain unapproved; see
+This is an owner-approved release candidate. All included outcomes remain
+constructed, scenario, planned, unrun, or otherwise bounded as labeled. Human
+learner and practitioner validation remains pending. See
 [LICENSE-STATUS.md](LICENSE-STATUS.md). Source lineage is recorded in
 [PROVENANCE.md](PROVENANCE.md), and local validation is described in
 [VALIDATION.md](VALIDATION.md).
