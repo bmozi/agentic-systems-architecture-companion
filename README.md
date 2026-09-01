@@ -1,6 +1,6 @@
-# Agentic Systems in the Age of AI — Companion
+# Agentic Systems Architecture — Companion
 
-**Series:** *Solution Architecture in the Age of AI — Software Engineering Field Guides*
+**Series:** *AI Systems Architecture Field Guides*
 **Previous working title:** *Architecting Agentic Systems*.
 
 Take one consequential AI-assisted action and make its delegated authority,
@@ -27,8 +27,8 @@ or ready for production.
 - **The companion provides the moves:** authority maps, governed-tool
   contracts, memory and provenance records, action budgets, evidence gates,
   incident plans, and constructed transfer examples.
-- **The book stands alone:** this repository extends *Architecting Agentic
-  Systems* without replacing its reasoning, threat analysis, or story.
+- **The book stands alone:** this repository extends *Agentic Systems
+  Architecture* without replacing its reasoning, threat analysis, or story.
 
 For the full intended learning path, use the book as the required source for
 the judgment behind each exercise and this companion as the working resource.

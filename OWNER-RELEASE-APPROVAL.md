@@ -2,7 +2,7 @@
 
 **Approval date:** 2026-08-30
 **Owner/approver:** John Briggs
-**Repository:** Architecting Agentic Systems Companion
+**Repository:** Agentic Systems Architecture Companion
 **Decision:** `OWNER-APPROVED FOR RELEASE PACKAGING`
 
 I approve the repository owner-controlled release decisions below for the
@@ -10,7 +10,7 @@ identified companion materials and their generated release artifacts:
 
 - licensing, rights, and distribution of my original companion content,
   manuscripts-linked material, scripts, and constructed teaching fixtures;
-- pairing with the corresponding *Architecting Agentic Systems* book edition,
+- pairing with the corresponding *Agentic Systems Architecture* book edition,
   with the exact edition/version recorded in the final package metadata;
 - the documented security and privacy disclosure and its stated scope;
 - accessibility risk acceptance for this text-first package pending human and

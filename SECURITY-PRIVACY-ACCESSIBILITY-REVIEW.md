@@ -1,7 +1,7 @@
 # Security, Privacy, and Accessibility Review
 
 **Review date:** 2026-08-30
-**Repository:** Architecting Agentic Systems Companion
+**Repository:** Agentic Systems Architecture Companion
 **Evidence state:** `STATIC-SCREEN-COMPLETE / OWNER-REVIEW-RECORDED`
 
 ## Scope and claim boundary
