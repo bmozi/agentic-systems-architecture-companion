@@ -36,4 +36,6 @@ and executive routes with a concrete handoff artifact.
 - [Pilot and Usability Route](PILOT-AND-USABILITY.md)
 - [Prepared Agentic Reader-Value Pilot Packet](testing/agentic-reader-value-v1/README.md)
 
+- [Responsible Amplification and Possible Futures Card](examples/responsible-amplification-and-possible-futures-card.md)
+
 See [BOOK-TO-COMPANION-MAP.md](BOOK-TO-COMPANION-MAP.md) for chapter routing.

@@ -82,6 +82,15 @@ contract while keeping future stage-end facts out of governed/scored
 workbooks. It remains
 **PREPARED/UNRUN** for humans; real-world execution remains **UNRUN**.
 
+## Imagine and shape what comes next
+
+Use the [Responsible Amplification and Possible Futures
+Card](examples/responsible-amplification-and-possible-futures-card.md) to begin
+with a beneficial possibility, trace bias and consequences through the whole
+system, compare three plausible futures, and turn one future signal into a
+reversible present decision. It is `PLANNED/UNRUN` and does not prove a
+forecast, fairness, safety, legality, effectiveness, or reader learning.
+
 ## Development boundary
 
 This is an owner-approved release candidate. All included outcomes remain
