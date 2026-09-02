@@ -35,3 +35,15 @@ distribution.
 This record is the owner's release authorization; it is not independent legal,
 security, privacy, accessibility, or human-participant evidence. Human learner
 and practitioner validation remains `PENDING OWNER-PROVIDED VALIDATION`.
+
++## Public-release licensing update
+
+**Recorded:** 2026-09-02
+**Decision:** `APPROVED FOR PUBLIC DISTRIBUTION`
+
+The owner authorizes this companion repository to be publicly available under
+the dual-license terms recorded in `LICENSE`, `LICENSE-CONTENT`, and
+`LICENSE-CODE`. This update supersedes an earlier all-rights-reserved
+distribution posture only to the extent expressly granted by those license
+files. All evidence, safety, accessibility, legal, and production-readiness
+boundaries above remain unchanged.

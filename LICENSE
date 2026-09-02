@@ -1,0 +1,28 @@
+Licensing for the Agentic Systems Architecture Companion
+
+Copyright (c) 2026 John Briggs
+
+This repository uses two licenses:
+
+1. Written content — Creative Commons Attribution 4.0 International
+   (CC BY 4.0). See LICENSE-CONTENT.
+
+   This covers README files, worksheets, templates, examples, diagrams,
+   teaching cases, and other prose or creative material unless a file says
+   otherwise.
+
+2. Executable code — Apache License 2.0. See LICENSE-CODE.
+
+   This covers files under scripts/ and other executable source files or
+   machine-executable configurations that explicitly identify Apache-2.0.
+
+The examples are educational and are provided without warranties. A license
+grants copyright permissions; it does not certify that an example is safe,
+complete, suitable for production, or appropriate for a particular legal,
+security, accessibility, or operational context.
+
+Recommended attribution:
+
+    Adapted from the companion to *Agentic Systems Architecture*
+    by John Briggs.
+    https://github.com/bmozi/agentic-systems-architecture-companion

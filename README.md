@@ -1,8 +1,6 @@
 # Agentic Systems Architecture — Companion
 
 **Series:** *AI Systems Architecture Field Guides*
-**Previous working title:** *Architecting Agentic Systems*.
-
 Take one consequential AI-assisted action and make its delegated authority,
 governed tool path, memory influence, action budget, stop conditions, and
 evidence reviewable.
@@ -91,11 +89,28 @@ system, compare three plausible futures, and turn one future signal into a
 reversible present decision. It is `PLANNED/UNRUN` and does not prove a
 forecast, fairness, safety, legality, effectiveness, or reader learning.
 
-## Development boundary
+## Evidence and use boundary
 
-This is an owner-approved release candidate. All included outcomes remain
-constructed, scenario, planned, unrun, or otherwise bounded as labeled. Human
-learner and practitioner validation remains pending. See
-[LICENSE-STATUS.md](LICENSE-STATUS.md). Source lineage is recorded in
-[PROVENANCE.md](PROVENANCE.md), and local validation is described in
-[VALIDATION.md](VALIDATION.md).
+This is the public reader companion to *Agentic Systems Architecture*. It provides
+editable tools and constructed examples; it does not certify a design,
+implementation, organization, or AI system as safe, lawful, effective, or
+production-ready. Preserve every `constructed`, `scenario`, `planned`,
+`unrun`, `observed`, `tested`, `reported`, `inferred`, and `unknown`
+label when adapting the material.
+
+Written content is available under
+[CC BY 4.0](LICENSE-CONTENT), and executable code is available under the
+[Apache License 2.0](LICENSE-CODE). Source lineage is recorded in
+[PROVENANCE.md](PROVENANCE.md); local integrity checks are documented in
+[VALIDATION.md](VALIDATION.md). Human learner and practitioner validation
+remains a separate evidence gate.
+
+## Continue through the series
+
+The five public companions follow the same evidence-bounded field-guide model:
+
+1. [API Architecture for AI Systems](https://github.com/bmozi/api-architecture-for-ai-systems-companion)
+2. [Event-Driven Architecture for AI Systems](https://github.com/bmozi/event-driven-architecture-for-ai-systems-companion)
+3. [Durable Workflows for AI Systems](https://github.com/bmozi/durable-workflows-for-ai-systems-companion)
+4. [Data Platform Architecture for AI Systems](https://github.com/bmozi/data-platform-architecture-for-ai-systems-companion)
+5. [Agentic Systems Architecture](https://github.com/bmozi/agentic-systems-architecture-companion)
