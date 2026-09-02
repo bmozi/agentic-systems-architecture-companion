@@ -9,6 +9,7 @@
 - **I need to limit accumulated consequence:** [Action Budget](action-budget-and-blast-radius.md).
 - **I need to decide whether autonomy may expand:** [Autonomy Evidence Gate](autonomy-evidence-gate.md).
 - **I need to prepare for failure:** [Incident Readiness Plan](agentic-incident-readiness-plan.md).
+- **I need to design a bounded RAG path:** [Basic RAG Architecture Learning Card](examples/basic-rag-architecture-learning-card.md).
 
 ## By role
 

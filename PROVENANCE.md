@@ -144,3 +144,15 @@ and which validation or usability state actually changed.
   and routing to approval, budgets, abstention, provenance, and reversal
 - **Boundary:** `PLANNED/UNRUN`; no authority, safety, usability, runtime, or
   production result is established
+
+## 2026-09-01 basic RAG architecture learning card
+
+- **Authority:** Direct author request; official OpenAI file upload,
+  vector-store file, vector-store search, and Responses `file_search`
+  documentation retrieved 2026-09-01
+- **Use:** Provider-neutral ingestion, retrieval, grounded-answer, abstention,
+  correction, evidence, and separate action-authority transfer exercise, with
+  OpenAI mapped as one current implementation
+- **Boundary:** `PLANNED/UNRUN`; product wording must be rechecked before
+  implementation, and no API call, RAG evaluation, security test, usability,
+  runtime, or production result is established
