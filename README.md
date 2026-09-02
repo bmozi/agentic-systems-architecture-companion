@@ -52,6 +52,7 @@ reopens the decision.
 | Limit accumulated consequence | [Action Budget and Blast-Radius Worksheet](action-budget-and-blast-radius.md) |
 | Decide whether autonomy may expand | [Autonomy Evidence Gate](autonomy-evidence-gate.md) |
 | Prepare containment and re-entry | [Agentic Incident Readiness Plan](agentic-incident-readiness-plan.md) |
+| Separate efficient planning from authority to act | [Northbridge Data-Structures Architecture Bridge](examples/northbridge-data-structures-architecture-bridge.md) |
 
 Use [INDEX.md](INDEX.md) for role- and outcome-based routes and
 [BOOK-TO-COMPANION-MAP.md](BOOK-TO-COMPANION-MAP.md) to reconnect each tool to

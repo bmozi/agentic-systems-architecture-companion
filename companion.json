@@ -18,6 +18,7 @@
     "EXECUTIVE-DECISION-BRIEF.md",
     "FAILURE-LAB.md",
     "PILOT-AND-USABILITY.md",
+    "examples/northbridge-data-structures-architecture-bridge.md",
     "testing/agentic-reader-value-v1/README.md",
     "testing/agentic-reader-value-v1/TEMPORAL-FREEZE-PROTOCOL.json",
     "testing/agentic-reader-value-v1/participant/00-packet-route.md",
