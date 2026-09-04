@@ -44,7 +44,7 @@ The participant may make only a `SCENARIO DECISION` about the constructed
 proposal. This task cannot grant authority, change a policy, execute a tool,
 approve a release, clear an incident, or transition an experiment.
 
-## Canonical working assets supplied
+## Canonical field tools supplied
 
 Use exact unchanged copies of these files. The hashes pin the prepared packet
 to the current source bytes; they do not prove that a template works.

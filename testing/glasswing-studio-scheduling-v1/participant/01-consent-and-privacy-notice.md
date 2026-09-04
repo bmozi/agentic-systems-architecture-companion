@@ -13,7 +13,7 @@
 
 If separately authorized after source-manifest verification, a participant would
 review a fictional studio-scheduling agent scenario, choose the smallest useful
-set of six working companion templates, and record bounded architectural
+set of six illustrative companion templates, and record bounded architectural
 decisions. The narrow purpose would be to observe routing ambiguity, field
 interpretation, omissions, safe refusal, and traceability for the exact task
 and versions. It would not assess job performance, intelligence, professional
