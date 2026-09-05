@@ -3,8 +3,8 @@
 <!-- markdownlint-disable MD013 -->
 
 **File ID:** AGENTIC-TEST-GAC-SCENARIO-001
-**File version:** 1.0.3
-**Packet:** AGENTIC-TEST-GAC-001 version 1.0.3
+**File version:** 1.0.2
+**Packet:** AGENTIC-TEST-GAC-001 version 1.0.2
 **Artifact state:** PREPARED; fictional participant fixture
 **Test execution state:** `PLANNED/UNRUN`
 **Recommended participant role:** Enterprise, solution, security, platform, or
@@ -51,10 +51,10 @@ to the current source bytes; they do not prove that a template works.
 
 | Canonical asset | Template version | SHA-256 |
 | --- | --- | --- |
-| [Agent Authority Map](../../../agent-authority-map.md) | 0.3-template | `06367a381cd5bdf37b2b8632e41936fc5e4408181ac51223e22c3fcf2cba9e5c` |
+| [Agent Authority Map](../../../agent-authority-map.md) | 0.2-template | `c00f3a3ad00938d30efea9792523a6c6f51a7c16d5061a9d9fdc7d8c53755f0f` |
 | [Governed Tool Contract](../../../governed-tool-contract.md) | 0.2-template | `52d574fdc56434e6bc32e83c8b5403d80536e7b1b3a077dbfaf848414ed02eb4` |
-| [Memory and Provenance Record](../../../memory-and-provenance-record.md) | 0.3-template | `d0d4cb0590e629c4687603688b61affdef052252cafd4a8497bcc5b4c5ead28a` |
-| [Action Budget and Blast-Radius Worksheet](../../../action-budget-and-blast-radius.md) | 0.2-template | `dc612f403ea663742ef57c64eb4e1330349ae49f646850d1ea2b362dc996a015` |
+| [Memory and Provenance Record](../../../memory-and-provenance-record.md) | 0.2-template | `27cbfe0c596f1d482cc9d4e74d18d55bc4bf91063db1b73498a5fed859c7a55a` |
+| [Action Budget and Blast-Radius Worksheet](../../../action-budget-and-blast-radius.md) | 0.1-template | `dfb70615c37c1917ff7e32c836ee45860268147aa7af2bd7bb580553eb531bf0` |
 | [Autonomy Evidence Gate](../../../autonomy-evidence-gate.md) | 0.1-template | `67cf1d908e6aa7d98745d84913b79c228cfbee04103d3218973cab9932960b43` |
 | [Agentic Incident Readiness Plan](../../../agentic-incident-readiness-plan.md) | 0.1-template | `26d2dea9ee8a92ab1df0d8ec066386730b80ec1e4da263b8f98638ea85d86f56` |
 

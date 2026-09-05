@@ -30,16 +30,15 @@ complete these six lines:
 | Stop or reconsider | Assignment ends, policy or case state changes, authority is revoked, required evidence becomes stale, or a prohibited action is attempted. |
 
 See the
-[complete Northbridge Agent Authority Map](https://github.com/bmozi/architecting-agentic-systems-companion/blob/main/NORTHBRIDGE-WORKED-EXAMPLES.md#1-agent-authority-map-example)
+[complete Northbridge Agent Authority Map](NORTHBRIDGE-WORKED-EXAMPLES.md#1-agent-authority-map-example)
 and the
-[unrelated Clearwater example](https://github.com/bmozi/architecting-agentic-systems-companion/blob/main/TRANSFER-SCENARIO-WORKED-EXAMPLES.md#1-agent-authority-map-example)
+[unrelated Clearwater example](TRANSFER-SCENARIO-WORKED-EXAMPLES.md#1-agent-authority-map-example)
 for deeper records and their explicit evidence limits.
 
 ## Plain-language vocabulary
 
 - **Principal:** the person or institution whose power is being represented.
-- **Affected subject:** the person, account, case, or party affected by the
-  decision; not automatically an OAuth token subject.
+- **Subject:** the person, account, case, or party affected by the decision.
 - **Protected object:** the record, money, device, communication, or other thing
   the action can change.
 - **Delegation chain:** who granted which power to whom, including whether it
@@ -58,7 +57,7 @@ for deeper records and their explicit evidence limits.
 | Field | Value |
 | --- | --- |
 | Artifact ID | Assign `AAM-<system>-<nnn>` |
-| Version | 0.3-template |
+| Version | 0.2-template |
 | Owner | Unassigned |
 | Case/capability | Unassigned |
 | Artifact state | BLANK |
@@ -137,13 +136,3 @@ team. Ask them what the software may do, whose authority it represents, what it
 cannot do, where the boundary is enforced, and how authority is revoked. If
 they answer in terms of model confidence or tool availability, the authority
 map is not yet clear enough.
-
-## Protocol mapping check
-
-Record represented principal, actor identity, affected party, protected
-resource, and application delegation record separately. RFC 8693's subject
-token represents the party on whose behalf the request is made; its actor
-token represents the acting party. Nested actor history is informational for
-the specified access-control interpretation. Validate business grants through
-their own authoritative records, not by treating each history entry as a grant.
-See [RFC 8693, sections 2.1 and 4.1](https://www.rfc-editor.org/rfc/rfc8693.html).

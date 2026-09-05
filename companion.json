@@ -3,7 +3,7 @@
   "title": "Agentic Systems Architecture Companion",
   "book_title": "Agentic Systems Architecture",
   "repository": "https://github.com/bmozi/agentic-systems-architecture-companion",
-  "source_commit": "9160061",
+  "source_commit": "60e26ac6b720326db8f8daa20df3a388dec71722",
   "required_files": [
     "README.md",
     "LICENSE",
@@ -34,7 +34,10 @@
     "testing/agentic-reader-value-v1/facilitator-only/06-handoff-layout-proof-record.md",
     "testing/agentic-reader-value-v1/facilitator-only/07-external-closeout-record.md",
     "testing/agentic-reader-value-v1/SHA256SUMS",
-    "scripts/test_temporal_freeze_protocol.py"
+    "scripts/test_temporal_freeze_protocol.py",
+    "bounded-action-lab.md",
+    "examples/bounded_action_lab.py",
+    "examples/test_bounded_action_lab.py"
   ],
   "checksum_manifests": [
     "testing/agentic-reader-value-v1/SHA256SUMS",
@@ -44,7 +47,10 @@
     {
       "path": "agent-authority-map.md",
       "first_pass": "Ten-minute first map",
-      "required_language": ["Plain-language vocabulary", "Outside-team comprehension test"],
+      "required_language": [
+        "Plain-language vocabulary",
+        "Outside-team comprehension test"
+      ],
       "examples": [
         "NORTHBRIDGE-WORKED-EXAMPLES.md",
         "TRANSFER-SCENARIO-WORKED-EXAMPLES.md"

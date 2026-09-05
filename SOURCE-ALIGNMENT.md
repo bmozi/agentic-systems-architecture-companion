@@ -2,6 +2,7 @@
 
 **Book source:** `bmozi/architecting-agentic-systems`, `companion/`
 **Original standalone seed:** book commit `9160061`
+**Current aligned book source:** `60e26ac6b720326db8f8daa20df3a388dec71722` (September 5, 2026)
 **Current rule:** explicit operational drift is permitted; silent conceptual
 drift is not
 
@@ -37,3 +38,8 @@ match unless explicitly classified, and standalone-only paths fit declared
 distribution categories. Repository validation and source alignment do not
 prove usability, enforcement, agent safety, business value, or publication
 readiness.
+
+
+## September 5 paired revision
+
+The active authority, memory/provenance, and action-budget forms, plus the attachment lab source and tests, match the book at the current source commit above. The standalone lab guide adjusts commands to its own `examples/` directory. The Glasswing prepared packet is version 1.0.3; its 1.0.2 inputs remain preserved in `reviews/historical/`. This alignment does not claim that original credit experiments or actual practitioner sessions have run.

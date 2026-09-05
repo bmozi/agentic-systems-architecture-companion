@@ -1,0 +1,87 @@
+{
+  "source_commit": "8b0ccdca61c607d825f288e6c514019889974e99",
+  "packet_version": "1.0.2",
+  "state": "Historical source bytes; no execution evidence",
+  "files": [
+    {
+      "original_path": "PRACTITIONER-TEST-LOGS.md",
+      "snapshot_path": "PRACTITIONER-TEST-LOGS.md.snapshot",
+      "sha256": "c4ae5cad7ae07ed77b18a68882a4f68ec6b197bbc1853f55e29174633500f10c"
+    },
+    {
+      "original_path": "TERMS.md",
+      "snapshot_path": "TERMS.md.snapshot",
+      "sha256": "831157899da80fa6716cdd3f623156604e9bf3ca47a387739f926041913962ea"
+    },
+    {
+      "original_path": "action-budget-and-blast-radius.md",
+      "snapshot_path": "action-budget-and-blast-radius.md.snapshot",
+      "sha256": "dfb70615c37c1917ff7e32c836ee45860268147aa7af2bd7bb580553eb531bf0"
+    },
+    {
+      "original_path": "agent-authority-map.md",
+      "snapshot_path": "agent-authority-map.md.snapshot",
+      "sha256": "c00f3a3ad00938d30efea9792523a6c6f51a7c16d5061a9d9fdc7d8c53755f0f"
+    },
+    {
+      "original_path": "agentic-incident-readiness-plan.md",
+      "snapshot_path": "agentic-incident-readiness-plan.md.snapshot",
+      "sha256": "26d2dea9ee8a92ab1df0d8ec066386730b80ec1e4da263b8f98638ea85d86f56"
+    },
+    {
+      "original_path": "autonomy-evidence-gate.md",
+      "snapshot_path": "autonomy-evidence-gate.md.snapshot",
+      "sha256": "67cf1d908e6aa7d98745d84913b79c228cfbee04103d3218973cab9932960b43"
+    },
+    {
+      "original_path": "governed-tool-contract.md",
+      "snapshot_path": "governed-tool-contract.md.snapshot",
+      "sha256": "52d574fdc56434e6bc32e83c8b5403d80536e7b1b3a077dbfaf848414ed02eb4"
+    },
+    {
+      "original_path": "memory-and-provenance-record.md",
+      "snapshot_path": "memory-and-provenance-record.md.snapshot",
+      "sha256": "27cbfe0c596f1d482cc9d4e74d18d55bc4bf91063db1b73498a5fed859c7a55a"
+    },
+    {
+      "original_path": "testing/glasswing-studio-scheduling-v1/README.md",
+      "snapshot_path": "testing/glasswing-studio-scheduling-v1/README.md.snapshot",
+      "sha256": "fe8dd0a1f8341f5bda45e1b73be085061c74157fb58648b132443a9f8926517e"
+    },
+    {
+      "original_path": "testing/glasswing-studio-scheduling-v1/SHA256SUMS",
+      "snapshot_path": "testing/glasswing-studio-scheduling-v1/SHA256SUMS.snapshot",
+      "sha256": "502f5c3c820aa96a7939304dda65cbc95e6c537cd31cbffa5f4a362e78a01a0a"
+    },
+    {
+      "original_path": "testing/glasswing-studio-scheduling-v1/facilitator-only/01-facilitator-guide.md",
+      "snapshot_path": "testing/glasswing-studio-scheduling-v1/facilitator-only/01-facilitator-guide.md.snapshot",
+      "sha256": "2b92ad06df3100ce8ea27acf4ceb89e619e3e79ddcc6f3208bd2ff6957a20922"
+    },
+    {
+      "original_path": "testing/glasswing-studio-scheduling-v1/facilitator-only/02-observation-and-scoring-rubric.md",
+      "snapshot_path": "testing/glasswing-studio-scheduling-v1/facilitator-only/02-observation-and-scoring-rubric.md.snapshot",
+      "sha256": "409ff1a941daa91e74258079f01f17f09daf7d477850ae021819e082a3927144"
+    },
+    {
+      "original_path": "testing/glasswing-studio-scheduling-v1/facilitator-only/03-results-and-deviation-log-blank.md",
+      "snapshot_path": "testing/glasswing-studio-scheduling-v1/facilitator-only/03-results-and-deviation-log-blank.md.snapshot",
+      "sha256": "c9514e610c6019be6a044cb50eb8360db7d2d37ac66ac9eecb5c7601d11d2a44"
+    },
+    {
+      "original_path": "testing/glasswing-studio-scheduling-v1/participant/01-consent-and-privacy-notice.md",
+      "snapshot_path": "testing/glasswing-studio-scheduling-v1/participant/01-consent-and-privacy-notice.md.snapshot",
+      "sha256": "3301168e03492b0fd32c08fcccdf46cb30b98dc07baad5ef486fd98f5bb46c75"
+    },
+    {
+      "original_path": "testing/glasswing-studio-scheduling-v1/participant/02-scenario-and-decision-task.md",
+      "snapshot_path": "testing/glasswing-studio-scheduling-v1/participant/02-scenario-and-decision-task.md.snapshot",
+      "sha256": "97d58fbd7e59955c047894446e05ebc332f8cfaf09483d64082c2cb3e3ab95aa"
+    },
+    {
+      "original_path": "testing/glasswing-studio-scheduling-v1/participant/03-response-workbook.md",
+      "snapshot_path": "testing/glasswing-studio-scheduling-v1/participant/03-response-workbook.md.snapshot",
+      "sha256": "90076766f252b9e9bf75473825db3a080a335e774d66aaab4233838dfbb070fb"
+    }
+  ]
+}

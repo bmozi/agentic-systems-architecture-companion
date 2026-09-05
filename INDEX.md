@@ -11,6 +11,8 @@
 - **I need to prepare for failure:** [Incident Readiness Plan](agentic-incident-readiness-plan.md).
 - **I need to design a bounded RAG path:** [Basic RAG Architecture Learning Card](examples/basic-rag-architecture-learning-card.md).
 
+- **I want to run a small permission example:** [one approved internal attachment](bounded-action-lab.md).
+
 ## By role
 
 - **Agent developer:** begin with one action, one governed tool, explicit state,

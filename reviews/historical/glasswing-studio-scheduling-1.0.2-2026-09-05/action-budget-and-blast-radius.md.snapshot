@@ -8,7 +8,7 @@ level” is too coarse for material action.
 | Field | Value |
 | --- | --- |
 | Artifact ID | Assign `ABB-<system>-<nnn>` |
-| Version | 0.2-template |
+| Version | 0.1-template |
 | Owner | Unassigned |
 | Case/capability | Unassigned |
 | Artifact state | BLANK |
@@ -73,21 +73,3 @@ level” is too coarse for material action.
 - Review date:
 - Artifact-state decision:
 - Restrictions or required follow-up:
-
-## Reservation and failure worksheet
-
-| Decision | Record |
-| --- | --- |
-| Which store atomically checks and reserves every applicable allowance? | |
-| How is the operation key bound to resource, action, and arguments? | |
-| What happens when two workers request the last allowance? | |
-| Who owns a reservation after a crash? | |
-| Which receipt resolves a timeout after possible commitment? | |
-| Can a delayed request still commit after a not-found query? | |
-| Where is current authority checked at the effect boundary? | |
-| What prevents a stale worker from committing after revocation? | |
-| What is withheld when a grant or budget store is unavailable? | |
-
-An unknown effect remains outstanding exposure. A timeout or lease expiry alone
-is not proof that a remote effect cannot occur. Cancellation, compensation,
-and release of a reservation need distinct evidence and authority.

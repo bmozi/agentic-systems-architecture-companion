@@ -3,8 +3,8 @@
 <!-- markdownlint-disable MD013 -->
 
 **Packet ID:** AGENTIC-TEST-GAC-001
-**Packet version:** 1.0.3
-**Artifact state:** PREPARED; version 1.0.3 integrity refreshed; independent revision review pending
+**Packet version:** 1.0.2
+**Artifact state:** PREPARED; source integrity and routing reviewed
 **Test execution state:** `PLANNED/UNRUN`
 **Domain:** Fictional community-arts studio scheduling and tentative-hold decision
 **Experiment authority:** None; EXP-001 through EXP-005 remain `PLANNED/UNRUN`
@@ -88,25 +88,9 @@ current source hashes are recorded in the scenario and the checked-in
 `SHA256SUMS`. A later byte change requires a new packet version and manifest
 update before use.
 
-## Version 1.0.3 revision — September 5, 2026
-
-Three canonical templates changed: the authority map separates protocol and
-business identities; the memory record states observable evidence types; the
-budget worksheet adds reservation and failure decisions. This packet now pins
-those exact revised bytes and their template versions. Packet-local headers
-advance together; scenario facts, tasks, consent requirements, scoring rules,
-and execution preconditions are unchanged.
-
-The earlier 1.0.2 packet, dependency bytes, and manifest are preserved in the
-[historical snapshot](../../reviews/historical/glasswing-studio-scheduling-1.0.2-2026-09-05/snapshot-index.json).
-See the [revision provenance](../../reviews/2026-09-05-template-revision-provenance.md)
-for original commit, hashes, changed files, and local verification.
-
 ## Prepared disposition
 
-Version 1.0.3 has a refreshed source manifest. This revision has not received
-independent review and has not been used in a practitioner session. The
-historical 1.0.2 review language applies only to that prior revision. Before
-use, an accountable owner must verify the current manifest and all execution
-preconditions. No recruitment, consent, observation, score, execution result,
-release approval, or experiment-state change is asserted by this refresh.
+Source structure, routing, and pinned dependencies have been reviewed and the
+packet is prepared for a separately authorized attempt. That review does not
+authorize recruitment or execution, record practitioner evidence, or change
+any artifact, release, research, case, or experiment state.

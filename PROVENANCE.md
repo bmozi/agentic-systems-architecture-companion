@@ -180,3 +180,13 @@ and which validation or usability state actually changed.
 - **Boundary:** This is an editorial and license-consistency repair, not legal
   advice or legal review, practitioner validation, control-effectiveness
   evidence, production fitness, retailer acceptance, or publication proof.
+
+
+## September 5, 2026 — teaching revision and local attachment lab
+
+John authorized the adversarial book fixes and competing editorial revisions. The active authority, memory, and budget forms now distinguish protocol identities, observable context events, and reservation/reconciliation duties. Historical scenario packets remain unchanged. The new `bounded-action-lab.md` and Python example demonstrate one internal SQLite effect; sixteen local tests passed in the book checkout. These are AI-assisted illustrative materials, not John's personal history or Northbridge production evidence. The separate credit experiments remain unrun. See the book repository review `2026-09-05-bounded-action-lab-verification.md` for the dated code/result receipt.
+
+
+## September 5, 2026 — paired committed source alignment
+
+John authorized committing and pushing the book and companion together. `companion.json` now pins book commit `60e26ac6b720326db8f8daa20df3a388dec71722`. The active forms and local lab align to that committed source; the historical seed and frozen-packet provenance remain intact. Repository synchronization is separate from reader effectiveness and retailer publication.

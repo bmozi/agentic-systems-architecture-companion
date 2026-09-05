@@ -8,7 +8,7 @@ agent's consequential decision.
 | Field | Value |
 | --- | --- |
 | Artifact ID | Assign `MPR-<system>-<nnn>` |
-| Version | 0.3-template |
+| Version | 0.2-template |
 | Owner | Unassigned |
 | Case/capability | Unassigned |
 | Artifact state | BLANK |
@@ -57,7 +57,7 @@ correction completeness, or safe model use.
 | Retrieval query, index version, and relevance-score meaning | NOT_YET_DECIDED — record the exact or immutable query reference, index/snapshot version, and what the score does and does not mean; use NOT_APPLICABLE when no retrieval occurs |
 | Known omissions and undiscovered-descendant disclaimer | NOT_YET_DECIDED — list known missing sources or descendants and state that undiscovered copies or effects may remain |
 | Parametric model, provider, version, and disclosed knowledge-cutoff metadata | NOT_YET_DECIDED — record available metadata without treating it as item-level lineage or currentness proof; use UNKNOWN when the provider does not disclose a value |
-| Stable observation-event and decision receipt with an explicit evidence type | NOT_YET_DECIDED — record RETRIEVED, EXCLUDED_FROM_CONTEXT, INCLUDED_IN_CONTEXT, CITED_IN_OUTPUT, or CONSUMED_BY_RULE; join the decision and request version; record CAUSAL_INFLUENCE_UNKNOWN unless a declared measurement supports more |
+| Stable use-event and consequential-decision receipt linking each retained item to actual use | NOT_YET_DECIDED — link each retained item actually used to an immutable use-event receipt and, when consequential, the resulting decision receipt; do not infer use from retrieval alone |
 
 ## Correction behavior
 
@@ -81,13 +81,3 @@ correction completeness, or safe model use.
 - Review date:
 - Artifact-state decision:
 - Restrictions or required follow-up:
-
-## Interpret a receipt before following its link
-
-A retrieval receipt establishes a search result. A context receipt establishes
-what a declared request assembly included. A citation records what the output
-names. A deterministic-consumption receipt identifies the rule and field it
-read. None alone proves hidden model causality. Record the observation method,
-request or rule version, source version, and known channels outside coverage.
-Use potential exposure to find decisions needing correction while preserving
-its distinction from proven causal influence.
