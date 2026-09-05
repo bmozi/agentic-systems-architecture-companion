@@ -3,7 +3,7 @@
   "title": "Agentic Systems Architecture Companion",
   "book_title": "Agentic Systems Architecture",
   "repository": "https://github.com/bmozi/agentic-systems-architecture-companion",
-  "source_commit": "60e26ac6b720326db8f8daa20df3a388dec71722",
+  "source_commit": "c32bd42e34016490faa679e89156e3262e72802d",
   "required_files": [
     "README.md",
     "LICENSE",

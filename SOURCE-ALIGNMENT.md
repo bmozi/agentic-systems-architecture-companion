@@ -2,7 +2,7 @@
 
 **Book source:** `bmozi/architecting-agentic-systems`, `companion/`
 **Original standalone seed:** book commit `9160061`
-**Current aligned book source:** `60e26ac6b720326db8f8daa20df3a388dec71722` (September 5, 2026)
+**Current aligned book source:** `c32bd42e34016490faa679e89156e3262e72802d` (September 5, 2026)
 **Current rule:** explicit operational drift is permitted; silent conceptual
 drift is not
 
